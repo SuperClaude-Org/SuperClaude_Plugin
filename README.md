@@ -84,12 +84,12 @@ Claude Code is a product built and maintained by [Anthropic](https://www.anthrop
 
 ## ⚡ **Quick Installation**
 
-### **🔌 Native Plugin (Recommended)**
+### **🔌 Native Plugin Distribution (NEW!)**
 
-SuperClaude is now available as a native Claude Code plugin for easier installation and automatic updates!
+SuperClaude is now available as a native Claude Code plugin! This repository provides plugin-based distribution of SuperClaude V4.
 
 ```shell
-# Add the marketplace
+# Add the SuperClaude marketplace
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # Install the plugin
@@ -98,22 +98,24 @@ SuperClaude is now available as a native Claude Code plugin for easier installat
 # Restart Claude Code to activate
 ```
 
-**Benefits:**
-- ✅ One-command installation
-- ✅ Automatic updates via Claude Code
-- ✅ No Python/Node.js dependencies
-- ✅ Better isolation and compatibility
-- ✅ Team sharing via marketplace URL
+**Why Plugin Distribution?**
+- ✅ **Easier Installation**: One command, no Python/Node.js setup required
+- ✅ **Automatic Updates**: Managed by Claude Code's plugin system
+- ✅ **Better Isolation**: No dependency conflicts with system packages
+- ✅ **Team Sharing**: Share via marketplace URL in repository settings
+- ✅ **Native Integration**: Seamless Claude Code experience
 
-### **Alternative: pip/npm Installation**
+### **Alternative: Package Manager Installation**
+
+SuperClaude V4 is also available via traditional package managers:
 
 | Method | Command | Best For |
 |:------:|---------|----------|
-| **🐍 pipx** | `pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install` | Linux/macOS users |
-| **📦 pip** | `pip install SuperClaude && pip upgrade SuperClaude && SuperClaude install` | Traditional Python environments |
+| **🐍 pipx** | `pipx install SuperClaude && SuperClaude install` | Linux/macOS users |
+| **📦 pip** | `pip install SuperClaude && SuperClaude install` | Traditional Python environments |
 | **🌐 npm** | `npm install -g @bifrost_inc/superclaude && superclaude install` | Node.js users |
 
-> **Note:** If you're upgrading from pip/npm to the plugin, see [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for instructions.
+> **Note:** Both installation methods provide the same functionality. Choose based on your preferred workflow.
 
 </div>
 
