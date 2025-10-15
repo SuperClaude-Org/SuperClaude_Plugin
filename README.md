@@ -23,11 +23,8 @@
   <a href="https://superclaude.netlify.app/">
     <img src="https://img.shields.io/badge/🌐_Visit_Website-blue" alt="Website">
   </a>
-  <a href="https://pypi.org/project/SuperClaude/">
-    <img src="https://img.shields.io/pypi/v/SuperClaude.svg?" alt="PyPI">
-  </a>
-  <a href="https://www.npmjs.com/package/@bifrost_inc/superclaude">
-    <img src="https://img.shields.io/npm/v/@bifrost_inc/superclaude.svg" alt="npm">
+  <a href="https://github.com/SuperClaude-Org/SuperClaude_Plugin">
+    <img src="https://img.shields.io/badge/🔌_Plugin-Distribution-green" alt="Plugin Distribution">
   </a>
 </p>
 
@@ -84,9 +81,7 @@ Claude Code is a product built and maintained by [Anthropic](https://www.anthrop
 
 ## ⚡ **Quick Installation**
 
-### **🔌 Native Plugin Distribution (NEW!)**
-
-SuperClaude is now available as a native Claude Code plugin! This repository provides plugin-based distribution of SuperClaude V4.
+SuperClaude is available as a native Claude Code plugin for easy installation and automatic updates.
 
 ```shell
 # Add the SuperClaude marketplace
@@ -98,64 +93,38 @@ SuperClaude is now available as a native Claude Code plugin! This repository pro
 # Restart Claude Code to activate
 ```
 
-**Why Plugin Distribution?**
-- ✅ **Easier Installation**: One command, no Python/Node.js setup required
-- ✅ **Automatic Updates**: Managed by Claude Code's plugin system
-- ✅ **Better Isolation**: No dependency conflicts with system packages
-- ✅ **Team Sharing**: Share via marketplace URL in repository settings
+**Plugin Benefits:**
+- ✅ **Simple Installation**: One command, no Python/Node.js required
+- ✅ **Automatic Updates**: Managed by Claude Code
+- ✅ **No Conflicts**: Isolated from system packages
+- ✅ **Team Sharing**: Easy distribution via marketplace
 - ✅ **Native Integration**: Seamless Claude Code experience
 
-### **Alternative: Package Manager Installation**
+### **Quick Start**
 
-SuperClaude V4 is also available via traditional package managers:
+After installation, restart Claude Code and try:
 
-| Method | Command | Best For |
-|:------:|---------|----------|
-| **🐍 pipx** | `pipx install SuperClaude && SuperClaude install` | Linux/macOS users |
-| **📦 pip** | `pip install SuperClaude && SuperClaude install` | Traditional Python environments |
-| **🌐 npm** | `npm install -g @bifrost_inc/superclaude && superclaude install` | Node.js users |
+```shell
+# See all commands
+/sc:help
 
-> **Note:** Both installation methods provide the same functionality. Choose based on your preferred workflow.
+# Start brainstorming
+/sc:brainstorm "your project idea"
+
+# Analyze codebase
+/sc:analyze
+
+# Deep research
+/sc:research "your topic"
+```
 
 </div>
 
 <details>
-<summary><b>⚠️ IMPORTANT: Upgrading from SuperClaude V3</b></summary>
+<summary><b>📦 Alternative: pip/npm Installation</b></summary>
 
-**If you have SuperClaude V3 installed, you SHOULD uninstall it before installing V4:**
+SuperClaude V4 is also available via package managers. See the main [SuperClaude Framework repository](https://github.com/SuperClaude-Org/SuperClaude_Framework) for pip/npm installation instructions.
 
-```bash
-# Uninstall V3 first
-Remove all related files and directories :
-*.md *.json and commands/
-
-# Then install V4
-pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install
-```
-
-**✅ What gets preserved during upgrade:**
-- ✓ Your custom slash commands (outside `commands/sc/`)
-- ✓ Your custom content in `CLAUDE.md` 
-- ✓ Claude Code's `.claude.json`, `.credentials.json`, `settings.json` and `settings.local.json`
-- ✓ Any custom agents and files you've added
-
-**⚠️ Note:** Other SuperClaude-related `.json` files from V3 may cause conflicts and should be removed.
-
-</details>
-
-<details>
-<summary><b>💡 Troubleshooting PEP 668 Errors</b></summary>
-
-```bash
-# Option 1: Use pipx (Recommended)
-pipx install SuperClaude
-
-# Option 2: User installation
-pip install --user SuperClaude
-
-# Option 3: Force installation (use with caution)
-pip install --break-system-packages SuperClaude
-```
 </details>
 
 ---
