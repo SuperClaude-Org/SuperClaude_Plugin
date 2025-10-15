@@ -1,0 +1,37 @@
+{
+  "name": "superclaude-official",
+  "owner": {
+    "name": "SuperClaude Team",
+    "email": "support@superclaude.dev"
+  },
+  "metadata": {
+    "description": "Official SuperClaude plugin marketplace",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "superclaude",
+      "source": ".",
+      "description": "Transform Claude Code into a structured development platform with 25 commands, 15 specialized agents, 7 behavioral modes, and 8 MCP server integrations",
+      "version": "4.2.0",
+      "author": {
+        "name": "SuperClaude Team",
+        "email": "support@superclaude.dev"
+      },
+      "homepage": "https://superclaude.netlify.app/",
+      "repository": "https://github.com/SuperClaude-Org/SuperClaude_Plugin",
+      "license": "MIT",
+      "keywords": [
+        "development",
+        "productivity",
+        "agents",
+        "workflow",
+        "automation",
+        "mcp",
+        "spec-driven",
+        "tdd"
+      ],
+      "category": "productivity"
+    }
+  ]
+}

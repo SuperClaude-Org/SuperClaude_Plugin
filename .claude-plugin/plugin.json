@@ -1,0 +1,23 @@
+{
+  "name": "superclaude",
+  "version": "4.2.0",
+  "description": "Transform Claude Code into a structured development platform with 25 commands, 15 specialized agents, 7 behavioral modes, and 8 MCP server integrations",
+  "author": {
+    "name": "SuperClaude Team",
+    "email": "support@superclaude.dev",
+    "url": "https://github.com/SuperClaude-Org"
+  },
+  "homepage": "https://superclaude.netlify.app/",
+  "repository": "https://github.com/SuperClaude-Org/SuperClaude_Plugin",
+  "license": "MIT",
+  "keywords": [
+    "development",
+    "productivity",
+    "agents",
+    "workflow",
+    "automation",
+    "mcp",
+    "spec-driven",
+    "tdd"
+  ]
+}
