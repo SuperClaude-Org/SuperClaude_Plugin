@@ -84,13 +84,36 @@ Claude Code is a product built and maintained by [Anthropic](https://www.anthrop
 
 ## ⚡ **Quick Installation**
 
-### **Choose Your Installation Method**
+### **🔌 Native Plugin (Recommended)**
+
+SuperClaude is now available as a native Claude Code plugin for easier installation and automatic updates!
+
+```shell
+# Add the marketplace
+/plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
+
+# Install the plugin
+/plugin install superclaude@SuperClaude-Org
+
+# Restart Claude Code to activate
+```
+
+**Benefits:**
+- ✅ One-command installation
+- ✅ Automatic updates via Claude Code
+- ✅ No Python/Node.js dependencies
+- ✅ Better isolation and compatibility
+- ✅ Team sharing via marketplace URL
+
+### **Alternative: pip/npm Installation**
 
 | Method | Command | Best For |
 |:------:|---------|----------|
-| **🐍 pipx** | `pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install` | **✅ Recommended** - Linux/macOS |
+| **🐍 pipx** | `pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install` | Linux/macOS users |
 | **📦 pip** | `pip install SuperClaude && pip upgrade SuperClaude && SuperClaude install` | Traditional Python environments |
-| **🌐 npm** | `npm install -g @bifrost_inc/superclaude && superclaude install` | Cross-platform, Node.js users |
+| **🌐 npm** | `npm install -g @bifrost_inc/superclaude && superclaude install` | Node.js users |
+
+> **Note:** If you're upgrading from pip/npm to the plugin, see [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for instructions.
 
 </div>
 
