@@ -2,6 +2,11 @@
 
 # 🚀 SuperClaude Framework
 
+> **🚧 WORK IN PROGRESS: Plugin System Migration**
+> We are currently migrating SuperClaude to Claude Code's native plugin system.
+> Target repository: [Utakata/SuperClaude_Plugin](https://github.com/Utakata/SuperClaude_Plugin)
+> **Current installer-based installation remains fully functional.**
+
 ### **Transform Claude Code into a Structured Development Platform**
 
 <p align="center">
