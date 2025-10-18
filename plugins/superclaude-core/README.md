@@ -35,6 +35,51 @@ Core SuperClaude framework with 25 slash commands and 7 behavioral modes for sys
 - **BUSINESS_PANEL_EXAMPLES.md**: Business strategy analysis examples
 - **RESEARCH_CONFIG.md**: Deep research configuration
 
+## ⚠️ Important: Existing Installation Check
+
+### If you have SuperClaude installed via installer (pip/npm)
+
+**Before installing the plugin version**, check if you have the installer-based version:
+
+```bash
+# Check for Python package
+pip list | grep SuperClaude
+pipx list | grep SuperClaude
+
+# Check for npm package
+npm list -g | grep superclaude
+
+# Check installation directory
+ls ~/.claude/commands/sc/
+```
+
+**If found, uninstall first to avoid conflicts:**
+
+```bash
+# Uninstall Python version
+SuperClaude uninstall
+# OR
+pipx uninstall SuperClaude
+
+# Uninstall npm version
+npm uninstall -g @bifrost_inc/superclaude
+```
+
+**Why?** Both versions provide the same `/sc:*` commands. Installing both causes:
+- ❌ Command name conflicts
+- ❌ Duplicate CLAUDE.md injections
+- ❌ Increased token usage
+- ❌ Unclear which version is executing
+
+### Migration Benefits
+
+✅ **Simpler installation**: One command vs multi-step installer
+✅ **Automatic updates**: Claude Code manages versions
+✅ **Modular**: Install only the plugins you need
+✅ **Team-friendly**: Auto-install via project settings
+
+---
+
 ## Installation
 
 ### Via Claude Code Plugin System
