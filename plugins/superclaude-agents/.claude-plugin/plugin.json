@@ -1,0 +1,14 @@
+{
+  "name": "superclaude-agents",
+  "version": "4.3.0",
+  "description": "15 specialized AI agents for architecture, quality, analysis, and development workflows",
+  "author": {
+    "name": "SuperClaude Development Team",
+    "email": "dev@superclaude.org"
+  },
+  "homepage": "https://github.com/Utakata/SuperClaude_Plugin",
+  "repository": "https://github.com/Utakata/SuperClaude_Plugin",
+  "license": "MIT",
+  "keywords": ["agents", "architecture", "quality", "analysis", "devops"],
+  "agents": "./SuperClaude/Agents/"
+}

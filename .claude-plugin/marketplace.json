@@ -1,0 +1,66 @@
+{
+  "name": "superclaude-official",
+  "owner": {
+    "name": "SuperClaude Development Team",
+    "email": "dev@superclaude.org",
+    "url": "https://github.com/Utakata"
+  },
+  "metadata": {
+    "description": "Official SuperClaude Framework marketplace for AI-enhanced development",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "superclaude-core",
+      "source": "./plugins/superclaude-core",
+      "description": "Core framework with 25 commands and 7 behavioral modes for systematic software development",
+      "version": "4.3.0",
+      "author": {
+        "name": "SuperClaude Development Team"
+      },
+      "homepage": "https://github.com/Utakata/SuperClaude_Plugin",
+      "repository": "https://github.com/Utakata/SuperClaude_Plugin",
+      "license": "MIT",
+      "keywords": ["framework", "commands", "modes", "workflow"],
+      "category": "framework",
+      "tags": ["core", "essential", "commands"],
+      "commands": "./SuperClaude/Commands/",
+      "hooks": "./hooks/hooks.json",
+      "strict": false
+    },
+    {
+      "name": "superclaude-agents",
+      "source": "./plugins/superclaude-agents",
+      "description": "15 specialized AI agents for architecture, quality, analysis, and development workflows",
+      "version": "4.3.0",
+      "author": {
+        "name": "SuperClaude Development Team"
+      },
+      "homepage": "https://github.com/Utakata/SuperClaude_Plugin",
+      "repository": "https://github.com/Utakata/SuperClaude_Plugin",
+      "license": "MIT",
+      "keywords": ["agents", "architecture", "quality", "analysis"],
+      "category": "agents",
+      "tags": ["agents", "architecture", "quality"],
+      "agents": "./SuperClaude/Agents/",
+      "strict": false
+    },
+    {
+      "name": "superclaude-mcp-docs",
+      "source": "./plugins/superclaude-mcp-docs",
+      "description": "MCP server integration documentation for 8 powerful external tools (Context7, Sequential, Magic, Playwright, Morphllm, Serena, Tavily, Chrome DevTools)",
+      "version": "4.3.0",
+      "author": {
+        "name": "SuperClaude Development Team"
+      },
+      "homepage": "https://github.com/Utakata/SuperClaude_Plugin",
+      "repository": "https://github.com/Utakata/SuperClaude_Plugin",
+      "license": "MIT",
+      "keywords": ["mcp", "integration", "documentation"],
+      "category": "documentation",
+      "tags": ["mcp", "integration", "tools"],
+      "strict": false
+    }
+  ]
+}

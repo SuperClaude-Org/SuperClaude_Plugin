@@ -1,0 +1,13 @@
+{
+  "name": "superclaude-mcp-docs",
+  "version": "4.3.0",
+  "description": "MCP server integration documentation for 8 powerful external tools",
+  "author": {
+    "name": "SuperClaude Development Team",
+    "email": "dev@superclaude.org"
+  },
+  "homepage": "https://github.com/Utakata/SuperClaude_Plugin",
+  "repository": "https://github.com/Utakata/SuperClaude_Plugin",
+  "license": "MIT",
+  "keywords": ["mcp", "integration", "documentation", "servers"]
+}

@@ -1,0 +1,66 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "--brainstorm",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Activating Brainstorming Mode: Collaborative discovery for vague requirements'"
+          }
+        ]
+      },
+      {
+        "matcher": "--business-panel",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Activating Business Panel Mode: Multi-expert strategic analysis'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "--orchestrate",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Activating Orchestration Mode: Intelligent tool coordination'"
+          }
+        ]
+      },
+      {
+        "matcher": "--uc|--ultracompressed",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Activating Token Efficiency Mode: Symbol-enhanced communication (30-50% reduction)'"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "--task-manage",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Activating Task Management Mode: Systematic organization with persistent memory'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "--introspect",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Activating Introspection Mode: Meta-cognitive analysis'"
+          }
+        ]
+      }
+    ]
+  }
+}

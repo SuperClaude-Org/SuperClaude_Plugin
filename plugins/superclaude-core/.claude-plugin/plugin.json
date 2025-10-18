@@ -1,0 +1,15 @@
+{
+  "name": "superclaude-core",
+  "version": "4.3.0",
+  "description": "Core SuperClaude framework with 25 commands and 7 behavioral modes for systematic software development",
+  "author": {
+    "name": "SuperClaude Development Team",
+    "email": "dev@superclaude.org"
+  },
+  "homepage": "https://github.com/Utakata/SuperClaude_Plugin",
+  "repository": "https://github.com/Utakata/SuperClaude_Plugin",
+  "license": "MIT",
+  "keywords": ["framework", "commands", "modes", "workflow", "automation"],
+  "commands": "./SuperClaude/Commands/",
+  "hooks": "./hooks/hooks.json"
+}
