@@ -81,29 +81,28 @@ SuperClaude는 **메타프로그래밍 설정 프레임워크**로, 동작 지�
 
 </div>
 
-<details>
-<summary><b>⚠️ 중요: SuperClaude V3에서 업그레이드</b></summary>
+## ⚠️ **중요: 안전한 설치를 위해**
 
-**SuperClaude V3가 설치되어 있다면 V4를 설치하기 전에 제거해야 합니다:**
+**SuperClaude V4를 설치하기 전에 이 내용을 읽어주세요.**
 
-```bash
-# 먼저 V3 제거
-관련된 모든 파일과 디렉토리 삭제:
-*.md *.json 및 commands/
+서로 다른 설치 방법(`pip`, `npm`, `pipx`, 구버전 플러그인)을 혼용하면 명령어 충돌이 발생하고 설정이 손상되어 **예상치 못한 오류**가 발생할 수 있습니다.
 
-# 그런 다음 V4 설치
-pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install
-```
+안전하고 깨끗한 설치를 위해, 공식 정리 스크립트를 사용하여 기존의 모든 SuperClaude 설치를 제거하는 것을 **강력히 권장**합니다.
 
-**✅ 업그레이드 시 유지되는 내용:**
-- ✓ 커스텀 슬래시 명령어 (`commands/sc/` 외부)
-- ✓ `CLAUDE.md` 내의 커스텀 콘텐츠
-- ✓ Claude Code의 `.claude.json`, `.credentials.json`, `settings.json`, `settings.local.json`
-- ✓ 추가한 커스텀 에이전트 및 파일
+**지침:**
 
-**⚠️ 참고:** V3의 다른 SuperClaude 관련 `.json` 파일은 충돌을 일으킬 수 있으므로 삭제하세요.
+1.  **스크립트 다운로드:**
+    ```bash
+    curl -o cleanup_superclaude.py https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Framework/master/cleanup_superclaude.py
+    ```
 
-</details>
+2.  **스크립트 실행:**
+    ```bash
+    python3 cleanup_superclaude.py
+    ```
+    이 스크립트는 시스템을 스캔하여 감지된 모든 SuperClaude 관련 파일을 안전하게 백업하고 제거하도록 안내합니다.
+
+정리가 완료되면 아래의 V4 클린 설치를 진행할 수 있습니다.
 
 <details>
 <summary><b>💡 PEP 668 오류 해결방법</b></summary>

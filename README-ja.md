@@ -66,6 +66,29 @@
 
 SuperClaudeは**メタプログラミング設定フレームワーク**で、動作指示の注入とコンポーネント統制を通じて、Claude Codeを構造化開発プラットフォームに変換します。強力なツールとインテリジェントエージェントを備えたシステム化されたワークフロー自動化を提供します。
 
+## ⚠️ **重要：安全なインストールのために**
+
+**SuperClaude V4をインストールする前に、必ずお読みください。**
+
+異なるインストール方法（`pip`, `npm`, `pipx`, 旧プラグイン）が混在すると、コマンドの競合や設定の破損を引き起こし、**予期せぬエラーの原因となります。**
+
+安全でクリーンなインストールを保証するため、公式のクリーンアップスクリプトを使用して、既存のSuperClaudeのインストールをすべて削除することを**強く推奨します。**
+
+**手順:**
+
+1.  **スクリプトをダウンロード:**
+    ```bash
+    curl -o cleanup_superclaude.py https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Framework/master/cleanup_superclaude.py
+    ```
+
+2.  **スクリプトを実行:**
+    ```bash
+    python3 cleanup_superclaude.py
+    ```
+    スクリプトがシステムをスキャンし、検出されたすべてのSuperClaude関連ファイルを安全にバックアップした後、削除を案内します。
+
+クリーンアップが完了したら、以下の手順で安心してV4をインストールできます。
+
 ## ⚡ **クイックインストール**
 
 ### **インストール方法を選択**
@@ -77,30 +100,6 @@ SuperClaudeは**メタプログラミング設定フレームワーク**で、�
 | **🌐 npm** | `npm install -g @bifrost_inc/superclaude && superclaude install` | クロスプラットフォーム、Node.jsユーザー |
 
 </div>
-
-<details>
-<summary><b>⚠️ 重要：SuperClaude V3からのアップグレード</b></summary>
-
-**SuperClaude V3がインストールされている場合は、V4をインストールする前にアンインストールする必要があります：**
-
-```bash
-# V3を最初にアンインストール
-関連するファイルとディレクトリをすべて削除：
-*.md *.json および commands/
-
-# その後V4をインストール
-pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install
-```
-
-**✅ アップグレード時に保持される内容：**
-- ✓ カスタムスラッシュコマンド（`commands/sc/`外のもの）
-- ✓ `CLAUDE.md`内のカスタム内容
-- ✓ Claude Codeの`.claude.json`、`.credentials.json`、`settings.json`、`settings.local.json`
-- ✓ 追加したカスタムエージェントとファイル
-
-**⚠️ 注意：** V3の他のSuperClaude関連`.json`ファイルは競合を引き起こす可能性があるため削除してください。
-
-</details>
 
 <details>
 <summary><b>💡 PEP 668エラーのトラブルシューティング</b></summary>

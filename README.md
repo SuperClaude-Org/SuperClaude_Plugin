@@ -90,6 +90,29 @@ SuperClaude is a **meta-programming configuration framework** that transforms Cl
 This project is not affiliated with or endorsed by Anthropic.  
 Claude Code is a product built and maintained by [Anthropic](https://www.anthropic.com/).
 
+## ⚠️ **Important: For a Safe Installation**
+
+**Please read this before installing SuperClaude V4.**
+
+Mixing different installation methods (`pip`, `npm`, `pipx`, old plugins) can cause command conflicts and corrupt your settings, leading to **unexpected errors.**
+
+To ensure a safe and clean installation, we **strongly recommend** using the official cleanup script to remove all existing SuperClaude installations.
+
+**Instructions:**
+
+1.  **Download the script:**
+    ```bash
+    curl -o cleanup_superclaude.py https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Framework/master/cleanup_superclaude.py
+    ```
+
+2.  **Run the script:**
+    ```bash
+    python3 cleanup_superclaude.py
+    ```
+    The script will scan your system and guide you to safely back up and remove all detected SuperClaude-related files.
+
+Once the cleanup is complete, you can proceed with a clean installation of V4 below.
+
 ## ⚡ **Quick Installation**
 
 ### **Choose Your Installation Method**
@@ -101,30 +124,6 @@ Claude Code is a product built and maintained by [Anthropic](https://www.anthrop
 | **🌐 npm** | `npm install -g @bifrost_inc/superclaude && superclaude install` | Cross-platform, Node.js users |
 
 </div>
-
-<details>
-<summary><b>⚠️ IMPORTANT: Upgrading from SuperClaude V3</b></summary>
-
-**If you have SuperClaude V3 installed, you SHOULD uninstall it before installing V4:**
-
-```bash
-# Uninstall V3 first
-Remove all related files and directories :
-*.md *.json and commands/
-
-# Then install V4
-pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install
-```
-
-**✅ What gets preserved during upgrade:**
-- ✓ Your custom slash commands (outside `commands/sc/`)
-- ✓ Your custom content in `CLAUDE.md` 
-- ✓ Claude Code's `.claude.json`, `.credentials.json`, `settings.json` and `settings.local.json`
-- ✓ Any custom agents and files you've added
-
-**⚠️ Note:** Other SuperClaude-related `.json` files from V3 may cause conflicts and should be removed.
-
-</details>
 
 <details>
 <summary><b>💡 Troubleshooting PEP 668 Errors</b></summary>
