@@ -5,7 +5,32 @@ This guide helps you migrate from the installer-based SuperClaude to the new plu
 
 ---
 
-## Quick Migration (5 minutes)
+## ⚡ Recommended: Use Official Cleanup Script
+
+**The easiest and safest way to migrate is using our official cleanup script:**
+
+```bash
+# Download the script
+curl -o cleanup_superclaude.py https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Framework/master/cleanup_superclaude.py
+
+# Run the script
+python3 cleanup_superclaude.py
+```
+
+**The script automatically**:
+- ✅ Detects all SuperClaude installations (pip, pipx, uv, npm)
+- ✅ Finds native plugins and V3 legacy files
+- ✅ Creates automatic backups before removal
+- ✅ Protects Claude Code files (.claude.json, settings.json)
+- ✅ Provides clear status messages
+
+**After cleanup completes**, proceed to [Step 5: Install Plugin Version](#step-5-install-plugin-version)
+
+---
+
+## Manual Migration (Advanced Users)
+
+If you prefer manual migration or need to understand the steps:
 
 ### Step 1: Check Current Installation
 
@@ -241,12 +266,36 @@ SuperClaude uninstall
 
 ## FAQ
 
+### Q: Should I use the cleanup script or manual migration?
+
+**A**: **Use the cleanup script** unless you have specific reasons not to:
+- ✅ **Safer**: Automatic backup and protected file handling
+- ✅ **Faster**: One command vs multiple manual steps
+- ✅ **More thorough**: Detects installations you might miss
+- ✅ **Cross-platform**: Works on Linux, macOS, Windows
+
+**Manual migration** is for advanced users who want full control.
+
+### Q: What does the cleanup script do?
+
+**A**: The script performs these actions:
+1. **Detection**: Scans for pip, pipx, uv, npm installations
+2. **Backup**: Creates timestamped backup of ~/.claude/
+3. **Uninstall**: Removes packages from detected package managers
+4. **Cleanup**: Removes SuperClaude files while protecting Claude Code settings
+5. **Verification**: Confirms clean removal
+
+All actions require user confirmation before execution.
+
 ### Q: Will my custom configurations be lost?
 
-**A**: Plugin version uses the same `/sc:*` command names and behaviors. However:
-- Custom MCP configurations in `~/.claude/.claude.json` are preserved
-- Custom slash commands in `~/.claude/commands/` are preserved
-- User-added content in `~/.claude/CLAUDE.md` should be backed up before migration
+**A**: **No, if you use the cleanup script**. It automatically protects:
+- ✅ Custom MCP configurations (`.claude.json`)
+- ✅ Claude Code settings (`settings.json`, `settings.local.json`)
+- ✅ Credentials (`credentials.json`)
+- ✅ Custom slash commands (outside `/sc:` namespace)
+
+**Manual migration**: Back up important files first.
 
 ### Q: Can I use both installer and plugin versions?
 
