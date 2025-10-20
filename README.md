@@ -2,10 +2,10 @@
 
 # 🚀 SuperClaude Framework
 
-> **🚧 WORK IN PROGRESS: Plugin System Migration**
-> We are currently migrating SuperClaude to Claude Code's native plugin system.
-> Target repository: [Utakata/SuperClaude_Plugin](https://github.com/Utakata/SuperClaude_Plugin)
-> **Current installer-based installation remains fully functional.**
+> **🎉 NEW: Plugin System Now Available (v4.3.0-beta)**
+> SuperClaude is now available as native Claude Code plugins!
+> Choose between **Plugin** (recommended, easier) or **Installer** (traditional) methods below.
+> Both methods are fully supported.
 
 ### **Transform Claude Code into a Structured Development Platform**
 
@@ -19,7 +19,7 @@
 <a href="https://github.com/SuperClaude-Org/SuperQwen_Framework" target="_blank">
   <img src="https://img.shields.io/badge/Try-SuperQwen_Framework-orange" alt="Try SuperQwen Framework"/>
 </a>
-  <img src="https://img.shields.io/badge/version-4.2.0-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-4.3.0--beta-blue" alt="Version">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
@@ -115,13 +115,38 @@ Once the cleanup is complete, you can proceed with a clean installation of V4 be
 
 ## ⚡ **Quick Installation**
 
-### **Choose Your Installation Method**
+### **Method 1: Plugin System** ⭐ **Recommended**
+
+The easiest way to install SuperClaude - just two commands in Claude Code:
+
+```bash
+# Add SuperClaude marketplace
+/plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
+
+# Install plugins (choose what you need)
+/plugin install superclaude-core@superclaude-official
+/plugin install superclaude-agents@superclaude-official
+/plugin install superclaude-mcp-docs@superclaude-official
+```
+
+**Why Plugin Method?**
+- ✅ Simpler installation (no Python/Node.js required)
+- ✅ Automatic updates via Claude Code
+- ✅ Modular (install only what you need)
+- ✅ No conflicts with system packages
+- ✅ Easy team distribution via `.claude/settings.json`
+
+### **Method 2: Traditional Installer**
+
+For users who prefer the traditional method:
 
 | Method | Command | Best For |
 |:------:|---------|----------|
-| **🐍 pipx** | `pipx install SuperClaude && pipx upgrade SuperClaude && SuperClaude install` | **✅ Recommended** - Linux/macOS |
-| **📦 pip** | `pip install SuperClaude && pip upgrade SuperClaude && SuperClaude install` | Traditional Python environments |
-| **🌐 npm** | `npm install -g @bifrost_inc/superclaude && superclaude install` | Cross-platform, Node.js users |
+| **🐍 pipx** | `pipx install SuperClaude && SuperClaude install` | Linux/macOS developers |
+| **📦 pip** | `pip install SuperClaude && SuperClaude install` | Traditional Python environments |
+| **🌐 npm** | `npm install -g @bifrost_inc/superclaude && SuperClaude install` | Cross-platform, Node.js users |
+
+**Migration Guide**: If you have an existing installer-based installation and want to switch to plugins, see [Migration Guide](docs/MIGRATION_GUIDE.md).
 
 </div>
 
