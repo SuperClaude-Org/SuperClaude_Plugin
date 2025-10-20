@@ -88,7 +88,7 @@ SuperClaude is available as a native Claude Code plugin for easy installation an
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # Install the plugin
-/plugin install sc@SuperClaude-Org
+/plugin install sc@superclaude-official
 
 # Restart Claude Code to activate
 ```
