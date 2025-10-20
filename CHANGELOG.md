@@ -7,6 +7,184 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0-beta] - 2025-10-21
+
+### 🎉 Major Changes
+
+#### Plugin System Migration
+SuperClaude is now available as a **native Claude Code plugin**. This represents a fundamental shift in distribution and installation methodology.
+
+**Three modular plugins**:
+- `superclaude-core`: 25 commands + 7 behavioral modes + 6 core behaviors
+- `superclaude-agents`: 15 specialized AI agents + 6 context engineering agents
+- `superclaude-mcp-docs`: 8 MCP server integration guides
+
+### ✨ Added
+
+#### Plugin Distribution System
+- `.claude-plugin/marketplace.json` - Official SuperClaude plugin marketplace
+- Plugin manifests for all three plugins with proper metadata
+- Hooks system (`hooks.json`) for behavioral mode activation
+- Modular component architecture with frontmatter metadata
+- GitHub-based distribution via SuperClaude-Org/SuperClaude_Plugin
+
+#### Documentation
+- `docs/MIGRATION_GUIDE.md` - Comprehensive migration guide from installer to plugin
+- `MIGRATION_COMPATIBILITY.md` - Technical analysis of installer vs plugin conflicts
+- Plugin-specific README.md for each plugin
+- Updated main README with plugin-first installation approach
+
+#### Migration Tools
+- `cleanup_superclaude.py` - Official cleanup utility for safe migration
+  - Automatic detection of pip, pipx, uv, npm installations
+  - Automatic backup creation before cleanup
+  - Protection for Claude Code configuration files
+  - Safe removal of conflicting installations
+
+### 📦 Plugin Structure
+
+#### superclaude-core (v4.3.0)
+**Commands** (25 total):
+- `/sc:analyze`, `/sc:brainstorm`, `/sc:build`, `/sc:business-panel`, `/sc:cleanup`
+- `/sc:design`, `/sc:document`, `/sc:estimate`, `/sc:explain`, `/sc:git`
+- `/sc:help`, `/sc:implement`, `/sc:improve`, `/sc:index`, `/sc:load`
+- `/sc:reflect`, `/sc:research`, `/sc:save`, `/sc:select-tool`, `/sc:spawn`
+- `/sc:spec-panel`, `/sc:task`, `/sc:test`, `/sc:troubleshoot`, `/sc:workflow`
+
+**Kiro Commands** (10 total):
+- `/kiro:spec-design`, `/kiro:spec-impl`, `/kiro:spec-init`, `/kiro:spec-requirements`
+- `/kiro:spec-status`, `/kiro:spec-tasks`, `/kiro:steering`, `/kiro:steering-custom`
+- `/kiro:validate-design`, `/kiro:validate-gap`
+
+**Core Behaviors** (6 files):
+- `BUSINESS_PANEL_EXAMPLES.md` - Business panel usage patterns
+- `BUSINESS_SYMBOLS.md` - Business analysis symbol system
+- `FLAGS.md` - Mode activation and control flags
+- `PRINCIPLES.md` - Software engineering philosophy
+- `RESEARCH_CONFIG.md` - Deep research configuration
+- `RULES.md` - Behavioral rules and decision trees
+
+**Behavioral Modes** (7 files):
+- `MODE_Brainstorming.md`, `MODE_Business_Panel.md`, `MODE_DeepResearch.md`
+- `MODE_Introspection.md`, `MODE_Orchestration.md`, `MODE_Task_Management.md`
+- `MODE_Token_Efficiency.md`
+
+#### superclaude-agents (v4.3.0)
+**Specialized Agents** (15 total):
+- `backend-architect`, `business-panel-experts`, `devops-architect`, `frontend-architect`
+- `learning-guide`, `performance-engineer`, `python-expert`, `quality-engineer`
+- `refactoring-expert`, `requirements-analyst`, `root-cause-analyst`, `security-engineer`
+- `socratic-mentor`, `system-architect`, `technical-writer`
+
+**Context Engineering Agents** (6 total):
+- `context-orchestrator`, `documentation-specialist`, `metrics-analyst`
+- `output-architect`, `query-optimizer`, `token-budget-manager`
+
+#### superclaude-mcp-docs (v4.3.0)
+**MCP Server Guides** (8 servers):
+- Context7, Sequential Thinking, Magic, Playwright, Morphllm, Serena, Tavily, Chrome DevTools
+
+### 🔄 Changed
+
+#### Installation Methods
+- **Plugin installation** is now the recommended method
+- Traditional installer (pip/npm) remains available for backward compatibility
+- Updated installation priority in all documentation
+
+#### Repository Structure
+- Added `plugins/` directory with three plugin packages
+- Added `.claude-plugin/` for marketplace configuration
+- Reorganized components with plugin-specific manifests
+
+#### Documentation
+- Main README prioritizes plugin installation
+- Added migration path documentation
+- Updated all component references for plugin structure
+
+### ⚠️ Migration Required
+
+**If you have existing installer-based installation**:
+
+1. **Recommended**: Use official cleanup script
+   ```bash
+   curl -o cleanup_superclaude.py https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Plugin/master/cleanup_superclaude.py
+   python3 cleanup_superclaude.py
+   ```
+
+2. **Manual**: Uninstall before installing plugin version
+   ```bash
+   # Check for conflicts
+   ls ~/.claude/commands/sc/
+
+   # Remove if found
+   pip uninstall superclaude
+   # or
+   npm uninstall -g @bifrost_inc/superclaude
+   ```
+
+**Why migration is necessary**:
+- ❌ Command name conflicts (/sc:* commands duplicated)
+- ❌ CLAUDE.md injection conflicts (increased token usage)
+- ❌ Agent duplication (redundant system instructions)
+
+See [MIGRATION_GUIDE.md](docs/MIGRATION_GUIDE.md) for detailed migration instructions.
+
+### 🛠️ Technical Details
+
+#### Plugin Manifest Schema
+```json
+{
+  "name": "superclaude-core",
+  "version": "4.3.0",
+  "description": "Core framework with commands and modes",
+  "commands": "./SuperClaude/Commands/",
+  "hooks": "./hooks/hooks.json"
+}
+```
+
+#### Hooks Configuration
+Behavioral modes now activate via hooks system:
+- `--brainstorm` → Brainstorming Mode
+- `--orchestrate` → Orchestration Mode
+- `--introspect` → Introspection Mode
+- `--task-manage` → Task Management Mode
+- `--token-efficient` → Token Efficiency Mode
+
+#### Component Frontmatter
+All commands and agents include metadata:
+```yaml
+name: analyze
+description: Comprehensive code analysis
+tags: [analysis, quality, security]
+version: 4.3.0
+```
+
+### 📊 Statistics
+
+- **Total plugins**: 3
+- **Total commands**: 35 (25 /sc: + 10 /kiro:)
+- **Total agents**: 21 (15 specialized + 6 context engineering)
+- **Total modes**: 7
+- **Total core behaviors**: 6
+- **Total MCP docs**: 8
+- **Total files migrated**: 93
+- **Total lines of documentation**: 11,864
+
+### 🔗 Links
+
+- **Plugin Repository**: https://github.com/SuperClaude-Org/SuperClaude_Plugin
+- **Migration Guide**: [docs/MIGRATION_GUIDE.md](docs/MIGRATION_GUIDE.md)
+- **Plugin Documentation**: [plugins/superclaude-core/README.md](plugins/superclaude-core/README.md)
+
+### 🙏 Acknowledgments
+
+Special thanks to:
+- Claude Code team for the plugin system architecture
+- SuperClaude community for feedback and testing
+- Contributors to the cleanup script enhancement
+
+---
+
 ## [4.2.0] - 2025-09-18
 ### Added
 - **Deep Research System** - Complete implementation of autonomous web research capabilities
