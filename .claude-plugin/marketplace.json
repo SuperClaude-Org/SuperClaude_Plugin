@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "superclaude",
+      "name": "sc",
       "source": "./",
       "description": "Transform Claude Code into a structured development platform with 25 commands, 15 specialized agents, 7 behavioral modes, and 8 MCP server integrations",
       "version": "4.3.0",
