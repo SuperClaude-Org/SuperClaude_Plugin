@@ -1,5 +1,4 @@
 ---
-name: spec-panel
 description: "Multi-expert specification review and improvement using renowned specification and software engineering experts"
 category: analysis
 complexity: enhanced

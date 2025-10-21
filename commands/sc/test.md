@@ -1,5 +1,4 @@
 ---
-name: test
 description: "Execute tests with coverage analysis and automated quality reporting"
 category: utility
 complexity: enhanced

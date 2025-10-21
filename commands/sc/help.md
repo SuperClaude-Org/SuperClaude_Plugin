@@ -1,5 +1,4 @@
 ---
-name: help
 description: "List all available /sc commands and their functionality"
 category: utility
 complexity: low
