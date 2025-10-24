@@ -8,5 +8,6 @@
   "homepage": "https://github.com/kazukixjp/superclaude",
   "repository": "https://github.com/kazukixjp/superclaude",
   "license": "MIT",
-  "keywords": ["superclaude", "confidence-check", "research", "indexing"]
+  "keywords": ["superclaude", "confidence-check", "research", "indexing"],
+  "skills": "./skills/"
 }

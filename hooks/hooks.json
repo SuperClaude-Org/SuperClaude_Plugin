@@ -5,8 +5,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/sc:agent",
-            "timeout": 30
+            "command": "./scripts/session-init.sh",
+            "timeout": 10
           }
         ]
       }
