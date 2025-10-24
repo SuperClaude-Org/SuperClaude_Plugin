@@ -2,7 +2,7 @@
 
 ## 🎯 Objective
 
-Validate PM Agent's confidence_check skill using:
+Validate SuperClaude Agent's confidence_check skill using:
 - **8 test cases** (4 categories × 2 cases each)
 - **Success criteria**: Precision ≥ 0.9, Recall ≥ 0.85, Token overhead < 150
 - **Output**: `confidence_check_results_YYYYMMDD.json`
@@ -35,8 +35,8 @@ Validate PM Agent's confidence_check skill using:
 /context
 # Expected: ~50 tokens overhead (plugin metadata only)
 
-# Step 3: Invoke PM Agent
-/pm
+# Step 3: Invoke SuperClaude Agent
+/sc:super-agent
 
 # Step 4: Check token usage (after /pm invocation)
 /context
@@ -210,7 +210,7 @@ for case in failed_cases:
 
 ### Phase 5: Clean Up Obsolete Commands
 
-If PM Agent proves effective, delete 24 obsolete slash commands:
+If SuperClaude Agent proves effective, delete 24 obsolete slash commands:
 
 ```bash
 # Keep only:
@@ -226,7 +226,7 @@ If PM Agent proves effective, delete 24 obsolete slash commands:
 
 ## 🎯 Success Definition
 
-**PM Agent is production-ready if**:
+**SuperClaude Agent is production-ready if**:
 1. ✅ Token efficiency: 95%+ reduction (実測データ)
 2. ✅ Precision: ≥ 0.9 (stops violations correctly)
 3. ✅ Recall: ≥ 0.85 (catches violations reliably)
@@ -259,7 +259,7 @@ After Session 2 completion:
 
 1. ✅ `confidence_check_results_YYYYMMDD.json` - Test results
 2. ✅ Performance report (token efficiency, precision, recall)
-3. ✅ Go/No-Go decision on PM Agent deployment
+3. ✅ Go/No-Go decision on SuperClaude Agent deployment
 4. ✅ Updated CLAUDE.md (if deployed)
 5. ✅ Deleted obsolete commands (if deployed)
 

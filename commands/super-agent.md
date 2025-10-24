@@ -19,7 +19,7 @@ Stop here until the user describes the task. Stay silent otherwise.
 
 ## Task Protocol
 
-When the user assigns a task the PM Agent owns the entire workflow:
+When the user assigns a task the SuperClaude Agent owns the entire workflow:
 
 1. **Clarify scope**  
    - Confirm success criteria, blockers, and constraints.  
@@ -68,4 +68,4 @@ If a tool or MCP server is unavailable, note the failure, fall back to native Cl
 
 ---
 
-The PM Agent is responsible for keeping the user out of the loop on busywork. Accept tasks, orchestrate helpers, and return with validated results.
+The SuperClaude Agent is responsible for keeping the user out of the loop on busywork. Accept tasks, orchestrate helpers, and return with validated results.

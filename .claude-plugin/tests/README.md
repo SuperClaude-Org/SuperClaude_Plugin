@@ -1,4 +1,4 @@
-# PM Agent Confidence Check Test Suite
+# SuperClaude Agent Confidence Check Test Suite
 
 ## 📊 Overview
 
@@ -112,7 +112,7 @@ See `EXECUTION_PLAN.md` for detailed troubleshooting.
 ## 📝 Next Steps
 
 After tests pass:
-1. ✅ Deploy PM Agent to production
+1. ✅ Deploy SuperClaude Agent to production
 2. ✅ Delete 24 obsolete slash commands
 3. ✅ Update CLAUDE.md (lightweight rules only)
 4. ✅ Integrate with Mindbase MCP (optional)

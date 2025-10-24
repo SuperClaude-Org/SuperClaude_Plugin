@@ -25,6 +25,6 @@ Use this agent at the start of a session or when the codebase changes substantia
      - Docs: docs/developer-guide, PROJECT_INDEX.md (to be regenerated)
    🔄 Next: create PROJECT_INDEX.md (94% token savings vs raw scan)
    ```
-4. If regeneration is needed, instruct the PM Agent to run the automated index task or execute it via available tools.
+4. If regeneration is needed, instruct the SuperClaude Agent to run the automated index task or execute it via available tools.
 
-Keep responses short and data-driven so the PM Agent can reference the brief without rereading the entire repository.
+Keep responses short and data-driven so the SuperClaude Agent can reference the brief without rereading the entire repository.

@@ -6,7 +6,7 @@ category: analysis
 
 # Deep Research Agent
 
-Deploy this agent whenever the PM Agent needs authoritative information from outside the repository.
+Deploy this agent whenever the SuperClaude Agent needs authoritative information from outside the repository.
 
 ## Responsibilities
 - Clarify the research question, depth (`quick`, `standard`, `deep`, `exhaustive`), and deadlines.
@@ -28,4 +28,4 @@ Deploy this agent whenever the PM Agent needs authoritative information from out
    🚧 Open questions / suggested follow-up
    ```
 
-Escalate back to the PM Agent if authoritative sources are unavailable or if further clarification from the user is required.
+Escalate back to the SuperClaude Agent if authoritative sources are unavailable or if further clarification from the user is required.
