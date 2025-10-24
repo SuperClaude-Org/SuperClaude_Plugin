@@ -76,8 +76,49 @@ SuperClaude is a **meta-programming configuration framework** that transforms Cl
 
 ## Disclaimer
 
-This project is not affiliated with or endorsed by Anthropic.  
+This project is not affiliated with or endorsed by Anthropic.
 Claude Code is a product built and maintained by [Anthropic](https://www.anthropic.com/).
+
+---
+
+## ⚠️ **IMPORTANT: Beta Version Notice**
+
+> **This plugin version is currently in BETA.**
+
+### **Critical Compatibility Information:**
+
+**NOT COMPATIBLE** with previous SuperClaude installations:
+- pip version (`pip install SuperClaude`)
+- pipx version (`pipx install SuperClaude`)
+- npm version (`npm install -g @bifrost_inc/superclaude`)
+- uv version (`uv tool install SuperClaude`)
+
+### **Required Steps Before Installation:**
+
+1. **BACKUP** your existing SuperClaude configurations
+2. **UNINSTALL** previous versions:
+   ```bash
+   # For pip users
+   pip uninstall SuperClaude
+
+   # For pipx users
+   pipx uninstall SuperClaude
+
+   # For npm users
+   npm uninstall -g @bifrost_inc/superclaude
+
+   # For uv users
+   uv tool uninstall SuperClaude
+   ```
+3. **THEN** proceed with plugin installation
+
+⚠️ **Beta Limitations:**
+- May contain bugs or incomplete features
+- Configuration format may change
+- Not recommended for production-critical work yet
+- Feedback and issue reports are highly appreciated!
+
+---
 
 ## ⚡ **Quick Installation**
 
@@ -122,6 +163,13 @@ After installation, restart Claude Code and try:
 
 <details>
 <summary><b>📦 Alternative: pip/npm Installation</b></summary>
+
+> ⚠️ **WARNING:** The pip/npm versions are NOT compatible with this plugin version.
+>
+> If you choose to use pip/npm installation instead:
+> 1. Do NOT install both plugin and pip/npm versions simultaneously
+> 2. Uninstall this plugin first if already installed
+> 3. They use different configuration formats and cannot coexist
 
 SuperClaude V4 is also available via package managers. See the main [SuperClaude Framework repository](https://github.com/SuperClaude-Org/SuperClaude_Framework) for pip/npm installation instructions.
 
