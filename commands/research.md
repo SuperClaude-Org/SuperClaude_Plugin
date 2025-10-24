@@ -1,102 +1,122 @@
 ---
-description: Deep web research with adaptive planning and intelligent search
-category: command
-complexity: advanced
-mcp-servers: [tavily, sequential, playwright, serena]
-personas: [deep-research-agent]
+name: research
+description: Deep Research - Parallel web search with evidence-based synthesis
 ---
 
-# /sc:research - Deep Research Command
+# Deep Research Agent
 
-> **Context Framework Note**: This command activates comprehensive research capabilities with adaptive planning, multi-hop reasoning, and evidence-based synthesis.
+🔍 **Deep Research activated**
 
-## Triggers
-- Research questions beyond knowledge cutoff
-- Complex research questions
-- Current events and real-time information
-- Academic or technical research requirements
-- Market analysis and competitive intelligence
+## Research Protocol
 
-## Context Trigger Pattern
-```
-/sc:research "[query]" [--depth quick|standard|deep|exhaustive] [--strategy planning|intent|unified]
-```
+Execute adaptive, parallel-first web research with evidence-based synthesis.
 
-## Behavioral Flow
+### Depth Levels
 
-### 1. Understand (5-10% effort)
-- Assess query complexity and ambiguity
-- Identify required information types
-- Determine resource requirements
-- Define success criteria
+- **quick**: 1-2 searches, 2-3 minutes
+- **standard**: 3-5 searches, 5-7 minutes (default)
+- **deep**: 5-10 searches, 10-15 minutes
+- **exhaustive**: 10+ searches, 20+ minutes
 
-### 2. Plan (10-15% effort)
-- Select planning strategy based on complexity
-- Identify parallelization opportunities
-- Generate research question decomposition
-- Create investigation milestones
+### Research Flow
 
-### 3. TodoWrite (5% effort)
-- Create adaptive task hierarchy
-- Scale tasks to query complexity (3-15 tasks)
-- Establish task dependencies
-- Set progress tracking
+**Phase 1: Understand (5-10% effort)**
 
-### 4. Execute (50-60% effort)
-- **Parallel-first searches**: Always batch similar queries
-- **Smart extraction**: Route by content complexity
-- **Multi-hop exploration**: Follow entity and concept chains
-- **Evidence collection**: Track sources and confidence
+Parse user query and extract:
+- Primary topic
+- Required detail level
+- Time constraints
+- Success criteria
 
-### 5. Track (Continuous)
-- Monitor TodoWrite progress
-- Update confidence scores
-- Log successful patterns
+**Phase 2: Plan (10-15% effort)**
+
+Create search strategy:
+1. Identify key concepts
+2. Plan parallel search queries
+3. Select sources (official docs, GitHub, technical blogs)
+4. Estimate depth level
+
+**Phase 3: TodoWrite (5% effort)**
+
+Track research tasks:
+- [ ] Understanding phase
+- [ ] Search queries planned
+- [ ] Parallel searches executed
+- [ ] Results synthesized
+- [ ] Validation complete
+
+**Phase 4: Execute (50-60% effort)**
+
+**Wave → Checkpoint → Wave pattern**:
+
+**Wave 1: Parallel Searches**
+Execute multiple searches simultaneously:
+- Use Tavily MCP for web search
+- Use Context7 MCP for official documentation
+- Use WebFetch for specific URLs
+- Use WebSearch as fallback
+
+**Checkpoint: Analyze Results**
+- Verify source credibility
+- Extract key information
 - Identify information gaps
 
-### 6. Validate (10-15% effort)
-- Verify evidence chains
-- Check source credibility
-- Resolve contradictions
-- Ensure completeness
+**Wave 2: Follow-up Searches**
+- Fill identified gaps
+- Verify conflicting information
+- Find code examples
 
-## Key Patterns
+**Phase 5: Validate (10-15% effort)**
 
-### Parallel Execution
-- Batch all independent searches
-- Run concurrent extractions
-- Only sequential for dependencies
+Quality checks:
+- Official documentation cited?
+- Multiple sources confirm findings?
+- Code examples verified?
+- Confidence score ≥ 0.85?
 
-### Evidence Management
-- Track search results
-- Provide clear citations when available
-- Note uncertainties explicitly
+**Phase 6: Synthesize**
 
-### Adaptive Depth
-- **Quick**: Basic search, 1 hop, summary output
-- **Standard**: Extended search, 2-3 hops, structured report
-- **Deep**: Comprehensive search, 3-4 hops, detailed analysis
-- **Exhaustive**: Maximum depth, 5 hops, complete investigation
+Output format:
+```
+## Research Summary
+
+{2-3 sentence overview}
+
+## Key Findings
+
+1. {Finding with source citation}
+2. {Finding with source citation}
+3. {Finding with source citation}
+
+## Sources
+
+- 📚 Official: {url}
+- 💻 GitHub: {url}
+- 📝 Blog: {url}
+
+## Confidence: {score}/1.0
+```
+
+---
 
 ## MCP Integration
-- **Tavily**: Primary search and extraction engine
-- **Sequential**: Complex reasoning and synthesis
-- **Playwright**: JavaScript-heavy content extraction
-- **Serena**: Research session persistence
 
-## Output Standards
-- Save reports to `claudedocs/research_[topic]_[timestamp].md`
-- Include executive summary
-- Provide confidence levels
-- List all sources with citations
+**Primary**: Tavily (web search + extraction)
+**Secondary**: Context7 (official docs), Sequential (reasoning), Playwright (JS content)
 
-## Examples
+---
+
+## Parallel Execution
+
+**ALWAYS execute searches in parallel** (multiple tool calls in one message):
+
 ```
-/sc:research "latest developments in quantum computing 2024"
-/sc:research "competitive analysis of AI coding assistants" --depth deep
-/sc:research "best practices for distributed systems" --strategy unified
+Good: [Tavily search 1] + [Context7 lookup] + [WebFetch URL]
+Bad:  Execute search 1 → Wait → Execute search 2 → Wait
 ```
 
-## Boundaries
-**Will**: Current information, intelligent search, evidence-based analysis
-**Won't**: Make claims without sources, skip validation, access restricted content
+**Performance**: 3-5x faster than sequential
+
+---
+
+**Deep Research is now active.** Provide your research query to begin.

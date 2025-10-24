@@ -1,0 +1,183 @@
+{
+  "generated": "2025-10-21T13:38:42.069098",
+  "test_suite": "confidence_check_precision_recall",
+  "summary": {
+    "total_tests": 8,
+    "passed": 8,
+    "failed": 0,
+    "true_positives": 4,
+    "true_negatives": 4,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.0,
+    "avg_confidence": 0.562,
+    "avg_token_overhead": 150.0
+  },
+  "evaluation": {
+    "overall_pass": true,
+    "checks": {
+      "precision_pass": true,
+      "recall_pass": true,
+      "confidence_pass": true,
+      "token_overhead_pass": true
+    },
+    "summary": "PASS ✅"
+  },
+  "cases": [
+    {
+      "id": "kong_001",
+      "category": "architecture_compliance",
+      "scenario": "Kong Gateway未使用パターン",
+      "expected_confidence": 0.25,
+      "actual_confidence": 0.25,
+      "expected_action": "stop",
+      "actual_action": "stop",
+      "result": "pass",
+      "checks": [
+        "✅ No duplicate implementations found",
+        "❌ Verify architecture compliance (avoid reinventing)",
+        "❌ Read official docs first",
+        "❌ Search for OSS implementations",
+        "❌ Continue investigation to identify root cause"
+      ],
+      "token_overhead": 150,
+      "data_source": "agiletec/PROJECT_INDEX.md:93, CLAUDE.md:134"
+    },
+    {
+      "id": "kong_002",
+      "category": "architecture_compliance",
+      "scenario": "Kong Gateway正しく使用",
+      "expected_confidence": 1.0,
+      "actual_confidence": 1.0,
+      "expected_action": "proceed",
+      "actual_action": "proceed",
+      "result": "pass",
+      "checks": [
+        "✅ No duplicate implementations found",
+        "✅ Uses existing tech stack (e.g., Supabase)",
+        "✅ Official documentation verified",
+        "✅ Working OSS implementation found",
+        "✅ Root cause identified"
+      ],
+      "token_overhead": 150,
+      "data_source": "agiletec/docs/kong-gateway.md"
+    },
+    {
+      "id": "dup_001",
+      "category": "duplicate_implementation",
+      "scenario": "重複実装パターン",
+      "expected_confidence": 0.0,
+      "actual_confidence": 0.0,
+      "expected_action": "stop",
+      "actual_action": "stop",
+      "result": "pass",
+      "checks": [
+        "❌ Check for existing implementations first",
+        "❌ Verify architecture compliance (avoid reinventing)",
+        "❌ Read official docs first",
+        "❌ Search for OSS implementations",
+        "❌ Continue investigation to identify root cause"
+      ],
+      "token_overhead": 150,
+      "data_source": "agiletec/docs/code-quality.md:22"
+    },
+    {
+      "id": "dup_002",
+      "category": "duplicate_implementation",
+      "scenario": "既存実装を参照",
+      "expected_confidence": 1.0,
+      "actual_confidence": 1.0,
+      "expected_action": "proceed",
+      "actual_action": "proceed",
+      "result": "pass",
+      "checks": [
+        "✅ No duplicate implementations found",
+        "✅ Uses existing tech stack (e.g., Supabase)",
+        "✅ Official documentation verified",
+        "✅ Working OSS implementation found",
+        "✅ Root cause identified"
+      ],
+      "token_overhead": 150,
+      "data_source": "agiletec/libs/schemas/src/auth.ts"
+    },
+    {
+      "id": "docs_001",
+      "category": "official_docs_missing",
+      "scenario": "公式ドキュメント未参照",
+      "expected_confidence": 0.25,
+      "actual_confidence": 0.25,
+      "expected_action": "stop",
+      "actual_action": "stop",
+      "result": "pass",
+      "checks": [
+        "✅ No duplicate implementations found",
+        "❌ Verify architecture compliance (avoid reinventing)",
+        "❌ Read official docs first",
+        "❌ Search for OSS implementations",
+        "❌ Continue investigation to identify root cause"
+      ],
+      "token_overhead": 150,
+      "data_source": "General pattern - guessing API endpoints"
+    },
+    {
+      "id": "docs_002",
+      "category": "official_docs_verified",
+      "scenario": "公式ドキュメント参照済み",
+      "expected_confidence": 1.0,
+      "actual_confidence": 1.0,
+      "expected_action": "proceed",
+      "actual_action": "proceed",
+      "result": "pass",
+      "checks": [
+        "✅ No duplicate implementations found",
+        "✅ Uses existing tech stack (e.g., Supabase)",
+        "✅ Official documentation verified",
+        "✅ Working OSS implementation found",
+        "✅ Root cause identified"
+      ],
+      "token_overhead": 150,
+      "data_source": "Supabase official documentation"
+    },
+    {
+      "id": "oss_001",
+      "category": "oss_reference_missing",
+      "scenario": "OSS実装未調査",
+      "expected_confidence": 0.0,
+      "actual_confidence": 0.0,
+      "expected_action": "stop",
+      "actual_action": "stop",
+      "result": "pass",
+      "checks": [
+        "❌ Check for existing implementations first",
+        "❌ Verify architecture compliance (avoid reinventing)",
+        "❌ Read official docs first",
+        "❌ Search for OSS implementations",
+        "❌ Continue investigation to identify root cause"
+      ],
+      "token_overhead": 150,
+      "data_source": "agiletec/libs/resilience/"
+    },
+    {
+      "id": "oss_002",
+      "category": "oss_reference_found",
+      "scenario": "OSS実装参照済み",
+      "expected_confidence": 1.0,
+      "actual_confidence": 1.0,
+      "expected_action": "proceed",
+      "actual_action": "proceed",
+      "result": "pass",
+      "checks": [
+        "✅ No duplicate implementations found",
+        "✅ Uses existing tech stack (e.g., Supabase)",
+        "✅ Official documentation verified",
+        "✅ Working OSS implementation found",
+        "✅ Root cause identified"
+      ],
+      "token_overhead": 150,
+      "data_source": "agiletec/libs/resilience/"
+    }
+  ]
+}

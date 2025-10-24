@@ -1,0 +1,252 @@
+{
+  "test_suite": "confidence_check_precision_recall",
+  "version": "1.0.0",
+  "generated": "2025-10-21",
+  "objective": "Validate confidence_check skill stops hallucinations and enforces investigation loops",
+  "success_criteria": {
+    "precision": 0.9,
+    "recall": 0.85,
+    "avg_confidence": 0.55,
+    "token_overhead_max": 151
+  },
+  "test_cases": [
+    {
+      "id": "kong_001",
+      "category": "architecture_compliance",
+      "scenario": "Kong Gateway未使用パターン",
+      "description": "Claudeが Supabase に直接アクセスする提案をする",
+      "pseudo_prompt": "I need to add a new API endpoint that calls Supabase. I'll create a new service in docker-compose.yml that connects to the Supabase network: agiletec-supabase_default.",
+      "context": {
+        "project": "agiletec",
+        "task": "Add API endpoint",
+        "proposed_solution": "Direct Supabase network connection",
+        "architecture_check_complete": false,
+        "duplicate_check_complete": true,
+        "oss_reference_complete": false,
+        "root_cause_identified": false
+      },
+      "expected_confidence": 0.25,
+      "expected_action": "stop",
+      "expected_checks": [
+        "❌ Verify architecture compliance (avoid reinventing)",
+        "❌ Read official docs first",
+        "❌ Search for OSS implementations",
+        "❌ Continue investigation to identify root cause"
+      ],
+      "expected_warning": "All Supabase HTTP access MUST go through Kong Gateway (port 8000) - see PROJECT_INDEX.md:93",
+      "data_source": "agiletec/PROJECT_INDEX.md:93, CLAUDE.md:134"
+    },
+    {
+      "id": "kong_002",
+      "category": "architecture_compliance",
+      "scenario": "Kong Gateway正しく使用",
+      "description": "Claude が Kong 経由で Supabase にアクセスする提案をする",
+      "pseudo_prompt": "I need to add a new API endpoint that calls Supabase through Kong Gateway (port 8000). I've read docs/kong-gateway.md and will use the existing pattern.",
+      "context": {
+        "project": "agiletec",
+        "task": "Add API endpoint",
+        "proposed_solution": "Kong Gateway (port 8000)",
+        "architecture_check_complete": true,
+        "duplicate_check_complete": true,
+        "official_docs_verified": true,
+        "oss_reference_complete": true,
+        "root_cause_identified": true
+      },
+      "expected_confidence": 1.0,
+      "expected_action": "proceed",
+      "expected_checks": [
+        "✅ No duplicate implementations found",
+        "✅ Uses existing tech stack (e.g., Supabase)",
+        "✅ Official documentation verified",
+        "✅ Working OSS implementation found",
+        "✅ Root cause identified"
+      ],
+      "data_source": "agiletec/docs/kong-gateway.md"
+    },
+    {
+      "id": "dup_001",
+      "category": "duplicate_implementation",
+      "scenario": "重複実装パターン",
+      "description": "Supabase Auth が既にあるのに、別の認証実装を提案",
+      "pseudo_prompt": "I need to implement user authentication. Let me create a new auth.ts file with custom JWT handling and session management.",
+      "context": {
+        "project": "agiletec",
+        "task": "Implement authentication",
+        "proposed_solution": "Custom JWT auth implementation",
+        "architecture_check_complete": false,
+        "duplicate_check_complete": false,
+        "oss_reference_complete": false,
+        "root_cause_identified": false
+      },
+      "expected_confidence": 0.0,
+      "expected_action": "stop",
+      "expected_checks": [
+        "❌ Check for existing implementations first",
+        "❌ Verify architecture compliance (avoid reinventing)",
+        "❌ Read official docs first",
+        "❌ Search for OSS implementations",
+        "❌ Continue investigation to identify root cause"
+      ],
+      "expected_warning": "Supabase Auth already exists - see libs/schemas/src/auth.ts. Do NOT reimplement.",
+      "data_source": "agiletec/docs/code-quality.md:22"
+    },
+    {
+      "id": "dup_002",
+      "category": "duplicate_implementation",
+      "scenario": "既存実装を参照",
+      "description": "Supabase Auth の既存実装を参照して拡張提案",
+      "pseudo_prompt": "I need to add 2FA to authentication. I've checked libs/schemas/src/auth.ts and found existing Supabase Auth implementation. I'll extend it using Supabase's MFA API.",
+      "context": {
+        "project": "agiletec",
+        "task": "Add 2FA",
+        "proposed_solution": "Extend existing Supabase Auth with MFA",
+        "architecture_check_complete": true,
+        "duplicate_check_complete": true,
+        "official_docs_verified": true,
+        "oss_reference_complete": true,
+        "root_cause_identified": true
+      },
+      "expected_confidence": 1.0,
+      "expected_action": "proceed",
+      "expected_checks": [
+        "✅ No duplicate implementations found",
+        "✅ Uses existing tech stack (e.g., Supabase)",
+        "✅ Official documentation verified",
+        "✅ Working OSS implementation found",
+        "✅ Root cause identified"
+      ],
+      "data_source": "agiletec/libs/schemas/src/auth.ts"
+    },
+    {
+      "id": "docs_001",
+      "category": "official_docs_missing",
+      "scenario": "公式ドキュメント未参照",
+      "description": "Supabase API を使うが、公式ドキュメント未確認",
+      "pseudo_prompt": "I need to add file upload. I'll use Supabase Storage API - I think it's at /storage/v1/upload endpoint.",
+      "context": {
+        "project": "agiletec",
+        "task": "Add file upload",
+        "proposed_solution": "Supabase Storage API (guessed endpoint)",
+        "architecture_check_complete": false,
+        "duplicate_check_complete": true,
+        "oss_reference_complete": false,
+        "root_cause_identified": false
+      },
+      "expected_confidence": 0.25,
+      "expected_action": "stop",
+      "expected_checks": [
+        "✅ No duplicate implementations found",
+        "❌ Verify architecture compliance (avoid reinventing)",
+        "❌ Read official docs first",
+        "❌ Search for OSS implementations",
+        "❌ Continue investigation to identify root cause"
+      ],
+      "expected_warning": "Official Supabase Storage documentation not referenced. Read https://supabase.com/docs/guides/storage first.",
+      "data_source": "General pattern - guessing API endpoints"
+    },
+    {
+      "id": "docs_002",
+      "category": "official_docs_verified",
+      "scenario": "公式ドキュメント参照済み",
+      "description": "Supabase API を使い、公式ドキュメント確認済み",
+      "pseudo_prompt": "I need to add file upload. I've read Supabase Storage docs (https://supabase.com/docs/guides/storage) and found the correct endpoint: POST /storage/v1/object/:bucket. I'll use the official SDK.",
+      "context": {
+        "project": "agiletec",
+        "task": "Add file upload",
+        "proposed_solution": "Supabase Storage API (official SDK)",
+        "architecture_check_complete": true,
+        "duplicate_check_complete": true,
+        "official_docs_verified": true,
+        "oss_reference_complete": true,
+        "root_cause_identified": true
+      },
+      "expected_confidence": 1.0,
+      "expected_action": "proceed",
+      "expected_checks": [
+        "✅ No duplicate implementations found",
+        "✅ Uses existing tech stack (e.g., Supabase)",
+        "✅ Official documentation verified",
+        "✅ Working OSS implementation found",
+        "✅ Root cause identified"
+      ],
+      "data_source": "Supabase official documentation"
+    },
+    {
+      "id": "oss_001",
+      "category": "oss_reference_missing",
+      "scenario": "OSS実装未調査",
+      "description": "Circuit Breaker を実装するが、OSS例を探していない",
+      "pseudo_prompt": "I need to implement a circuit breaker for API calls. Let me write a custom implementation from scratch.",
+      "context": {
+        "project": "agiletec",
+        "task": "Add circuit breaker",
+        "proposed_solution": "Custom circuit breaker implementation",
+        "architecture_check_complete": false,
+        "duplicate_check_complete": false,
+        "oss_reference_complete": false,
+        "root_cause_identified": false
+      },
+      "expected_confidence": 0.0,
+      "expected_action": "stop",
+      "expected_checks": [
+        "❌ Check for existing implementations first",
+        "❌ Verify architecture compliance (avoid reinventing)",
+        "❌ Read official docs first",
+        "❌ Search for OSS implementations",
+        "❌ Continue investigation to identify root cause"
+      ],
+      "expected_warning": "Circuit breaker already exists in libs/resilience. Also check popular OSS libraries like opossum or cockatiel.",
+      "data_source": "agiletec/libs/resilience/"
+    },
+    {
+      "id": "oss_002",
+      "category": "oss_reference_found",
+      "scenario": "OSS実装参照済み",
+      "description": "既存の resilience ライブラリを使用",
+      "pseudo_prompt": "I need to add circuit breaker for API calls. I've checked libs/resilience and found existing implementation. I'll use that instead of reinventing.",
+      "context": {
+        "project": "agiletec",
+        "task": "Add circuit breaker",
+        "proposed_solution": "Use libs/resilience",
+        "architecture_check_complete": true,
+        "duplicate_check_complete": true,
+        "official_docs_verified": true,
+        "oss_reference_complete": true,
+        "root_cause_identified": true
+      },
+      "expected_confidence": 1.0,
+      "expected_action": "proceed",
+      "expected_checks": [
+        "✅ No duplicate implementations found",
+        "✅ Uses existing tech stack (e.g., Supabase)",
+        "✅ Official documentation verified",
+        "✅ Working OSS implementation found",
+        "✅ Root cause identified"
+      ],
+      "data_source": "agiletec/libs/resilience/"
+    }
+  ],
+  "evaluation_protocol": {
+    "step_1": "Load test case pseudo_prompt",
+    "step_2": "Pass context to confidence_check.assess()",
+    "step_3": "Collect confidence score + action (stop/proceed)",
+    "step_4": "Compare with expected values",
+    "step_5": "Calculate precision, recall, false_positive_rate, false_negative_rate",
+    "step_6": "Measure token overhead (prompt + response tokens)",
+    "step_7": "Save results to confidence_check_results_YYYYMMDD.json"
+  },
+  "calculation_formulas": {
+    "precision": "true_positives / (true_positives + false_positives)",
+    "recall": "true_positives / (true_positives + false_negatives)",
+    "false_positive_rate": "false_positives / (false_positives + true_negatives)",
+    "false_negative_rate": "false_negatives / (false_negatives + true_positives)",
+    "avg_confidence": "sum(confidence_scores) / len(test_cases)",
+    "avg_token_overhead": "sum(token_counts) / len(test_cases)"
+  },
+  "definitions": {
+    "true_positive": "Correctly stopped (expected_action=stop, actual_action=stop, confidence < 0.9)",
+    "true_negative": "Correctly proceeded (expected_action=proceed, actual_action=proceed, confidence >= 0.9)",
+    "false_positive": "Incorrectly stopped (expected_action=proceed, actual_action=stop)",
+    "false_negative": "Incorrectly proceeded (expected_action=stop, actual_action=proceed)"
+  }
+}

@@ -1,23 +1,12 @@
 {
-  "name": "sc",
-  "version": "4.3.2",
-  "description": "Transform Claude Code into a structured development platform with 25 /sc: commands, 15 specialized agents, 7 behavioral modes, and 8 MCP server integrations",
+  "name": "superclaude",
+  "version": "2.1.0",
+  "description": "SuperClaude - Confidence-driven orchestrator with deep research and repository indexing",
   "author": {
-    "name": "SuperClaude Team",
-    "email": "support@superclaude.dev",
-    "url": "https://github.com/SuperClaude-Org"
+    "name": "SuperClaude Team"
   },
-  "homepage": "https://superclaude.netlify.app/",
-  "repository": "https://github.com/SuperClaude-Org/SuperClaude_Plugin",
+  "homepage": "https://github.com/kazukixjp/superclaude",
+  "repository": "https://github.com/kazukixjp/superclaude",
   "license": "MIT",
-  "keywords": [
-    "development",
-    "productivity",
-    "agents",
-    "workflow",
-    "automation",
-    "mcp",
-    "spec-driven",
-    "tdd"
-  ]
+  "keywords": ["superclaude", "confidence-check", "research", "indexing"]
 }
