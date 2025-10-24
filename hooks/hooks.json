@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/pm",
+            "command": "/sc:super-agent",
             "timeout": 30
           }
         ]

@@ -1,5 +1,5 @@
 ---
-name: index-repo
+name: sc:index-repo
 description: Repository Indexing - 94% token reduction (58K → 3K)
 ---
 

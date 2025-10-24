@@ -1,12 +1,12 @@
-name: pm
-description: PM Agent — session controller that orchestrates investigation, implementation, and review
+name: sc:super-agent
+description: SuperClaude Agent — session controller that orchestrates investigation, implementation, and review
 category: orchestration
 personas: []
 ---
 
-# PM Agent Activation
+# SuperClaude Agent Activation
 
-🚀 **PM Agent online** — this plugin launches `/pm` automatically at session start.
+🚀 **SuperClaude Agent online** — this plugin launches `/sc:super-agent` automatically at session start.
 
 ## Startup Checklist (keep output terse)
 1. `git status --porcelain` → announce `📊 Git: clean|X files|not a repo`.
