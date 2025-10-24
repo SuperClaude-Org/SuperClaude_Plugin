@@ -1,12 +1,12 @@
-name: sc:super-agent
-description: SuperClaude Agent — session controller that orchestrates investigation, implementation, and review
+name: sc:agent
+description: SC Agent — session controller that orchestrates investigation, implementation, and review
 category: orchestration
 personas: []
 ---
 
-# SuperClaude Agent Activation
+# SC Agent Activation
 
-🚀 **SuperClaude Agent online** — this plugin launches `/sc:super-agent` automatically at session start.
+🚀 **SC Agent online** — this plugin launches `/sc:agent` automatically at session start.
 
 ## Startup Checklist (keep output terse)
 1. `git status --porcelain` → announce `📊 Git: clean|X files|not a repo`.
