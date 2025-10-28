@@ -1,0 +1,407 @@
+{
+  "metadata": {
+    "name": "SuperClaude_Plugin",
+    "version": "2.1.0",
+    "license": "MIT",
+    "generated": "2025-10-29",
+    "indexVersion": "1.0",
+    "branch": "next",
+    "mainBranch": "main",
+    "repositorySize": "3.8M",
+    "gitStatus": "clean"
+  },
+  "tokenEfficiency": {
+    "indexSize": "3KB",
+    "fullCodebaseSize": "58KB",
+    "reductionPercentage": 94,
+    "breakEvenSessions": 1,
+    "savings10Sessions": 550000,
+    "savings100Sessions": 5500000
+  },
+  "structure": {
+    "directories": [
+      {
+        "path": ".claude-plugin",
+        "purpose": "Plugin configuration and metadata",
+        "files": 2,
+        "subdirectories": ["tests"]
+      },
+      {
+        "path": "agents",
+        "purpose": "Specialized AI agents",
+        "files": 3,
+        "agents": ["deep-research", "repo-index", "self-review"]
+      },
+      {
+        "path": "commands",
+        "purpose": "Slash commands for workflow automation",
+        "files": 3,
+        "commands": ["agent", "index-repo", "research"]
+      },
+      {
+        "path": "skills",
+        "purpose": "Reusable capabilities with validation",
+        "files": 2,
+        "skills": ["confidence-check"]
+      },
+      {
+        "path": "scripts",
+        "purpose": "Utility scripts",
+        "files": 2,
+        "scripts": ["clean_command_names.py", "session-init.sh"]
+      },
+      {
+        "path": "hooks",
+        "purpose": "Claude Code hooks",
+        "files": 1
+      }
+    ],
+    "rootFiles": [
+      "CLAUDE.md",
+      "README.md",
+      "MIGRATION_GUIDE.md",
+      "PLUGIN_SUMMARY.md",
+      "LICENSE",
+      "PROJECT_INDEX.md",
+      "PROJECT_INDEX.json"
+    ]
+  },
+  "entryPoints": {
+    "sessionInitialization": {
+      "path": "scripts/session-init.sh",
+      "purpose": "Automatically invoked at session start",
+      "actions": ["Activates SC Agent", "Reports git status", "Lists services"]
+    },
+    "commands": {
+      "/sc:agent": {
+        "path": "commands/agent.md",
+        "purpose": "Session orchestrator",
+        "features": [
+          "Investigation workflow",
+          "Implementation coordination",
+          "Review management",
+          "Confidence tracking (≥0.90)"
+        ]
+      },
+      "/sc:index-repo": {
+        "path": "commands/index-repo.md",
+        "purpose": "Repository indexing",
+        "features": [
+          "Generate PROJECT_INDEX.md",
+          "Generate PROJECT_INDEX.json",
+          "94% token reduction"
+        ]
+      },
+      "/sc:research": {
+        "path": "commands/research.md",
+        "purpose": "Deep web research",
+        "features": [
+          "Parallel search execution",
+          "Evidence-based synthesis",
+          "4 depth levels"
+        ]
+      }
+    },
+    "skills": {
+      "confidence-check": {
+        "path": "skills/confidence-check/",
+        "purpose": "Pre-implementation assessment",
+        "requiredConfidence": 0.90,
+        "checks": 5,
+        "testResults": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "testsPassed": 8,
+          "testsTotal": 8
+        }
+      }
+    }
+  },
+  "agents": [
+    {
+      "name": "deep-research",
+      "category": "analysis",
+      "path": "agents/deep-research.md",
+      "purpose": "External knowledge gathering",
+      "features": [
+        "Multi-hop reasoning (up to 5 hops)",
+        "Source credibility tracking",
+        "4 depth levels",
+        "Parallel search execution"
+      ],
+      "depthLevels": {
+        "quick": {"sources": "5-10", "hops": 1, "time": "~2min"},
+        "standard": {"sources": "10-20", "hops": 3, "time": "~5min"},
+        "deep": {"sources": "20-40", "hops": 4, "time": "~8min"},
+        "exhaustive": {"sources": "40+", "hops": 5, "time": "~10min"}
+      }
+    },
+    {
+      "name": "repo-index",
+      "category": "discovery",
+      "path": "agents/repo-index.md",
+      "purpose": "Repository indexing assistant",
+      "features": [
+        "Directory structure inspection",
+        "Freshness detection (7-day threshold)",
+        "Parallel glob searches",
+        "Entry point identification"
+      ],
+      "stalenessThreshold": "7 days"
+    },
+    {
+      "name": "self-review",
+      "category": "quality",
+      "path": "agents/self-review.md",
+      "purpose": "Post-implementation validation",
+      "features": [
+        "Test verification",
+        "Edge case coverage",
+        "Requirements matching",
+        "Risk assessment"
+      ],
+      "mandatoryChecks": 4
+    }
+  ],
+  "commands": [
+    {
+      "name": "/sc:agent",
+      "path": "commands/agent.md",
+      "category": "orchestration",
+      "description": "Session controller for investigation, implementation, and review",
+      "workflow": [
+        "Clarify scope",
+        "Plan investigation",
+        "Iterate until confident",
+        "Implementation wave",
+        "Self-review and reflexion"
+      ],
+      "confidenceThreshold": 0.90
+    },
+    {
+      "name": "/sc:index-repo",
+      "path": "commands/index-repo.md",
+      "category": "discovery",
+      "description": "Repository index creator",
+      "phases": [
+        "Analyze repository structure",
+        "Extract metadata",
+        "Generate index",
+        "Validation"
+      ],
+      "outputs": ["PROJECT_INDEX.md", "PROJECT_INDEX.json"],
+      "tokenReduction": 94
+    },
+    {
+      "name": "/sc:research",
+      "path": "commands/research.md",
+      "category": "analysis",
+      "description": "Deep Research with parallel web search",
+      "protocol": [
+        "Understand (5-10% effort)",
+        "Plan (10-15% effort)",
+        "TodoWrite (5% effort)",
+        "Execute (50-60% effort)",
+        "Validate (10-15% effort)",
+        "Synthesize"
+      ],
+      "depthLevels": ["quick", "standard", "deep", "exhaustive"]
+    }
+  ],
+  "skills": [
+    {
+      "name": "confidence-check",
+      "path": "skills/confidence-check/",
+      "description": "Pre-implementation confidence assessment",
+      "implementation": "confidence.ts",
+      "requiredConfidence": 0.90,
+      "checks": [
+        {"name": "No duplicate implementations", "weight": 0.25},
+        {"name": "Architecture compliance", "weight": 0.25},
+        {"name": "Official documentation verified", "weight": 0.20},
+        {"name": "Working OSS implementations", "weight": 0.15},
+        {"name": "Root cause identified", "weight": 0.15}
+      ],
+      "testResults": {
+        "date": "2025-10-21",
+        "precision": 1.0,
+        "recall": 1.0,
+        "passed": 8,
+        "total": 8
+      }
+    }
+  ],
+  "configuration": {
+    "plugin": {
+      "path": ".claude-plugin/plugin.json",
+      "name": "sc",
+      "version": "2.1.0",
+      "author": "SuperClaude Team",
+      "homepage": "https://github.com/kazukixjp/superclaude",
+      "repository": "https://github.com/kazukixjp/superclaude",
+      "skillsDirectory": "./skills/"
+    },
+    "marketplace": {
+      "path": ".claude-plugin/marketplace.json",
+      "name": "superclaude",
+      "owner": "SuperClaude Team"
+    },
+    "hooks": {
+      "path": "hooks/hooks.json",
+      "purpose": "Session initialization and custom triggers"
+    }
+  },
+  "documentation": {
+    "README.md": {
+      "lines": 513,
+      "topics": [
+        "Quick installation",
+        "Feature overview",
+        "Deep research capabilities",
+        "Support information"
+      ]
+    },
+    "CLAUDE.md": {
+      "lines": 36,
+      "topics": [
+        "Component overview",
+        "Installation guide",
+        "Quick start",
+        "Migration notes"
+      ]
+    },
+    "MIGRATION_GUIDE.md": {
+      "purpose": "Transition from pip/npm to plugin"
+    },
+    "PLUGIN_SUMMARY.md": {
+      "purpose": "Technical architecture overview"
+    }
+  },
+  "testing": {
+    "location": ".claude-plugin/tests/",
+    "files": [
+      "confidence_test_cases.json",
+      "confidence_check_results_20251021.json"
+    ],
+    "coverage": {
+      "confidenceCheck": {
+        "passed": 8,
+        "total": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "date": "2025-10-21"
+      }
+    }
+  },
+  "dependencies": {
+    "runtime": [
+      {"name": "Claude Code", "required": true, "purpose": "Host platform"},
+      {"name": "Git", "required": true, "purpose": "Version control operations"},
+      {"name": "Bash", "required": true, "purpose": "Script execution"}
+    ],
+    "mcpServers": [
+      {"name": "Tavily", "purpose": "Web search and extraction", "primary": true},
+      {"name": "Context7", "purpose": "Official documentation lookup"},
+      {"name": "Sequential", "purpose": "Multi-step reasoning"},
+      {"name": "Playwright", "purpose": "JavaScript content extraction"},
+      {"name": "Morphllm", "purpose": "Bulk transformations"},
+      {"name": "Serena", "purpose": "Session persistence"},
+      {"name": "Chrome DevTools", "purpose": "Performance analysis"},
+      {"name": "Magic", "purpose": "UI component generation"}
+    ]
+  },
+  "architecture": {
+    "designPhilosophy": [
+      "Meta-programming with behavioral instruction injection",
+      "Orchestration via specialized agent coordination",
+      "Confidence-driven (≥0.90 threshold)",
+      "Token-efficient (parallel execution, context compression)",
+      "Evidence-based (source citation, validation)"
+    ],
+    "componentInteraction": [
+      "User Request",
+      "SC Agent (orchestrator)",
+      "Confidence Check (≥0.90?)",
+      "Specialists (parallel: Deep Research, Repo Index, Self Review)",
+      "Implementation",
+      "Validation & Report"
+    ],
+    "tokenEfficiencyStrategies": [
+      "Index-based context (94% reduction)",
+      "Parallel tool calls (3-5x faster)",
+      "Specialized agents (focused knowledge)",
+      "Confidence gating (prevent wrong-direction work)",
+      "Short status messages (terse updates)"
+    ]
+  },
+  "statistics": {
+    "totalFiles": 16,
+    "markdownLines": 1529,
+    "commandsCount": 3,
+    "agentsCount": 3,
+    "skillsCount": 1,
+    "scriptsCount": 2,
+    "repositorySize": "3.8M",
+    "documentationSize": "~60KB"
+  },
+  "recentActivity": {
+    "latestCommits": [
+      "b291c53 feat: add skills support and session initialization",
+      "47065cd refactor: simplify command name from /sc:super-agent to /sc:agent",
+      "5aa4c8f refactor: unify naming to SuperClaude Agent and sc: prefix",
+      "ca935cc refactor: unify command names with /sc: prefix",
+      "fe1bdfa refactor: migrate to refactored plugin implementation"
+    ],
+    "currentBranch": "next",
+    "mainBranch": "main",
+    "gitStatus": "clean"
+  },
+  "quickStart": {
+    "installation": [
+      "/plugin marketplace add SuperClaude-Org/SuperClaude_Plugin",
+      "/plugin install sc@superclaude-official",
+      "Restart Claude Code"
+    ],
+    "firstUse": [
+      "/sc:help",
+      "/sc:research \"...\"",
+      "/sc:index-repo"
+    ],
+    "developmentWorkflow": [
+      "User describes task",
+      "Agent runs confidence check (≥0.90 required)",
+      "Agent delegates to specialists",
+      "Implementation with parallel tools",
+      "Self-review validation"
+    ]
+  },
+  "learningResources": {
+    "keyConcepts": [
+      "Confidence-Driven Development (≥90%)",
+      "Parallel-First Execution",
+      "Wave-Checkpoint-Wave pattern",
+      "Token Discipline",
+      "Evidence-Based Synthesis"
+    ],
+    "bestPractices": [
+      "Use /sc:index-repo at session start",
+      "Run confidence checks before implementation",
+      "Delegate research to deep-research agent",
+      "Execute tool calls in parallel",
+      "Validate with self-review after implementation"
+    ],
+    "relatedDocumentation": [
+      {"name": "Main Framework", "url": "https://github.com/SuperClaude-Org/SuperClaude_Framework"},
+      {"name": "Documentation Site", "url": "https://superclaude.netlify.app/"},
+      {"name": "Plugin Repository", "url": "https://github.com/SuperClaude-Org/SuperClaude_Plugin"},
+      {"name": "Issues", "url": "https://github.com/SuperClaude-Org/SuperClaude_Plugin/issues"}
+    ]
+  },
+  "qualityChecks": {
+    "allEntryPointsIdentified": true,
+    "coreModulesDocumented": true,
+    "indexSizeUnder5KB": true,
+    "humanReadableFormat": true,
+    "machineParseableStructure": true
+  }
+}
