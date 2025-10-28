@@ -4,6 +4,11 @@
 
 ### **Transform Claude Code into a Structured Development Platform**
 
+> ⚠️ **Repository Notice**  
+> This repository now contains the **generated distribution artefacts** for the SuperClaude Claude Code plugin.  
+> Authoritative sources (agents, commands, hooks, skills) live in [`SuperClaude_Framework/plugins/superclaude`](https://github.com/SuperClaude-Org/SuperClaude_Framework/tree/main/plugins/superclaude).  
+> Please submit changes there and rebuild via `make build-plugin && make sync-plugin-repo`.
+
 <p align="center">
   <a href="https://github.com/hesreallyhim/awesome-claude-code/">
   <img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome Claude Code">
@@ -58,8 +63,8 @@
 
 | **Commands** | **Agents** | **Modes** | **MCP Servers** |
 |:------------:|:----------:|:---------:|:---------------:|
-| **25** | **15** | **7** | **8** |
-| Slash Commands | Specialized AI | Behavioral | Integrations |
+| **3** | **3** | **—** | **—** |
+| `/sc:*` commands | Specialized AI | — | Integrations delegated to AIRIS Gateway |
 
 Use the new `/sc:help` command to see a full list of all available commands.
 
@@ -197,23 +202,20 @@ SuperClaude V4 is also available via package managers. See the main [SuperClaude
 <tr>
 <td width="50%">
 
-### 🤖 **Smarter Agent System**
-**15 specialized agents** with domain expertise:
+### 🤖 **Focused Agent System**
+**3 specialized agents** with clear responsibilities:
 - Deep Research agent for autonomous web research
-- Security engineer catches real vulnerabilities
-- Frontend architect understands UI patterns
-- Automatic coordination based on context
-- Domain-specific expertise on demand
+- Repository Index agent for project mapping
+- Self Review agent for post-implementation validation
 
 </td>
 <td width="50%">
 
-### 📝 **Improved Namespace**
+### 📝 **Command Namespace**
 **`/sc:` prefix** for all commands:
-- No conflicts with custom commands
-- 25 commands covering full lifecycle
-- From brainstorming to deployment
-- Clean, organized command structure
+- `/sc:agent` for orchestration
+- `/sc:index-repo` for context compression
+- `/sc:research` for deep research
 
 </td>
 </tr>

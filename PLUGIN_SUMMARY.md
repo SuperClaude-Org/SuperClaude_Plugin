@@ -1,5 +1,10 @@
 # SuperClaude Plugin Migration Summary
 
+> ⚠️ **Outdated Content**  
+> This summary reflects the initial 25-command architecture.  
+> Current plugin scope is limited to `/sc:agent`, `/sc:index-repo`, `/sc:research` with three supporting agents.  
+> Refer to `SuperClaude_Framework/plugins/superclaude` for up-to-date asset definitions.
+
 ## ✅ Migration Complete
 
 SuperClaude Framework has been successfully transformed into a native Claude Code plugin.

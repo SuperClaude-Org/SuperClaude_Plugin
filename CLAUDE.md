@@ -2,15 +2,17 @@
 
 This plugin provides the complete SuperClaude framework as a native Claude Code plugin.
 
+> ⚠️ **Generated Artefact**  
+> Do not edit this repository directly. Source-of-truth lives in `SuperClaude_Framework/plugins/superclaude`.  
+> Regenerate via `make build-plugin && make sync-plugin-repo` from the framework repo.
+
 ## Components Included
 
-### Commands (35 total)
-- **25 /sc: commands**: Full workflow automation from brainstorming to deployment
-- **10 /kiro: commands**: Spec-driven development with TDD methodology
+### Commands (3 total)
+- **3 /sc: commands**: Orchestration, repository indexing, deep research
 
-### Agents (21 total)
-- **15 specialized agents**: Technical expertise across domains
-- **6 Context Engineering agents**: Advanced context optimization
+### Agents (3 total)
+- **Deep Research**, **Repo Index**, **Self Review**
 
 ### Behavioral Modes (7 modes)
 - Brainstorming, Business Panel, Deep Research, Orchestration

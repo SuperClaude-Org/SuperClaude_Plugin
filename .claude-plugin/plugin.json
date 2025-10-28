@@ -1,6 +1,6 @@
 {
   "name": "sc",
-  "version": "2.1.0",
+  "version": "4.1.6",
   "description": "SuperClaude - Confidence-driven orchestrator with deep research and repository indexing",
   "author": {
     "name": "SuperClaude Team"
@@ -11,3 +11,4 @@
   "keywords": ["superclaude", "confidence-check", "research", "indexing"],
   "skills": "./skills/"
 }
+

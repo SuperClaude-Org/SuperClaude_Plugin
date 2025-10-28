@@ -84,12 +84,11 @@ Restart Claude Code to activate the plugin.
 
 ## What's Changed?
 
-### Same Functionality
-- ✅ All 25 `/sc:` commands work identically
-- ✅ All 10 `/kiro:` spec-driven development commands
-- ✅ 15 specialized agents with same capabilities
-- ✅ 7 behavioral modes with same triggers
-- ✅ MCP server integrations unchanged
+### Current Scope
+- ✅ `/sc:agent`, `/sc:index-repo`, `/sc:research`
+- ✅ Deep Research / Repo Index / Self Review agents
+- ✅ SessionStart hook + confidence skill
+- ✅ MCP integrations provided via AIRIS Gateway
 
 ### What's Better
 - ✅ Easier installation (one command)
