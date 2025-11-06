@@ -139,6 +139,34 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 - ✅ **无冲突**：与系统包隔离
 - ✅ **团队共享**：通过市场轻松分发
 - ✅ **原生集成**：无缝的 Claude Code 体验
+- ✅ **自动 MCP 设置**：AIRIS MCP Gateway 自动配置
+
+### **MCP 服务器设置**
+
+插件自动配置 **AIRIS MCP Gateway**，包含 10 个集成工具。
+
+**前提条件**（一次性设置）：
+```bash
+# 安装 uvx（MCP 服务器所需）
+pip install uv
+# 或
+brew install uv
+```
+
+**验证设置**：
+```shell
+/sc:setup-mcp   # 交互式设置向导
+/sc:verify-mcp  # 检查 MCP 状态
+```
+
+**可选 API 密钥**（用于高级功能）：
+```bash
+# Tavily（网络搜索） - 在 https://tavily.com 获取密钥
+export TAVILY_API_KEY="your-key"
+
+# Magic（UI 生成） - 在 https://21st.dev 获取密钥
+export TWENTYFIRST_API_KEY="your-key"
+```
 
 ### **快速开始**
 
@@ -268,15 +296,18 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 🔧 **MCP 服务器集成**
-**8 个强大的服务器**协同工作：
-- **Context7** → 最新文档
-- **Sequential** → 复杂分析
-- **Magic** → UI 组件生成
-- **Playwright** → 浏览器测试
-- **Morphllm** → 批量转换
-- **Serena** → 会话持久化
-- **Tavily** → Deep Research 的网络搜索
-- **Chrome DevTools** → 性能分析
+**自动设置** 通过 AIRIS MCP Gateway：
+- **10 个集成工具** 在一个统一网关中
+- **无需手动配置** - 开箱即用
+- **上下文优化** - 减少 40% 令牌
+- **只需 uvx** - `pip install uv` 或 `brew install uv`
+
+**包含的工具**：
+- sequential-thinking, context7, magic, playwright
+- serena, morphllm, tavily, chrome-devtools
+- git, puppeteer
+
+运行 `/sc:setup-mcp` 验证安装
 
 </td>
 <td width="50%">

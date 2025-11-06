@@ -140,6 +140,34 @@ SuperClaude is available as a native Claude Code plugin for easy installation an
 - ✅ **No Conflicts**: Isolated from system packages
 - ✅ **Team Sharing**: Easy distribution via marketplace
 - ✅ **Native Integration**: Seamless Claude Code experience
+- ✅ **Auto MCP Setup**: AIRIS MCP Gateway configured automatically
+
+### **MCP Server Setup**
+
+The plugin automatically configures **AIRIS MCP Gateway** with 10 integrated tools.
+
+**Prerequisites** (one-time setup):
+```bash
+# Install uvx (required for MCP server)
+pip install uv
+# or
+brew install uv
+```
+
+**Verify Setup**:
+```shell
+/sc:setup-mcp   # Interactive setup wizard
+/sc:verify-mcp  # Check MCP status
+```
+
+**Optional API Keys** (for premium features):
+```bash
+# Tavily (web search) - Get key at https://tavily.com
+export TAVILY_API_KEY="your-key"
+
+# Magic (UI generation) - Get key at https://21st.dev
+export TWENTYFIRST_API_KEY="your-key"
+```
 
 ### **Quick Start**
 
@@ -269,15 +297,18 @@ SuperClaude V4 is also available via package managers. See the main [SuperClaude
 <td width="50%">
 
 ### 🔧 **MCP Server Integration**
-**8 powerful servers** working together:
-- **Context7** → Up-to-date documentation
-- **Sequential** → Complex analysis
-- **Magic** → UI component generation
-- **Playwright** → Browser testing
-- **Morphllm** → Bulk transformations
-- **Serena** → Session persistence
-- **Tavily** → Web search for deep research
-- **Chrome DevTools** → Performance analysis
+**Automatic setup** via AIRIS MCP Gateway:
+- **10 integrated tools** in one unified gateway
+- **No manual configuration** - works out of the box
+- **Context optimized** - 40% token reduction
+- **Just needs uvx** - `pip install uv` or `brew install uv`
+
+**Included Tools**:
+- sequential-thinking, context7, magic, playwright
+- serena, morphllm, tavily, chrome-devtools
+- git, puppeteer
+
+Run `/sc:setup-mcp` to verify installation
 
 </td>
 <td width="50%">

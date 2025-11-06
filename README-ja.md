@@ -139,6 +139,34 @@ SuperClaudeは、簡単なインストールと自動更新のためのネイテ
 - ✅ **競合なし**: システムパッケージから分離
 - ✅ **チーム共有**: マーケットプレイス経由で簡単に配布
 - ✅ **ネイティブ統合**: シームレスなClaude Code体験
+- ✅ **自動MCPセットアップ**: AIRIS MCP Gatewayが自動設定
+
+### **MCPサーバーのセットアップ**
+
+プラグインは10の統合ツールを持つ**AIRIS MCP Gateway**を自動設定します。
+
+**前提条件**（初回のみ）：
+```bash
+# uvxをインストール（MCPサーバーに必要）
+pip install uv
+# または
+brew install uv
+```
+
+**セットアップの確認**：
+```shell
+/sc:setup-mcp   # 対話型セットアップウィザード
+/sc:verify-mcp  # MCPステータスの確認
+```
+
+**オプションAPIキー**（プレミアム機能用）：
+```bash
+# Tavily（Web検索） - https://tavily.com でキーを取得
+export TAVILY_API_KEY="your-key"
+
+# Magic（UI生成） - https://21st.dev でキーを取得
+export TWENTYFIRST_API_KEY="your-key"
+```
 
 ### **クイックスタート**
 
@@ -268,15 +296,18 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td width="50%">
 
 ### 🔧 **MCPサーバー統合**
-**8つの強力なサーバー**が連携：
-- **Context7** → 最新のドキュメント
-- **Sequential** → 複雑な分析
-- **Magic** → UIコンポーネント生成
-- **Playwright** → ブラウザテスト
-- **Morphllm** → 一括変換
-- **Serena** → セッション永続化
-- **Tavily** → Deep Research用のWeb検索
-- **Chrome DevTools** → パフォーマンス分析
+**自動セットアップ** AIRIS MCP Gateway経由：
+- **10の統合ツール** を1つの統合ゲートウェイで提供
+- **手動設定不要** - すぐに使える
+- **コンテキスト最適化** - 40%のトークン削減
+- **uvxのみ必要** - `pip install uv` または `brew install uv`
+
+**含まれるツール**：
+- sequential-thinking, context7, magic, playwright
+- serena, morphllm, tavily, chrome-devtools
+- git, puppeteer
+
+インストール確認: `/sc:setup-mcp`
 
 </td>
 <td width="50%">
