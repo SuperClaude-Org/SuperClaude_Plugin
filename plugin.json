@@ -19,5 +19,16 @@
     "mcp",
     "spec-driven",
     "tdd"
-  ]
+  ],
+  "mcpServers": {
+    "airis-mcp-gateway": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/agiletec-inc/airis-mcp-gateway",
+        "airis-mcp-gateway"
+      ],
+      "env": {}
+    }
+  }
 }
