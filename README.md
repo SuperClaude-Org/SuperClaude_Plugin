@@ -146,6 +146,19 @@ SuperClaude is available as a native Claude Code plugin for easy installation an
 
 The plugin automatically configures **AIRIS MCP Gateway** with 10 integrated tools.
 
+> ⚠️ **IMPORTANT: Backup Existing MCP Configuration**
+>
+> If you have existing MCP servers configured, **backup your settings first**:
+> ```bash
+> # Backup Claude Code MCP settings
+> cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
+>
+> # Or backup project-specific MCP config
+> cp .mcp.json .mcp.json.backup  # If you have project MCP config
+> ```
+>
+> The plugin adds AIRIS MCP Gateway to your configuration. Review for conflicts with existing MCP servers before enabling.
+
 **Prerequisites** (one-time setup):
 ```bash
 # Install uvx (required for MCP server)

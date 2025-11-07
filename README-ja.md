@@ -145,6 +145,19 @@ SuperClaudeは、簡単なインストールと自動更新のためのネイテ
 
 プラグインは10の統合ツールを持つ**AIRIS MCP Gateway**を自動設定します。
 
+> ⚠️ **重要：既存のMCP設定のバックアップ**
+>
+> 既にMCPサーバーを設定している場合、**まず設定をバックアップしてください**：
+> ```bash
+> # Claude CodeのMCP設定をバックアップ
+> cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
+>
+> # またはプロジェクト固有のMCP設定をバックアップ
+> cp .mcp.json .mcp.json.backup  # プロジェクトにMCP設定がある場合
+> ```
+>
+> プラグインはAIRIS MCP Gatewayを設定に追加します。有効化する前に、既存のMCPサーバーとの競合がないか確認してください。
+
 **前提条件**（初回のみ）：
 ```bash
 # uvxをインストール（MCPサーバーに必要）

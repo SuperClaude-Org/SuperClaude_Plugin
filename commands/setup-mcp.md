@@ -35,7 +35,40 @@ Optional (API Key Required):
 Let's verify your setup...
 ```
 
-### Step 2: Check Prerequisites
+### Step 2: Backup Existing MCP Configuration (Safety First!)
+
+**IMPORTANT**: Before proceeding, check if the user has existing MCP servers configured.
+
+```bash
+# Check for existing MCP configuration
+if [ -f ~/.claude/settings.local.json ]; then
+    echo "⚠️  Found existing Claude Code settings"
+    echo ""
+    echo "RECOMMENDED: Backup your settings before enabling the plugin:"
+    echo "  cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup"
+    echo ""
+    read -p "Have you backed up your settings? (y/n): " backup_done
+
+    if [ "$backup_done" != "y" ]; then
+        echo ""
+        echo "Creating backup now..."
+        cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
+        echo "✅ Backup created: ~/.claude/settings.local.json.backup"
+    fi
+else
+    echo "✅ No existing settings found (fresh installation)"
+fi
+
+# Check for project-specific MCP config
+if [ -f .mcp.json ]; then
+    echo ""
+    echo "⚠️  Found project-specific MCP configuration (.mcp.json)"
+    echo "RECOMMENDED: Backup before proceeding:"
+    echo "  cp .mcp.json .mcp.json.backup"
+fi
+```
+
+### Step 3: Check Prerequisites
 
 ```bash
 # Check uvx installation
@@ -51,7 +84,7 @@ else
 fi
 ```
 
-### Step 3: Verify Plugin MCP Configuration
+### Step 4: Verify Plugin MCP Configuration
 
 ```bash
 # Check if plugin is installed
@@ -61,7 +94,7 @@ fi
 claude mcp list 2>/dev/null || echo "⚠️ MCP CLI not available (check Claude Code version)"
 ```
 
-### Step 4: Interactive Configuration (Optional Features)
+### Step 5: Interactive Configuration (Optional Features)
 
 Present an interactive menu for optional API keys:
 
@@ -90,7 +123,7 @@ echo ""
 echo "Then restart your terminal or run: source ~/.zshrc"
 ```
 
-### Step 5: Test MCP Connection
+### Step 6: Test MCP Connection
 
 ```bash
 # Try to invoke AIRIS MCP Gateway
@@ -105,7 +138,7 @@ echo "Available MCP tools:"
 # List available tools from the server
 ```
 
-### Step 6: Troubleshooting Guide
+### Step 7: Troubleshooting Guide
 
 If any issues are detected, provide specific solutions:
 
@@ -147,7 +180,7 @@ If it's not working:
 4. Report issue: https://github.com/SuperClaude-Org/SuperClaude_Plugin/issues
 ```
 
-### Step 7: Final Summary
+### Step 8: Final Summary
 
 Provide a setup summary:
 

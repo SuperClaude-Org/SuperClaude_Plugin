@@ -145,6 +145,19 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 
 插件自动配置 **AIRIS MCP Gateway**，包含 10 个集成工具。
 
+> ⚠️ **重要：备份现有 MCP 配置**
+>
+> 如果您已配置 MCP 服务器，**请先备份您的设置**：
+> ```bash
+> # 备份 Claude Code MCP 设置
+> cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
+>
+> # 或备份项目特定的 MCP 配置
+> cp .mcp.json .mcp.json.backup  # 如果您有项目 MCP 配置
+> ```
+>
+> 插件会将 AIRIS MCP Gateway 添加到您的配置中。启用前请检查与现有 MCP 服务器的冲突。
+
 **前提条件**（一次性设置）：
 ```bash
 # 安装 uvx（MCP 服务器所需）
