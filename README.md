@@ -81,6 +81,99 @@ Claude Code is a product built and maintained by [Anthropic](https://www.anthrop
 
 ---
 
+## 🛡️ **CRITICAL: Backup Your Configuration First!**
+
+> **⚠️ DO NOT SKIP THIS STEP ⚠️**
+>
+> The SuperClaude plugin modifies your Claude Code MCP configuration.
+> **Always backup before installing** to ensure you can safely rollback if needed.
+
+<div align="center">
+
+### **⏱️ Quick Backup (30 seconds)**
+
+```bash
+# Download and run automated backup script
+curl -o /tmp/backup-claude.sh https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Plugin/main/scripts/backup-claude-config.sh
+chmod +x /tmp/backup-claude.sh
+/tmp/backup-claude.sh
+```
+
+**✅ Backup complete!** Now you can safely install the plugin.
+
+</div>
+
+<details>
+<summary><b>📋 What Gets Backed Up?</b></summary>
+
+The automated backup script saves:
+- ✅ `~/.claude/settings.local.json` - Your MCP server configurations
+- ✅ `~/.claude/CLAUDE.md` - Your custom instructions
+- ✅ `~/.claude/.credentials.json` - Your API credentials (if exists)
+- ✅ `.mcp.json` - Project-specific MCP config (if exists)
+- ✅ `.claude/` - Project-specific settings (if exists)
+
+**Backup location:** `~/claude-backups/backup-YYYY-MM-DD-HH-MM-SS/`
+
+</details>
+
+<details>
+<summary><b>🔧 Manual Backup Alternative</b></summary>
+
+Prefer to backup manually?
+
+```bash
+# Create backup directory
+BACKUP_DIR=~/claude-backups/backup-$(date +%Y-%m-%d-%H-%M-%S)
+mkdir -p "$BACKUP_DIR"
+
+# Backup global settings
+cp ~/.claude/settings.local.json "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/CLAUDE.md "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/.credentials.json "$BACKUP_DIR/" 2>/dev/null
+
+# Backup project settings (if in a project directory)
+cp .mcp.json "$BACKUP_DIR/" 2>/dev/null
+cp -r .claude "$BACKUP_DIR/" 2>/dev/null
+
+echo "✅ Backup created at: $BACKUP_DIR"
+```
+
+</details>
+
+<details>
+<summary><b>🚨 Emergency Rollback</b></summary>
+
+If something goes wrong after installation:
+
+```bash
+# 1. Uninstall plugin
+/plugin uninstall sc@superclaude-official
+
+# 2. Restore your backup (use your actual backup path)
+BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25
+
+cp "$BACKUP_DIR/settings.local.json" ~/.claude/
+cp "$BACKUP_DIR/CLAUDE.md" ~/.claude/ 2>/dev/null
+cp "$BACKUP_DIR/.credentials.json" ~/.claude/ 2>/dev/null
+
+# 3. Restart Claude Code
+pkill -9 claude-code
+# Then relaunch Claude Code
+```
+
+**Rollback time: ~1 minute**
+
+</details>
+
+<div align="center">
+
+**📖 Full Guide:** [Complete Backup & Safety Guide](BACKUP_GUIDE.md)
+
+</div>
+
+---
+
 ## ⚠️ **IMPORTANT: Beta Version Notice**
 
 > **This plugin version is currently in BETA.**
@@ -95,7 +188,7 @@ Claude Code is a product built and maintained by [Anthropic](https://www.anthrop
 
 ### **Required Steps Before Installation:**
 
-1. **BACKUP** your existing SuperClaude configurations
+1. **✅ BACKUP** your configuration (see section above)
 2. **UNINSTALL** previous versions:
    ```bash
    # For pip users

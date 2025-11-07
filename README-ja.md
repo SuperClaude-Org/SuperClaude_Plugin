@@ -80,6 +80,99 @@ Claude Codeは[Anthropic](https://www.anthropic.com/)によって構築および
 
 ---
 
+## 🛡️ **重要：まず設定をバックアップしてください！**
+
+> **⚠️ このステップを絶対にスキップしないでください ⚠️**
+>
+> SuperClaudeプラグインはClaude CodeのMCP設定を変更します。
+> **インストール前に必ずバックアップ**を取ることで、必要に応じて安全にロールバックできます。
+
+<div align="center">
+
+### **⏱️ クイックバックアップ（30秒）**
+
+```bash
+# 自動バックアップスクリプトをダウンロードして実行
+curl -o /tmp/backup-claude.sh https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Plugin/main/scripts/backup-claude-config.sh
+chmod +x /tmp/backup-claude.sh
+/tmp/backup-claude.sh
+```
+
+**✅ バックアップ完了！** 安全にプラグインをインストールできます。
+
+</div>
+
+<details>
+<summary><b>📋 バックアップされる内容</b></summary>
+
+自動バックアップスクリプトは以下を保存します：
+- ✅ `~/.claude/settings.local.json` - MCPサーバー設定
+- ✅ `~/.claude/CLAUDE.md` - カスタム指示
+- ✅ `~/.claude/.credentials.json` - API認証情報（存在する場合）
+- ✅ `.mcp.json` - プロジェクト固有のMCP設定（存在する場合）
+- ✅ `.claude/` - プロジェクト固有の設定（存在する場合）
+
+**バックアップ先：** `~/claude-backups/backup-YYYY-MM-DD-HH-MM-SS/`
+
+</details>
+
+<details>
+<summary><b>🔧 手動バックアップの方法</b></summary>
+
+手動でバックアップしたい場合：
+
+```bash
+# バックアップディレクトリを作成
+BACKUP_DIR=~/claude-backups/backup-$(date +%Y-%m-%d-%H-%M-%S)
+mkdir -p "$BACKUP_DIR"
+
+# グローバル設定をバックアップ
+cp ~/.claude/settings.local.json "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/CLAUDE.md "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/.credentials.json "$BACKUP_DIR/" 2>/dev/null
+
+# プロジェクト設定をバックアップ（プロジェクトディレクトリ内の場合）
+cp .mcp.json "$BACKUP_DIR/" 2>/dev/null
+cp -r .claude "$BACKUP_DIR/" 2>/dev/null
+
+echo "✅ バックアップ作成完了: $BACKUP_DIR"
+```
+
+</details>
+
+<details>
+<summary><b>🚨 緊急ロールバック</b></summary>
+
+インストール後に問題が発生した場合：
+
+```bash
+# 1. プラグインをアンインストール
+/plugin uninstall sc@superclaude-official
+
+# 2. バックアップを復元（実際のバックアップパスを使用）
+BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25
+
+cp "$BACKUP_DIR/settings.local.json" ~/.claude/
+cp "$BACKUP_DIR/CLAUDE.md" ~/.claude/ 2>/dev/null
+cp "$BACKUP_DIR/.credentials.json" ~/.claude/ 2>/dev/null
+
+# 3. Claude Codeを再起動
+pkill -9 claude-code
+# その後、Claude Codeを再起動
+```
+
+**ロールバック所要時間：約1分**
+
+</details>
+
+<div align="center">
+
+**📖 完全ガイド：** [バックアップ＆安全性ガイド](BACKUP_GUIDE.md)
+
+</div>
+
+---
+
 ## ⚠️ **重要：ベータ版に関する注意事項**
 
 > **このプラグイン版は現在ベータ版です。**
@@ -94,7 +187,7 @@ Claude Codeは[Anthropic](https://www.anthropic.com/)によって構築および
 
 ### **インストール前に必要な手順：**
 
-1. **バックアップ** 既存のSuperClaude設定をバックアップしてください
+1. **✅ バックアップ** 設定をバックアップ（上記のセクション参照）
 2. **アンインストール** 以前のバージョンをアンインストールしてください：
    ```bash
    # pipユーザーの場合
