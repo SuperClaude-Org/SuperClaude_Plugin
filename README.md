@@ -129,7 +129,7 @@ SuperClaude is available as a native Claude Code plugin for easy installation an
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # Install the plugin
-/plugin install sc@superclaude-official
+/plugin install superclaude@SuperClaude-Org
 
 # Restart Claude Code to activate
 ```
@@ -269,15 +269,19 @@ SuperClaude V4 is also available via package managers. See the main [SuperClaude
 <td width="50%">
 
 ### 🔧 **MCP Server Integration**
-**8 powerful servers** working together:
+**Powered by [AIRIS-MCP-Gateway](https://github.com/agiletec-inc/airis-mcp-gateway)** (external dependency):
+
+SuperClaude Plugin comes pre-configured with AIRIS-MCP-Gateway, giving you instant access to **8 powerful MCP servers**:
 - **Context7** → Up-to-date documentation
 - **Sequential** → Complex analysis
 - **Magic** → UI component generation
 - **Playwright** → Browser testing
-- **Morphllm** → Bulk transformations
+- **Mindbase** → Knowledge management
 - **Serena** → Session persistence
 - **Tavily** → Web search for deep research
 - **Chrome DevTools** → Performance analysis
+
+> 💡 **One gateway, all editors**: The official [AIRIS-MCP-Gateway installer](https://github.com/agiletec-inc/airis-mcp-gateway#installation) can deploy these servers to Claude Code, Claude Desktop, Cursor, Zed, and Codex CLI simultaneously
 
 </td>
 <td width="50%">
@@ -451,8 +455,8 @@ The Deep Research system intelligently coordinates multiple tools:
 - 🚩 [**Flags Guide**](Docs/User-Guide/flags.md)  
   *Control behaviors*
 
-- 🔧 [**MCP Servers**](Docs/User-Guide/mcp-servers.md)  
-  *7 server integrations*
+- 🔧 [**MCP Servers**](Docs/User-Guide/mcp-servers.md)
+  *8 server integrations via AIRIS-MCP-Gateway*
 
 - 💼 [**Session Management**](Docs/User-Guide/session-management.md)  
   *Save & restore state*
