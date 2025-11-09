@@ -1,4 +1,4 @@
-name: sc:agent
+---
 description: SC Agent — session controller that orchestrates investigation, implementation, and review
 category: orchestration
 personas: []
