@@ -6,7 +6,7 @@
   },
   "plugins": [
     {
-      "name": "sc",
+      "name": "superclaude",
       "source": "./",
       "version": "4.1.6",
       "description": "SuperClaude - Confidence-driven orchestrator with deep research and repository indexing"
