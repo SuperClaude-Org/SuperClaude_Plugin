@@ -80,6 +80,99 @@ Claude Code 是由 [Anthropic](https://www.anthropic.com/) 构建和维护的产
 
 ---
 
+## 🛡️ **关键：先备份您的配置！**
+
+> **⚠️ 请勿跳过此步骤 ⚠️**
+>
+> SuperClaude 插件会修改您的 Claude Code MCP 配置。
+> **安装前务必备份**以确保需要时可以安全回滚。
+
+<div align="center">
+
+### **⏱️ 快速备份（30秒）**
+
+```bash
+# 下载并运行自动备份脚本
+curl -o /tmp/backup-claude.sh https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Plugin/main/scripts/backup-claude-config.sh
+chmod +x /tmp/backup-claude.sh
+/tmp/backup-claude.sh
+```
+
+**✅ 备份完成！** 现在可以安全地安装插件了。
+
+</div>
+
+<details>
+<summary><b>📋 备份内容</b></summary>
+
+自动备份脚本会保存：
+- ✅ `~/.claude/settings.local.json` - MCP 服务器配置
+- ✅ `~/.claude/CLAUDE.md` - 自定义指令
+- ✅ `~/.claude/.credentials.json` - API 凭证（如果存在）
+- ✅ `.mcp.json` - 项目特定的 MCP 配置（如果存在）
+- ✅ `.claude/` - 项目特定的设置（如果存在）
+
+**备份位置：** `~/claude-backups/backup-YYYY-MM-DD-HH-MM-SS/`
+
+</details>
+
+<details>
+<summary><b>🔧 手动备份方法</b></summary>
+
+如果您更喜欢手动备份：
+
+```bash
+# 创建备份目录
+BACKUP_DIR=~/claude-backups/backup-$(date +%Y-%m-%d-%H-%M-%S)
+mkdir -p "$BACKUP_DIR"
+
+# 备份全局设置
+cp ~/.claude/settings.local.json "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/CLAUDE.md "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/.credentials.json "$BACKUP_DIR/" 2>/dev/null
+
+# 备份项目设置（如果在项目目录中）
+cp .mcp.json "$BACKUP_DIR/" 2>/dev/null
+cp -r .claude "$BACKUP_DIR/" 2>/dev/null
+
+echo "✅ 备份已创建：$BACKUP_DIR"
+```
+
+</details>
+
+<details>
+<summary><b>🚨 紧急回滚</b></summary>
+
+如果安装后出现问题：
+
+```bash
+# 1. 卸载插件
+/plugin uninstall sc@superclaude-official
+
+# 2. 恢复备份（使用您实际的备份路径）
+BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25
+
+cp "$BACKUP_DIR/settings.local.json" ~/.claude/
+cp "$BACKUP_DIR/CLAUDE.md" ~/.claude/ 2>/dev/null
+cp "$BACKUP_DIR/.credentials.json" ~/.claude/ 2>/dev/null
+
+# 3. 重启 Claude Code
+pkill -9 claude-code
+# 然后重新启动 Claude Code
+```
+
+**回滚时间：约1分钟**
+
+</details>
+
+<div align="center">
+
+**📖 完整指南：** [备份与安全指南](BACKUP_GUIDE.md)
+
+</div>
+
+---
+
 ## ⚠️ **重要：Beta 版本说明**
 
 > **此插件版本目前处于 Beta 阶段。**
@@ -94,7 +187,7 @@ Claude Code 是由 [Anthropic](https://www.anthropic.com/) 构建和维护的产
 
 ### **安装前的必要步骤：**
 
-1. **备份** 您现有的 SuperClaude 配置
+1. **✅ 备份** 您的配置（见上述部分）
 2. **卸载** 以前的版本：
    ```bash
    # pip 用户
@@ -139,6 +232,47 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 - ✅ **无冲突**：与系统包隔离
 - ✅ **团队共享**：通过市场轻松分发
 - ✅ **原生集成**：无缝的 Claude Code 体验
+- ✅ **自动 MCP 设置**：AIRIS MCP Gateway 自动配置
+
+### **MCP 服务器设置**
+
+插件自动配置 **AIRIS MCP Gateway**，包含 10 个集成工具。
+
+> ⚠️ **重要：备份现有 MCP 配置**
+>
+> 如果您已配置 MCP 服务器，**请先备份您的设置**：
+> ```bash
+> # 备份 Claude Code MCP 设置
+> cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
+>
+> # 或备份项目特定的 MCP 配置
+> cp .mcp.json .mcp.json.backup  # 如果您有项目 MCP 配置
+> ```
+>
+> 插件会将 AIRIS MCP Gateway 添加到您的配置中。启用前请检查与现有 MCP 服务器的冲突。
+
+**前提条件**（一次性设置）：
+```bash
+# 安装 uvx（MCP 服务器所需）
+pip install uv
+# 或
+brew install uv
+```
+
+**验证设置**：
+```shell
+/sc:setup-mcp   # 交互式设置向导
+/sc:verify-mcp  # 检查 MCP 状态
+```
+
+**可选 API 密钥**（用于高级功能）：
+```bash
+# Tavily（网络搜索） - 在 https://tavily.com 获取密钥
+export TAVILY_API_KEY="your-key"
+
+# Magic（UI 生成） - 在 https://21st.dev 获取密钥
+export TWENTYFIRST_API_KEY="your-key"
+```
 
 ### **快速开始**
 
@@ -268,15 +402,18 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 🔧 **MCP 服务器集成**
-**8 个强大的服务器**协同工作：
-- **Context7** → 最新文档
-- **Sequential** → 复杂分析
-- **Magic** → UI 组件生成
-- **Playwright** → 浏览器测试
-- **Morphllm** → 批量转换
-- **Serena** → 会话持久化
-- **Tavily** → Deep Research 的网络搜索
-- **Chrome DevTools** → 性能分析
+**自动设置** 通过 AIRIS MCP Gateway：
+- **10 个集成工具** 在一个统一网关中
+- **无需手动配置** - 开箱即用
+- **上下文优化** - 减少 40% 令牌
+- **只需 uvx** - `pip install uv` 或 `brew install uv`
+
+**包含的工具**：
+- sequential-thinking, context7, magic, playwright
+- serena, morphllm, tavily, chrome-devtools
+- git, puppeteer
+
+运行 `/sc:setup-mcp` 验证安装
 
 </td>
 <td width="50%">

@@ -81,6 +81,99 @@ Claude Code is a product built and maintained by [Anthropic](https://www.anthrop
 
 ---
 
+## 🛡️ **CRITICAL: Backup Your Configuration First!**
+
+> **⚠️ DO NOT SKIP THIS STEP ⚠️**
+>
+> The SuperClaude plugin modifies your Claude Code MCP configuration.
+> **Always backup before installing** to ensure you can safely rollback if needed.
+
+<div align="center">
+
+### **⏱️ Quick Backup (30 seconds)**
+
+```bash
+# Download and run automated backup script
+curl -o /tmp/backup-claude.sh https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Plugin/main/scripts/backup-claude-config.sh
+chmod +x /tmp/backup-claude.sh
+/tmp/backup-claude.sh
+```
+
+**✅ Backup complete!** Now you can safely install the plugin.
+
+</div>
+
+<details>
+<summary><b>📋 What Gets Backed Up?</b></summary>
+
+The automated backup script saves:
+- ✅ `~/.claude/settings.local.json` - Your MCP server configurations
+- ✅ `~/.claude/CLAUDE.md` - Your custom instructions
+- ✅ `~/.claude/.credentials.json` - Your API credentials (if exists)
+- ✅ `.mcp.json` - Project-specific MCP config (if exists)
+- ✅ `.claude/` - Project-specific settings (if exists)
+
+**Backup location:** `~/claude-backups/backup-YYYY-MM-DD-HH-MM-SS/`
+
+</details>
+
+<details>
+<summary><b>🔧 Manual Backup Alternative</b></summary>
+
+Prefer to backup manually?
+
+```bash
+# Create backup directory
+BACKUP_DIR=~/claude-backups/backup-$(date +%Y-%m-%d-%H-%M-%S)
+mkdir -p "$BACKUP_DIR"
+
+# Backup global settings
+cp ~/.claude/settings.local.json "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/CLAUDE.md "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/.credentials.json "$BACKUP_DIR/" 2>/dev/null
+
+# Backup project settings (if in a project directory)
+cp .mcp.json "$BACKUP_DIR/" 2>/dev/null
+cp -r .claude "$BACKUP_DIR/" 2>/dev/null
+
+echo "✅ Backup created at: $BACKUP_DIR"
+```
+
+</details>
+
+<details>
+<summary><b>🚨 Emergency Rollback</b></summary>
+
+If something goes wrong after installation:
+
+```bash
+# 1. Uninstall plugin
+/plugin uninstall sc@superclaude-official
+
+# 2. Restore your backup (use your actual backup path)
+BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25
+
+cp "$BACKUP_DIR/settings.local.json" ~/.claude/
+cp "$BACKUP_DIR/CLAUDE.md" ~/.claude/ 2>/dev/null
+cp "$BACKUP_DIR/.credentials.json" ~/.claude/ 2>/dev/null
+
+# 3. Restart Claude Code
+pkill -9 claude-code
+# Then relaunch Claude Code
+```
+
+**Rollback time: ~1 minute**
+
+</details>
+
+<div align="center">
+
+**📖 Full Guide:** [Complete Backup & Safety Guide](BACKUP_GUIDE.md)
+
+</div>
+
+---
+
 ## ⚠️ **IMPORTANT: Beta Version Notice**
 
 > **This plugin version is currently in BETA.**
@@ -95,7 +188,7 @@ Claude Code is a product built and maintained by [Anthropic](https://www.anthrop
 
 ### **Required Steps Before Installation:**
 
-1. **BACKUP** your existing SuperClaude configurations
+1. **✅ BACKUP** your configuration (see section above)
 2. **UNINSTALL** previous versions:
    ```bash
    # For pip users
@@ -140,6 +233,47 @@ SuperClaude is available as a native Claude Code plugin for easy installation an
 - ✅ **No Conflicts**: Isolated from system packages
 - ✅ **Team Sharing**: Easy distribution via marketplace
 - ✅ **Native Integration**: Seamless Claude Code experience
+- ✅ **Auto MCP Setup**: AIRIS MCP Gateway configured automatically
+
+### **MCP Server Setup**
+
+The plugin automatically configures **AIRIS MCP Gateway** with 10 integrated tools.
+
+> ⚠️ **IMPORTANT: Backup Existing MCP Configuration**
+>
+> If you have existing MCP servers configured, **backup your settings first**:
+> ```bash
+> # Backup Claude Code MCP settings
+> cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
+>
+> # Or backup project-specific MCP config
+> cp .mcp.json .mcp.json.backup  # If you have project MCP config
+> ```
+>
+> The plugin adds AIRIS MCP Gateway to your configuration. Review for conflicts with existing MCP servers before enabling.
+
+**Prerequisites** (one-time setup):
+```bash
+# Install uvx (required for MCP server)
+pip install uv
+# or
+brew install uv
+```
+
+**Verify Setup**:
+```shell
+/sc:setup-mcp   # Interactive setup wizard
+/sc:verify-mcp  # Check MCP status
+```
+
+**Optional API Keys** (for premium features):
+```bash
+# Tavily (web search) - Get key at https://tavily.com
+export TAVILY_API_KEY="your-key"
+
+# Magic (UI generation) - Get key at https://21st.dev
+export TWENTYFIRST_API_KEY="your-key"
+```
 
 ### **Quick Start**
 
@@ -269,15 +403,18 @@ SuperClaude V4 is also available via package managers. See the main [SuperClaude
 <td width="50%">
 
 ### 🔧 **MCP Server Integration**
-**8 powerful servers** working together:
-- **Context7** → Up-to-date documentation
-- **Sequential** → Complex analysis
-- **Magic** → UI component generation
-- **Playwright** → Browser testing
-- **Morphllm** → Bulk transformations
-- **Serena** → Session persistence
-- **Tavily** → Web search for deep research
-- **Chrome DevTools** → Performance analysis
+**Automatic setup** via AIRIS MCP Gateway:
+- **10 integrated tools** in one unified gateway
+- **No manual configuration** - works out of the box
+- **Context optimized** - 40% token reduction
+- **Just needs uvx** - `pip install uv` or `brew install uv`
+
+**Included Tools**:
+- sequential-thinking, context7, magic, playwright
+- serena, morphllm, tavily, chrome-devtools
+- git, puppeteer
+
+Run `/sc:setup-mcp` to verify installation
 
 </td>
 <td width="50%">
