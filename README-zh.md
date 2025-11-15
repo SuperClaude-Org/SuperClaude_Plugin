@@ -128,7 +128,7 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # 安装插件
-/plugin install sc@superclaude-official
+/plugin install sc@SuperClaude-Org
 
 # 重启 Claude Code 以激活
 ```
