@@ -221,7 +221,7 @@ SuperClaudeは、簡単なインストールと自動更新のためのネイテ
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # プラグインをインストール
-/plugin install sc@superclaude-official
+/plugin install sc@sc
 
 # Claude Codeを再起動して有効化
 ```

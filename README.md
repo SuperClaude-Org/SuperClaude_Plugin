@@ -222,7 +222,7 @@ SuperClaude is available as a native Claude Code plugin for easy installation an
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # Install the plugin
-/plugin install sc@superclaude-official
+/plugin install sc@sc
 
 # Restart Claude Code to activate
 ```
