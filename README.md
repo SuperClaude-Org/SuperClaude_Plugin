@@ -428,18 +428,32 @@ SuperClaude V4 is also available via package managers. See the main [SuperClaude
 <td width="50%">
 
 ### 🔧 **MCP Server Integration**
-**Automatic setup** via AIRIS MCP Gateway:
-- **10 integrated tools** in one unified gateway
-- **No manual configuration** - works out of the box
-- **Context optimized** - 40% token reduction
-- **Just needs uvx** - `pip install uv` or `brew install uv`
+**Powered by [AIRIS MCP Gateway](https://github.com/agiletec-inc/airis-mcp-gateway)**
 
-**Included Tools**:
-- sequential-thinking, context7, magic, playwright
-- serena, morphllm, tavily, chrome-devtools
-- git, puppeteer
+A unified MCP proxy that reduces IDE startup token overhead through schema partitioning:
+- **How it works**: Intercepts `tools/list` responses and returns only top-level schemas (1,250 tokens instead of 12,500)
+- **25+ MCP servers** accessible through one endpoint
+- **On-demand expansion**: Full schemas loaded only when needed via `expandSchema` tool
 
-Run `/sc:setup-mcp` to verify installation
+**Quick Setup:**
+```bash
+git clone https://github.com/agiletec-inc/airis-mcp-gateway.git
+cd airis-mcp-gateway && just up
+claude mcp add --transport http airis-mcp-gateway http://api.gateway.localhost:9400/api/v1/mcp
+```
+
+**🚀 Boost Further with [AIRIS Agent](https://github.com/agiletec-inc/airis-agent)**
+
+Add the AIRIS Agent plugin for additional workflow optimization:
+- ✅ **Repository Indexing**: 94% token reduction (58K → 3K) via `/index-repo`
+- ✅ **Confidence Check**: Pre-implementation validation (≥90% required)
+- ✅ **Deep Research**: Parallel web search with evidence synthesis
+- ✅ **Self Review**: Post-implementation reflexion and validation
+
+```bash
+/plugin marketplace add agiletec-inc/airis-agent
+/plugin install airis-agent
+```
 
 </td>
 <td width="50%">
