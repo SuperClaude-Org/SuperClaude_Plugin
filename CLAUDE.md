@@ -6,7 +6,7 @@
 
 ## Table of Contents
 1. [Repository Overview](#repository-overview)
-2. [Architecture & Design Patterns](#architecture--design-patterns)
+2. [Architecture & Design Patterns](#architecture-design-patterns)
 3. [Directory Structure](#directory-structure)
 4. [File Conventions](#file-conventions)
 5. [Development Workflows](#development-workflows)
@@ -16,9 +16,15 @@
 9. [Mode System](#mode-system)
 10. [Flag System](#flag-system)
 11. [MCP Integration](#mcp-integration)
-12. [CI/CD & Automation](#cicd--automation)
-13. [Testing & Validation](#testing--validation)
+12. [CI/CD & Automation](#cicd-automation)
+13. [Testing & Validation](#testing-validation)
 14. [Best Practices](#best-practices)
+15. [Common Development Patterns](#common-development-patterns)
+16. [Troubleshooting](#troubleshooting)
+17. [Quick Reference](#quick-reference)
+18. [Additional Resources](#additional-resources)
+19. [Version History](#version-history)
+20. [License](#license)
 
 ---
 
