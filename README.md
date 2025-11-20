@@ -259,12 +259,15 @@ The plugin automatically configures **AIRIS MCP Gateway** with 10 integrated too
 Unified endpoint for 25+ MCP servers with 90% token reduction:
 
 ```bash
-# 1. Start the Gateway
+# 1. Install airis-workspace CLI
+brew install agiletec-inc/tap/airis-workspace
+
+# 2. Clone and start the Gateway
 git clone https://github.com/agiletec-inc/airis-mcp-gateway.git
 cd airis-mcp-gateway
-just up
+airis up
 
-# 2. Connect to Claude Code
+# 3. Connect to Claude Code
 claude mcp add --transport http airis-mcp-gateway http://api.gateway.localhost:9400/api/v1/mcp
 ```
 
