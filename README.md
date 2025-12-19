@@ -148,7 +148,7 @@ If something goes wrong after installation:
 
 ```bash
 # 1. Uninstall plugin
-/plugin uninstall sc@superclaude-official
+/plugin uninstall sc@superclaude
 
 # 2. Restore your backup (use your actual backup path)
 BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25
