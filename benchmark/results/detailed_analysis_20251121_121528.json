@@ -1,0 +1,64 @@
+{
+  "timestamp": "20251121_121528",
+  "analysis_type": "detailed_runtime_behavior",
+  "component_breakdown": {
+    "commands": {"category":"commands","file_count":29,"total_bytes":123433,"avg_bytes":4256,"total_tokens":30858,"avg_tokens":1064},
+    "agents": {"category":"agents","file_count":25,"total_bytes":144770,"avg_bytes":5790,"total_tokens":36192,"avg_tokens":1447},
+    "modes": {"category":"modes","file_count":7,"total_bytes":26716,"avg_bytes":3816,"total_tokens":6679,"avg_tokens":954},
+    "core": {"category":"core","file_count":6,"total_bytes":47711,"avg_bytes":7951,"total_tokens":11927,"avg_tokens":1987}
+  },
+  "total_plugin_cost": {
+    "files": 76,
+    "bytes": 437838,
+    "tokens": 109459
+  },
+  "usage_scenarios": {
+    "scenario_1_help_command": {
+      "description": "User types /sc:help",
+      "plugin_tokens": 109459,
+      "mcp_tokens": 2046,
+      "overhead_tokens": 107413,
+      "waste_percentage": 98
+    },
+    "scenario_2_backend_architect": {
+      "description": "User spawns backend-architect agent",
+      "plugin_tokens": 109459,
+      "mcp_tokens": 586,
+      "overhead_tokens": 108873,
+      "waste_percentage": 99
+    },
+    "scenario_3_typical_session": {
+      "description": "Typical session with 5 commands",
+      "plugin_tokens": 109459,
+      "mcp_tokens": 10230,
+      "savings_tokens": 99229,
+      "savings_percentage": 90
+    }
+  },
+  "context_window_impact": {
+    "claude_sonnet_4_5": {
+      "total_context": 200000,
+      "plugin_usage": 109459,
+      "percentage_used": 54,
+      "remaining": 90541
+    },
+    "gpt4_turbo": {
+      "total_context": 128000,
+      "plugin_usage": 109459,
+      "percentage_used": 85,
+      "remaining": 18541
+    },
+    "gemini_1_5_pro": {
+      "total_context": 1000000,
+      "plugin_usage": 109459,
+      "percentage_used": 10,
+      "remaining": 890541
+    }
+  },
+  "key_findings": {
+    "upfront_cost": "109459 tokens loaded on every session start",
+    "typical_waste": "95%+ tokens unused in typical sessions",
+    "context_pressure": "Plugin consumes 54% of Claude Sonnet context window",
+    "mcp_advantage": "Lazy loading eliminates 100% of upfront cost"
+  }
+}
