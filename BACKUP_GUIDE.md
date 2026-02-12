@@ -201,7 +201,7 @@ claude mcp list > ~/claude-backups/mcp-before.txt
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # Install plugin
-/plugin install sc@superclaude-official
+/plugin install sc@superclaude
 ```
 
 ### Step 3: Restart Claude Code
@@ -237,7 +237,7 @@ If the plugin doesn't work or conflicts with your setup:
 
 ```bash
 # 1. Uninstall the plugin
-/plugin uninstall sc@superclaude-official
+/plugin uninstall sc@superclaude
 
 # 2. Restore your backup
 BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25  # Your backup path
@@ -311,7 +311,7 @@ claude mcp get airis-mcp-gateway
 **Solution:**
 ```bash
 # 1. Uninstall plugin
-/plugin uninstall sc@superclaude-official
+/plugin uninstall sc@superclaude
 
 # 2. Restore backup
 cp ~/claude-backups/backup-XXXX/settings.local.json ~/.claude/
@@ -321,7 +321,7 @@ cp ~/claude-backups/backup-XXXX/settings.local.json ~/.claude/
 # Remove or rename conflicting MCP servers
 
 # 4. Reinstall plugin
-/plugin install sc@superclaude-official
+/plugin install sc@superclaude
 ```
 
 ---
@@ -441,7 +441,7 @@ If you encounter issues not covered in this guide:
 
 **Emergency Rollback Script:**
 ```bash
-/plugin uninstall sc@superclaude-official
+/plugin uninstall sc@superclaude
 cp ~/claude-backups/backup-LATEST/* ~/.claude/
 pkill -9 claude-code
 ```
