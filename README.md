@@ -663,6 +663,47 @@ The Deep Research system intelligently coordinates multiple tools:
 
 <div align="center">
 
+## 🔧 **Development**
+
+### **Automated Sync System**
+
+This plugin is automatically synchronized from the [SuperClaude_Framework](https://github.com/SuperClaude-Org/SuperClaude_Framework) repository **hourly** using an intelligent namespace isolation system.
+
+**Key Features:**
+- ✅ **Automatic namespace isolation** (`sc:` prefix for all commands)
+- ✅ **Safe MCP configuration merging** (preserves your custom servers)
+- ✅ **Git history preservation** (file renames tracked properly)
+- ✅ **Validation and rollback** (automatic rollback on errors)
+- ✅ **Detailed sync reports** (full audit trail of changes)
+
+**How It Works:**
+
+1. **Hourly Sync**: GitHub Actions automatically pulls from Framework
+2. **Transformation**: Commands get `sc:` prefix, files get `sc-` prefix
+3. **Validation**: All changes validated before commit
+4. **Auto-commit**: Changes automatically committed if valid
+
+**For Developers:**
+
+```bash
+# Test sync locally (dry run - no changes)
+python scripts/sync_from_framework.py --dry-run true
+
+# Run full sync manually
+python scripts/sync_from_framework.py --output-report sync-report.json
+
+# View sync report
+cat sync-report.json | jq '.'
+```
+
+📖 **Full Documentation**: [docs/SYNC_SYSTEM.md](docs/SYNC_SYSTEM.md)
+
+</div>
+
+---
+
+<div align="center">
+
 ## 🤝 **Contributing**
 
 ### **Join the SuperClaude Community**
