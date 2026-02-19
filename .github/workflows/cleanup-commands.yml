@@ -209,6 +209,8 @@ jobs:
   summary:
     name: "Pipeline summary"
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: [cleanup-name-attributes, validate-plugin]
     if: always()
 
