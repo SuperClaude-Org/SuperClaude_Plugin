@@ -1,0 +1,83 @@
+name: Pull Sync from Framework
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # 6時間に1回（Frameworkに変更がなければ数秒でスキップ）
+  workflow_dispatch:  # 手動実行を有効化
+
+jobs:
+  sync-and-isolate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 変更をプッシュするために必要
+
+    steps:
+      - name: Checkout Plugin Repository (Target)
+        uses: actions/checkout@v4
+        with:
+          path: plugin-repo
+
+      - name: Check for Framework updates
+        id: check-updates
+        run: |
+          FRAMEWORK_HEAD=$(git ls-remote https://github.com/SuperClaude-Org/SuperClaude_Framework HEAD | cut -f1)
+          echo "Current framework HEAD: $FRAMEWORK_HEAD"
+          echo "framework-head=$FRAMEWORK_HEAD" >> $GITHUB_OUTPUT
+
+          LAST_SYNCED=""
+          if [ -f "plugin-repo/docs/.framework-sync-commit" ]; then
+            LAST_SYNCED=$(cat plugin-repo/docs/.framework-sync-commit)
+            echo "Last synced commit: $LAST_SYNCED"
+          else
+            echo "No previous sync state - will run sync"
+          fi
+
+          if [ "$FRAMEWORK_HEAD" = "$LAST_SYNCED" ] && [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            echo "✅ Framework is up to date - skipping sync"
+            echo "has-updates=false" >> $GITHUB_OUTPUT
+          else
+            echo "🔄 Framework has updates - proceeding with sync"
+            echo "has-updates=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout Framework Repository (Source)
+        if: steps.check-updates.outputs.has-updates == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: SuperClaude-Org/SuperClaude_Framework
+          path: framework-src
+
+      - name: Set up Python
+        if: steps.check-updates.outputs.has-updates == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Transformation & Sync Logic
+        if: steps.check-updates.outputs.has-updates == 'true'
+        run: |
+          cd plugin-repo
+          # スクリプト内で framework-src を参照するようにパスが組まれていることを想定
+          python3 scripts/sync_from_framework.py
+
+      - name: Save framework sync state
+        if: steps.check-updates.outputs.has-updates == 'true'
+        run: |
+          echo "${{ steps.check-updates.outputs.framework-head }}" > plugin-repo/docs/.framework-sync-commit
+          echo "✅ Saved framework commit: ${{ steps.check-updates.outputs.framework-head }}"
+
+      - name: Commit and Push Changes
+        if: steps.check-updates.outputs.has-updates == 'true'
+        working-directory: plugin-repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add commands/ agents/ .claude-plugin/ docs/.framework-sync-commit
+
+          # 差分がある場合のみコミット
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: automated sync and namespace isolation from framework [$(date +'%Y-%m-%d %H:%M')]"
+            git push origin main
+          else
+            echo "No changes detected."
+          fi
