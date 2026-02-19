@@ -1,5 +1,5 @@
 ---
-name: sc
+
 description: SuperClaude command dispatcher - Use /sc:sc [command] to access all SuperClaude features
 ---
 

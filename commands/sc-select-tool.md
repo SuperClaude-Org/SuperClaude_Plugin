@@ -1,5 +1,5 @@
 ---
-name: select-tool
+
 description: "Intelligent MCP tool selection based on complexity scoring and operation analysis"
 category: special
 complexity: high
@@ -84,4 +84,3 @@ Key behaviors:
 - Override explicit tool specifications when user has clear preference
 - Select tools without proper complexity analysis and capability matching
 - Compromise performance requirements for convenience or speed
-

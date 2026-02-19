@@ -1,5 +1,5 @@
 ---
-name: reflect
+
 description: "Task reflection and validation using Serena MCP analysis capabilities"
 category: special
 complexity: standard
@@ -85,4 +85,3 @@ Key behaviors:
 - Operate without proper Serena MCP integration and reflection tool access
 - Override task completion decisions without proper adherence and quality validation
 - Bypass session integrity checks and cross-session persistence requirements
-
