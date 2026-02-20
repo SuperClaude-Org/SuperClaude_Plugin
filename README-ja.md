@@ -147,7 +147,7 @@ echo "✅ バックアップ作成完了: $BACKUP_DIR"
 
 ```bash
 # 1. プラグインをアンインストール
-/plugin uninstall sc@superclaude-official
+/plugin uninstall sc@superclaude
 
 # 2. バックアップを復元（実際のバックアップパスを使用）
 BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25

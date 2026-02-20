@@ -147,7 +147,7 @@ echo "✅ 备份已创建：$BACKUP_DIR"
 
 ```bash
 # 1. 卸载插件
-/plugin uninstall sc@superclaude-official
+/plugin uninstall sc@superclaude
 
 # 2. 恢复备份（使用您实际的备份路径）
 BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25
