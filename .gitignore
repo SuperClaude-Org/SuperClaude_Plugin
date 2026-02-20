@@ -62,4 +62,8 @@ docs/.doctrees/
 
 # Project specific
 config/
+
+# Ignore docs/ directory except specific sync tracking files
 docs/
+!docs/.framework-sync-commit
+!docs/SYNC_SYSTEM.md
