@@ -21,13 +21,13 @@ The SuperClaude Plugin uses an automated synchronization system to pull the late
 To prevent conflicts with Claude Code built-in commands and other plugins (e.g., Conductor), we implement comprehensive namespace isolation:
 
 ### Commands
-- **Filename**: `sc-brainstorm.md` (WITH `sc-` prefix)
+- **Filename**: `brainstorm.md` (no prefix — original filename preserved)
 - **Header**: `# /sc:brainstorm` (WITH `sc:` prefix)
 - **Invocation**: `/sc:brainstorm` (user types this in Claude Code)
-- **plugin.json mapping**: `"sc:brainstorm": "commands/sc-brainstorm.md"`
+- **plugin.json mapping**: `"sc:brainstorm": "commands/brainstorm.md"`
 
 ### Agents
-- **Filename**: `sc-backend-architect.md` (WITH `sc-` prefix)
+- **Filename**: `backend-architect.md` (no prefix — original filename preserved)
 - **Name**: `sc-backend-architect` (in frontmatter `name:` field)
 - **Reference**: Agents are referenced by name in command persona lists
 
@@ -37,13 +37,14 @@ To prevent conflicts with Claude Code built-in commands and other plugins (e.g.,
 
 ## Sync Workflow
 
-### Automatic Sync (Hourly)
+### Automatic Sync (Every 6 Hours)
 
-GitHub Actions runs `.github/workflows/pull-sync-framework.yml` every hour:
+GitHub Actions runs `.github/workflows/pull-sync-framework.yml` every 6 hours. It first checks if the Framework has new commits using `git ls-remote`, and skips the sync if no changes are detected:
 
-1. **Clone Framework**: Download latest Framework content to temp directory
-2. **Transform Commands**: Apply `sc:` prefix to headers, `sc-` prefix to filenames, update cross-references
-3. **Transform Agents**: Apply `sc-` prefix to filenames and frontmatter names
+1. **Check for Updates**: Compare Framework HEAD with stored commit hash (fast, no clone)
+2. **Clone Framework**: Download latest Framework content to temp directory (only if updates detected)
+3. **Transform Commands**: Apply `sc:` prefix to headers, update cross-references
+4. **Transform Agents**: Apply `sc-` prefix to frontmatter names
 4. **Copy Core Files**: Sync core/ and modes/ directories without transformation
 5. **Generate plugin.json**: Create `.claude-plugin/plugin.json` with command mappings
 6. **Merge MCP Configs**: Safely merge MCP server configurations
@@ -112,7 +113,7 @@ description: Interactive requirements discovery
 Use /analyze for analysis and [/task] for task management.
 ```
 
-**Output** (`Plugin: commands/sc-brainstorm.md`):
+**Output** (`Plugin: commands/brainstorm.md`):
 ```markdown
 ---
 description: Interactive requirements discovery
@@ -124,10 +125,10 @@ Use /sc:analyze for analysis and [/sc:task] for task management.
 ```
 
 **Changes**:
-1. ✅ Filename: `brainstorm.md` → `sc-brainstorm.md`
-2. ✅ Header: `# /brainstorm` → `# /sc:brainstorm`
-3. ✅ Cross-references: `/analyze` → `/sc:analyze`
-4. ✅ Link references: `[/task]` → `[/sc:task]`
+1. ✅ Header: `# /brainstorm` → `# /sc:brainstorm`
+2. ✅ Cross-references: `/analyze` → `/sc:analyze`
+3. ✅ Link references: `[/task]` → `[/sc:task]`
+4. ⏭️ Filename: Preserved as `brainstorm.md` (no rename)
 
 ### Agent Transformation
 
@@ -142,7 +143,7 @@ category: engineering
 # Backend Architect
 ```
 
-**Output** (`Plugin: agents/sc-backend-architect.md`):
+**Output** (`Plugin: agents/backend-architect.md`):
 ```markdown
 ---
 name: sc-backend-architect
@@ -154,8 +155,8 @@ category: engineering
 ```
 
 **Changes**:
-1. ✅ Filename: `backend-architect.md` → `sc-backend-architect.md`
-2. ✅ Name field: `name: backend-architect` → `name: sc-backend-architect`
+1. ✅ Name field: `name: backend-architect` → `name: sc-backend-architect`
+2. ⏭️ Filename: Preserved as `backend-architect.md` (no rename)
 3. ⏭️ Content: No changes to markdown body
 
 ## MCP Configuration Safety
@@ -251,10 +252,8 @@ git push
 
 After each sync, the system validates:
 
-1. ✅ **Command files**: All have `sc-` prefix in filename
-2. ✅ **Command headers**: All have `# /sc:` prefix
-3. ✅ **Agent files**: All have `sc-` prefix in filename
-4. ✅ **Agent names**: All have `sc-` prefix in frontmatter
+1. ✅ **Command headers**: All have `# /sc:` prefix
+2. ✅ **Agent names**: All have `sc-` prefix in frontmatter
 5. ✅ **plugin.json**: Valid JSON with correct command mappings
 6. ✅ **MCP configurations**: Valid JSON structure
 
@@ -324,7 +323,7 @@ Each workflow run generates a summary visible in the Actions UI:
 1. Check Framework repository is accessible: `https://github.com/SuperClaude-Org/SuperClaude_Framework`
 2. Verify network connectivity
 3. Check GitHub Status: `https://www.githubstatus.com/`
-4. Wait and retry (hourly cron will retry automatically)
+4. Wait and retry (6-hour cron will retry automatically)
 
 ### Sync Fails with "Validation Error"
 
@@ -383,7 +382,7 @@ Each workflow run generates a summary visible in the Actions UI:
 - Automatic sync from Framework repository
 - Namespace transformation with `sc:` prefix
 - Name cleanup built-in to sync process
-- Hourly automated execution
+- Automated execution every 6 hours (with change detection)
 
 ### Migration Timeline
 
@@ -403,7 +402,7 @@ Each workflow run generates a summary visible in the Actions UI:
 ### No Action Required
 
 Plugin maintainers and users don't need to do anything. The new system:
-- ✅ Runs automatically (hourly)
+- ✅ Runs automatically (every 6 hours, skips if no Framework changes)
 - ✅ Handles all transformations
 - ✅ Includes old cleanup functionality
 - ✅ Generates detailed reports
@@ -467,17 +466,7 @@ This outputs:
 
 ### Git History Preservation
 
-The sync system uses `git mv` to preserve file history when renaming files:
-
-```bash
-# Automatic git mv for renamed files
-git mv commands/brainstorm.md commands/sc-brainstorm.md
-```
-
-This ensures:
-- ✅ File history is preserved
-- ✅ Blame information remains accurate
-- ✅ Git tracks as rename, not delete + add
+The sync system preserves file history by updating content in-place rather than renaming files. Filenames are kept as-is from the Framework (e.g., `brainstorm.md`), while namespace isolation is applied through header prefixes (`# /sc:brainstorm`) and agent name fields (`name: sc-backend-architect`).
 
 ### Backup Before Sync
 
@@ -554,13 +543,13 @@ Found a bug or issue with the sync system?
 ```
 SuperClaude_Plugin/
 ├── commands/
-│   ├── sc-brainstorm.md
-│   ├── sc-analyze.md
+│   ├── brainstorm.md
+│   ├── analyze.md
 │   └── ... (29 commands)
 ├── agents/
-│   ├── sc-backend-architect.md
-│   ├── sc-pm-agent.md
-│   └── ... (25 agents)
+│   ├── backend-architect.md
+│   ├── system-architect.md
+│   └── ... (23 agents)
 ├── core/
 │   ├── PRINCIPLES.md
 │   ├── RULES.md
