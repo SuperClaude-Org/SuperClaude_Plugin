@@ -195,7 +195,7 @@ jobs:
 
       - name: "🔍 Check command count"
         run: |
-          expected_count=25
+          expected_count=29
           actual_count=$(find commands -name "*.md" | wc -l)
 
           echo "Expected: $expected_count commands"
