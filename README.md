@@ -14,7 +14,7 @@
 <a href="https://github.com/SuperClaude-Org/SuperQwen_Framework" target="_blank">
   <img src="https://img.shields.io/badge/Try-SuperQwen_Framework-orange" alt="Try SuperQwen Framework"/>
 </a>
-  <img src="https://img.shields.io/badge/version-4.3.2-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-4.4.0-blue" alt="Version">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
@@ -56,9 +56,9 @@
 
 ## 📊 **Framework Statistics**
 
-| **Commands** | **Agents** | **Modes** | **MCP Servers** |
+| **Commands** | **Agents** | **Modes** | **MCP Tools** |
 |:------------:|:----------:|:---------:|:---------------:|
-| **25** | **15** | **7** | **8** |
+| **29** | **23** | **7** | **10** |
 | Slash Commands | Specialized AI | Behavioral | Integrations |
 
 Use the new `/sc:help` command to see a full list of all available commands.
@@ -405,7 +405,7 @@ SuperClaude V4 is also available via package managers. See the main [SuperClaude
 <td width="50%">
 
 ### 🤖 **Smarter Agent System**
-**15 specialized agents** with domain expertise:
+**23 specialized agents** with domain expertise:
 - Deep Research agent for autonomous web research
 - Security engineer catches real vulnerabilities
 - Frontend architect understands UI patterns
@@ -418,7 +418,7 @@ SuperClaude V4 is also available via package managers. See the main [SuperClaude
 ### 📝 **Improved Namespace**
 **`/sc:` prefix** for all commands:
 - No conflicts with custom commands
-- 25 commands covering full lifecycle
+- 29 commands covering full lifecycle
 - From brainstorming to deployment
 - Clean, organized command structure
 
@@ -615,11 +615,11 @@ The Deep Research system intelligently coordinates multiple tools:
 </td>
 <td valign="top">
 
-- 🎯 [**Commands Reference**](Docs/User-Guide/commands.md)  
-  *All 25 slash commands*
+- 🎯 [**Commands Reference**](Docs/User-Guide/commands.md)
+  *All 29 slash commands*
 
-- 🤖 [**Agents Guide**](Docs/User-Guide/agents.md)  
-  *15 specialized agents*
+- 🤖 [**Agents Guide**](Docs/User-Guide/agents.md)
+  *23 specialized agents*
 
 - 🎨 [**Behavioral Modes**](Docs/User-Guide/modes.md)  
   *7 adaptive modes*
@@ -627,8 +627,8 @@ The Deep Research system intelligently coordinates multiple tools:
 - 🚩 [**Flags Guide**](Docs/User-Guide/flags.md)  
   *Control behaviors*
 
-- 🔧 [**MCP Servers**](Docs/User-Guide/mcp-servers.md)  
-  *7 server integrations*
+- 🔧 [**MCP Servers**](Docs/User-Guide/mcp-servers.md)
+  *10 tool integrations*
 
 - 💼 [**Session Management**](Docs/User-Guide/session-management.md)  
   *Save & restore state*
@@ -667,19 +667,19 @@ The Deep Research system intelligently coordinates multiple tools:
 
 ### **Automated Sync System**
 
-This plugin is automatically synchronized from the [SuperClaude_Framework](https://github.com/SuperClaude-Org/SuperClaude_Framework) repository **hourly** using an intelligent namespace isolation system.
+This plugin is automatically synchronized from the [SuperClaude_Framework](https://github.com/SuperClaude-Org/SuperClaude_Framework) repository **every 6 hours** using an intelligent namespace isolation system with change detection.
 
 **Key Features:**
-- ✅ **Automatic namespace isolation** (`sc:` prefix for all commands)
+- ✅ **Automatic namespace isolation** (`sc:` prefix for command headers, `sc-` prefix for agent names in frontmatter)
+- ✅ **Change detection** (skips sync when Framework is unchanged via `git ls-remote`)
 - ✅ **Safe MCP configuration merging** (preserves your custom servers)
-- ✅ **Git history preservation** (file renames tracked properly)
 - ✅ **Validation and rollback** (automatic rollback on errors)
 - ✅ **Detailed sync reports** (full audit trail of changes)
 
 **How It Works:**
 
-1. **Hourly Sync**: GitHub Actions automatically pulls from Framework
-2. **Transformation**: Commands get `sc:` prefix, files get `sc-` prefix
+1. **Change Detection**: GitHub Actions checks Framework HEAD via `git ls-remote` (fast, no clone needed)
+2. **Transformation**: Command headers get `sc:` prefix, agent names get `sc-` prefix in frontmatter
 3. **Validation**: All changes validated before commit
 4. **Auto-commit**: Changes automatically committed if valid
 

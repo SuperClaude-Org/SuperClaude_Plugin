@@ -2,7 +2,7 @@
 description: Interactive MCP server setup wizard
 ---
 
-# MCP Server Setup Wizard
+# /sc:setup-mcp - MCP Server Setup Wizard
 
 You are now in **MCP Setup Wizard Mode**. Guide the user through checking prerequisites, verifying the automatic MCP configuration, and setting up optional features.
 

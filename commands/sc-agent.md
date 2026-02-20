@@ -4,7 +4,7 @@ category: orchestration
 personas: []
 ---
 
-# SC Agent Activation
+# /sc:agent - SC Agent Activation
 
 🚀 **SC Agent online** — this plugin launches `/sc:sc:agent` automatically at session start.
 

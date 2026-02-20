@@ -14,7 +14,7 @@
 <a href="https://github.com/SuperClaude-Org/SuperQwen_Framework" target="_blank">
   <img src="https://img.shields.io/badge/Try-SuperQwen_Framework-orange" alt="Try SuperQwen Framework"/>
 </a>
-  <img src="https://img.shields.io/badge/version-4.3.2-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-4.4.0-blue" alt="Version">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
@@ -56,9 +56,9 @@
 
 ## 📊 **框架统计**
 
-| **命令** | **代理** | **模式** | **MCP服务器** |
+| **命令** | **代理** | **模式** | **MCP工具** |
 |:------------:|:----------:|:---------:|:---------------:|
-| **25** | **15** | **7** | **8** |
+| **29** | **23** | **7** | **10** |
 | 斜杠命令 | 专业AI | 行为模式 | 集成功能 |
 
 使用新的 `/sc:help` 命令查看所有可用命令的完整列表。
@@ -379,7 +379,7 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 🤖 **智能代理系统**
-**15 个专业代理**具有领域专业知识：
+**23 个专业代理**具有领域专业知识：
 - Deep Research 代理用于自主网络研究
 - 安全工程师捕获真实漏洞
 - 前端架构师理解 UI 模式
@@ -392,7 +392,7 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 ### 📝 **改进的命名空间**
 所有命令使用 **`/sc:` 前缀**：
 - 与自定义命令无冲突
-- 涵盖完整生命周期的 25 个命令
+- 涵盖完整生命周期的 29 个命令
 - 从头脑风暴到部署
 - 清晰、有组织的命令结构
 
@@ -576,10 +576,10 @@ Deep Research 系统智能协调多个工具：
 <td valign="top">
 
 - 🎯 [**命令参考**](Docs/User-Guide/commands.md)
-  *全部 25 个斜杠命令*
+  *全部 29 个斜杠命令*
 
 - 🤖 [**代理指南**](Docs/User-Guide/agents.md)
-  *15 个专业代理*
+  *23 个专业代理*
 
 - 🎨 [**行为模式**](Docs/User-Guide/modes.md)
   *7 种适应性模式*
@@ -588,7 +588,7 @@ Deep Research 系统智能协调多个工具：
   *控制行为*
 
 - 🔧 [**MCP 服务器**](Docs/User-Guide/mcp-servers.md)
-  *7 个服务器集成*
+  *10 个工具集成*
 
 - 💼 [**会话管理**](Docs/User-Guide/session-management.md)
   *保存和恢复状态*

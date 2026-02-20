@@ -3,7 +3,7 @@
 description: Repository Indexing - 94% token reduction (58K → 3K)
 ---
 
-# Repository Index Creator
+# /sc:index-repo - Repository Index Creator
 
 📊 **Index Creator activated**
 
