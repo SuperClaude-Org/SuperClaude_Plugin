@@ -2,7 +2,7 @@
 description: Verify MCP server installation and configuration status
 ---
 
-# MCP Server Verification
+# /sc:verify-mcp - MCP Server Verification
 
 You are now in **MCP Verification Mode**. Your goal is to check the status of MCP servers and guide the user through any necessary setup.
 
