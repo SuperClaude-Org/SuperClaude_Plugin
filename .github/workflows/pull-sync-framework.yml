@@ -2,7 +2,7 @@ name: Pull Sync from Framework
 
 on:
   schedule:
-    - cron: '0 * * * *' # 1時間に1回自動実行
+    - cron: '0 */6 * * *' # 6時間ごとに自動実行
   workflow_dispatch: # 手動実行を有効化
 
 jobs:
@@ -12,35 +12,68 @@ jobs:
       contents: write # 変更をプッシュするために必要
 
     steps:
+      - name: Check for Framework changes
+        id: check-changes
+        run: |
+          # 前回の同期コミットから Framework の HEAD が変わったか確認
+          FRAMEWORK_HEAD=$(git ls-remote https://github.com/SuperClaude-Org/SuperClaude_Framework.git HEAD | cut -f1)
+          echo "framework-head=$FRAMEWORK_HEAD" >> $GITHUB_OUTPUT
+          echo "Framework HEAD: $FRAMEWORK_HEAD"
+
       - name: Checkout Plugin Repository (Target)
         uses: actions/checkout@v4
         with:
           path: plugin-repo
 
+      - name: Check cached Framework SHA
+        id: check-cache
+        working-directory: plugin-repo
+        run: |
+          CACHED_SHA=""
+          if [ -f .last-framework-sha ]; then
+            CACHED_SHA=$(cat .last-framework-sha)
+          fi
+          echo "cached-sha=$CACHED_SHA" >> $GITHUB_OUTPUT
+
+          if [ "$CACHED_SHA" = "${{ steps.check-changes.outputs.framework-head }}" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Framework unchanged (SHA: $CACHED_SHA). Skipping sync."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "Framework changed: $CACHED_SHA -> ${{ steps.check-changes.outputs.framework-head }}"
+          fi
+
       - name: Checkout Framework Repository (Source)
+        if: steps.check-cache.outputs.skip != 'true'
         uses: actions/checkout@v4
         with:
           repository: SuperClaude-Org/SuperClaude_Framework
           path: framework-src
 
       - name: Set up Python
+        if: steps.check-cache.outputs.skip != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Run Transformation & Sync Logic
+        if: steps.check-cache.outputs.skip != 'true'
         run: |
           cd plugin-repo
           # スクリプト内で framework-src を参照するようにパスが組まれていることを想定
           python3 scripts/sync_from_framework.py
 
       - name: Commit and Push Changes
+        if: steps.check-cache.outputs.skip != 'true'
         working-directory: plugin-repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add commands/ agents/ .claude-plugin/
-          
+
+          # Framework SHA を記録
+          echo "${{ steps.check-changes.outputs.framework-head }}" > .last-framework-sha
+          git add commands/ agents/ .claude-plugin/ .last-framework-sha
+
           # 差分がある場合のみコミット
           if ! git diff --cached --quiet; then
             git commit -m "chore: automated sync and namespace isolation from framework [$(date +'%Y-%m-%d %H:%M')]"
