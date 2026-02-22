@@ -59,6 +59,37 @@ jobs:
           cd plugin-repo
           python3 scripts/sync_from_framework.py
 
+      # ── Protection gate ────────────────────────────────────────────────────
+      # Verify that sync did NOT touch any Plugin-owned file.
+      # PROTECTED_PATHS in sync_from_framework.py defines the full list.
+      # If any protected file appears in `git diff`, this step fails and the
+      # workflow aborts before any commit is made.
+      - name: Verify protected files are unchanged
+        if: steps.check-updates.outputs.has-updates == 'true'
+        working-directory: plugin-repo
+        run: |
+          PROTECTED=(
+            "README.md" "README-ja.md" "README-zh.md"
+            "BACKUP_GUIDE.md" "MIGRATION_GUIDE.md" "SECURITY.md"
+            "CLAUDE.md" "LICENSE" ".gitignore" "plugin.json"
+            ".claude-plugin/marketplace.json"
+            "core/" "modes/"
+          )
+          VIOLATIONS=()
+          for path in "${PROTECTED[@]}"; do
+            if git diff --name-only HEAD -- "$path" | grep -q .; then
+              VIOLATIONS+=("$path")
+            fi
+          done
+          if [ ${#VIOLATIONS[@]} -gt 0 ]; then
+            echo "🚨 PROTECTION VIOLATION: sync modified Plugin-owned files:"
+            for v in "${VIOLATIONS[@]}"; do echo "  • $v"; done
+            echo ""
+            echo "Fix: check SYNC_MAPPINGS in scripts/sync_from_framework.py"
+            exit 1
+          fi
+          echo "🔒 Protection check passed — no Plugin-owned files were modified"
+
       - name: Save framework sync state
         if: steps.check-updates.outputs.has-updates == 'true'
         run: |
@@ -71,7 +102,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add commands/ agents/ .claude-plugin/ docs/.framework-sync-commit
+
+          # Explicitly add only sync-managed paths.
+          # Protected paths (core/, modes/, README.md, etc.) are intentionally excluded.
+          git add commands/ agents/ .claude-plugin/plugin.json docs/.framework-sync-commit
 
           # 差分がある場合のみコミット
           if ! git diff --cached --quiet; then

@@ -1,0 +1,40 @@
+# .gitattributes — Plugin-owned file merge strategy
+#
+# Files listed here use `merge=ours` so that during a git merge
+# (e.g. when the automated sync bot merges main into a PR branch),
+# Git automatically prefers the Plugin version over any incoming change.
+#
+# This is the THIRD layer of protection (defense in depth):
+#   Layer 1 — PROTECTED_PATHS in sync_from_framework.py  (script never writes them)
+#   Layer 2 — Workflow gate: "Verify protected files are unchanged" step aborts on violation
+#   Layer 3 — .gitattributes merge=ours: Git merge always keeps Plugin version
+#
+# To promote a path from protected to synced:
+#   1. Remove it from PROTECTED_PATHS in scripts/sync_from_framework.py
+#   2. Add it to SYNC_MAPPINGS
+#   3. Remove the merge=ours line below
+
+# ── Plugin documentation ───────────────────────────────────────────────────
+README.md           merge=ours
+README-ja.md        merge=ours
+README-zh.md        merge=ours
+BACKUP_GUIDE.md     merge=ours
+MIGRATION_GUIDE.md  merge=ours
+SECURITY.md         merge=ours
+CLAUDE.md           merge=ours
+LICENSE             merge=ours
+.gitignore          merge=ours
+
+# ── Plugin configuration ───────────────────────────────────────────────────
+plugin.json                    merge=ours
+.claude-plugin/marketplace.json merge=ours
+
+# ── Plugin infrastructure ──────────────────────────────────────────────────
+.github/**                     merge=ours
+docs/**                        merge=ours
+scripts/**                     merge=ours
+tests/**                       merge=ours
+
+# ── Plugin-customized behavioral content ──────────────────────────────────
+core/**                        merge=ours
+modes/**                       merge=ours
