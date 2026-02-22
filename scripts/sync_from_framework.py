@@ -21,6 +21,7 @@ import sys
 import argparse
 import tempfile
 import shutil
+import hashlib
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 import json
@@ -36,6 +37,11 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+class ProtectionViolationError(RuntimeError):
+    """Raised when sync would overwrite a Plugin-owned file listed in PROTECTED_PATHS."""
+    pass
 
 
 @dataclass
@@ -451,13 +457,49 @@ class McpMerger:
 class FrameworkSyncer:
     """Main orchestrator for Framework → Plugin sync."""
 
-    # Directory mappings: Framework → Plugin
+    # ── SYNC MAPPINGS ──────────────────────────────────────────────────────────
+    # What to pull from Framework and transform for Plugin distribution.
+    # Symmetric pair with PROTECTED_PATHS below: a path appears in one or the other,
+    # never both.
     SYNC_MAPPINGS = {
-        "src/superclaude/commands": "commands",
-        "src/superclaude/agents": "agents",
-        "src/superclaude/core": "core",
-        "src/superclaude/modes": "modes",
+        "src/superclaude/commands": "commands",   # /cmd → /sc:cmd, sc- prefix
+        "src/superclaude/agents":   "agents",     # name → sc-name in frontmatter
+        # core/ and modes/ are intentionally absent — they live in PROTECTED_PATHS
     }
+
+    # ── PROTECTED PATHS ────────────────────────────────────────────────────────
+    # Plugin-owned files and directories that must NEVER be overwritten by sync,
+    # regardless of what the Framework contains.
+    #
+    # Algorithm: before sync → hash all protected paths → after sync → re-hash
+    # and raise ProtectionViolationError if anything changed.
+    #
+    # To move a path from protected to synced: remove it here, add to SYNC_MAPPINGS.
+    PROTECTED_PATHS: List[str] = [
+        # Plugin-specific documentation (Plugin spec, not Framework spec)
+        "README.md",
+        "README-ja.md",
+        "README-zh.md",
+        "BACKUP_GUIDE.md",
+        "MIGRATION_GUIDE.md",
+        "SECURITY.md",
+        "CLAUDE.md",
+        "LICENSE",
+        ".gitignore",
+        # Plugin configuration & marketplace metadata
+        "plugin.json",
+        ".claude-plugin/",
+        # Plugin infrastructure (workflows, scripts, tests are Plugin-owned)
+        ".github/",
+        "docs/",
+        "scripts/",
+        "tests/",
+        "backups/",
+        # Plugin-customized behavioral content
+        # Plugin maintains its own tuned versions; Framework versions are ignored.
+        "core/",
+        "modes/",
+    ]
 
     def __init__(
         self,
@@ -485,19 +527,25 @@ class FrameworkSyncer:
             logger.info(f"📦 Framework version: {framework_version}")
             logger.info(f"📝 Framework commit: {framework_commit[:8]}")
 
-            # Step 2: Create backup
+            # Step 2: Snapshot protected files BEFORE any changes
+            protection_snapshot = self._snapshot_protected_files()
+
+            # Step 3: Create backup
             self._create_backup()
 
-            # Step 3: Transform and sync content
+            # Step 4: Transform and sync content
             stats = self._sync_content(framework_path)
 
-            # Step 4: Generate plugin.json
+            # Step 5: Verify protected files were NOT touched
+            self._validate_protected_files(protection_snapshot)
+
+            # Step 6: Generate plugin.json
             self._generate_plugin_json(framework_version)
 
-            # Step 5: Merge MCP configurations
+            # Step 7: Merge MCP configurations
             mcp_merged = self._merge_mcp_configs(framework_path)
 
-            # Step 6: Validate results
+            # Step 8: Validate sync results
             self._validate_sync()
 
             logger.info("✅ Sync completed successfully!")
@@ -516,6 +564,22 @@ class FrameworkSyncer:
                 errors=self.errors
             )
 
+        except ProtectionViolationError as e:
+            # Protection violations are logged already; surface them clearly in the report
+            self.errors.append(str(e))
+            return SyncResult(
+                success=False,
+                timestamp=datetime.now().isoformat(),
+                framework_commit="",
+                framework_version="",
+                files_synced=0,
+                files_modified=0,
+                commands_transformed=0,
+                agents_transformed=0,
+                mcp_servers_merged=0,
+                warnings=self.warnings,
+                errors=self.errors
+            )
         except Exception as e:
             logger.error(f"❌ Sync failed: {e}", exc_info=True)
             self.errors.append(str(e))
@@ -534,6 +598,70 @@ class FrameworkSyncer:
             )
         finally:
             self._cleanup()
+
+    # ── Protection helpers ─────────────────────────────────────────────────────
+
+    @staticmethod
+    def _hash_file(path: Path) -> str:
+        """Return SHA-256 hex digest of a file's contents."""
+        h = hashlib.sha256()
+        h.update(path.read_bytes())
+        return h.hexdigest()
+
+    def _snapshot_protected_files(self) -> Dict[str, str]:
+        """
+        Hash every file that lives under a PROTECTED_PATHS entry.
+
+        Called BEFORE sync begins so we have a baseline to compare against.
+
+        Returns:
+            Mapping of relative-path-string → SHA-256 hex digest.
+        """
+        snapshot: Dict[str, str] = {}
+        for protected in self.PROTECTED_PATHS:
+            target = self.plugin_root / protected
+            if target.is_file():
+                rel = protected
+                snapshot[rel] = self._hash_file(target)
+            elif target.is_dir():
+                for f in sorted(target.rglob('*')):
+                    if f.is_file():
+                        rel = str(f.relative_to(self.plugin_root))
+                        snapshot[rel] = self._hash_file(f)
+        logger.info(f"🔒 Protection snapshot: {len(snapshot)} Plugin-owned files hashed")
+        return snapshot
+
+    def _validate_protected_files(self, snapshot: Dict[str, str]) -> None:
+        """
+        Re-hash every file from the snapshot and compare.
+
+        Called AFTER sync to verify no protected file was touched.
+
+        Raises:
+            ProtectionViolationError: if any protected file was modified or deleted.
+        """
+        violations: List[str] = []
+        for rel_path, original_hash in snapshot.items():
+            current = self.plugin_root / rel_path
+            if not current.exists():
+                violations.append(f"DELETED  : {rel_path}")
+            else:
+                current_hash = self._hash_file(current)
+                if current_hash != original_hash:
+                    violations.append(f"MODIFIED : {rel_path}")
+
+        if violations:
+            msg = (
+                "🚨 PROTECTION VIOLATION — sync modified Plugin-owned files:\n"
+                + "\n".join(f"  • {v}" for v in violations)
+                + "\n\nFix: ensure SYNC_MAPPINGS does not target any path in PROTECTED_PATHS."
+            )
+            logger.error(msg)
+            raise ProtectionViolationError(msg)
+
+        logger.info(f"🔒 Protection check passed — {len(snapshot)} Plugin-owned files unchanged")
+
+    # ── Core sync workflow ─────────────────────────────────────────────────────
 
     def _clone_framework(self) -> Path:
         """Clone Framework repository to temp directory."""
@@ -650,23 +778,11 @@ class FrameworkSyncer:
             stats['files_modified'] += agent_stats['modified']
             logger.info(f"✅ Agents: {stats['agents']} transformed")
 
-        # Sync core files (no transformation)
-        logger.info("📝 Syncing core files...")
-        source_core = framework_path / 'src/superclaude/core'
-        dest_core = self.plugin_root / 'core'
-
-        if source_core.exists():
-            core_count = file_syncer.copy_directory(source_core, dest_core)
-            logger.info(f"✅ Core files: {core_count} copied")
-
-        # Sync modes (no transformation)
-        logger.info("📝 Syncing modes...")
-        source_modes = framework_path / 'src/superclaude/modes'
-        dest_modes = self.plugin_root / 'modes'
-
-        if source_modes.exists():
-            modes_count = file_syncer.copy_directory(source_modes, dest_modes)
-            logger.info(f"✅ Modes: {modes_count} copied")
+        # core/ and modes/ are in PROTECTED_PATHS — Plugin maintains its own versions.
+        # They are intentionally excluded from SYNC_MAPPINGS and will never be
+        # overwritten here.  To re-enable Framework sync for either directory,
+        # remove it from PROTECTED_PATHS and add it back to SYNC_MAPPINGS.
+        logger.info("🔒 core/ and modes/ are Plugin-owned (PROTECTED_PATHS) — skipping")
 
         return stats
 
