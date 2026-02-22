@@ -67,3 +67,4 @@ config/
 docs/
 !docs/.framework-sync-commit
 !docs/SYNC_SYSTEM.md
+PR_DESCRIPTION.md
