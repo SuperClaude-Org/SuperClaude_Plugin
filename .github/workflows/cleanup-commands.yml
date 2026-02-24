@@ -10,8 +10,6 @@ on:
       - main
     paths:
       - 'commands/**/*.md'
-      - 'scripts/clean_command_names.py'
-      - '.github/workflows/cleanup-commands.yml'
 
   pull_request:
     branches:
