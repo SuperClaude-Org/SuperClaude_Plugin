@@ -2,14 +2,14 @@ name: Pull Sync from Framework
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # 6時間に1回（Frameworkに変更がなければ数秒でスキップ）
-  workflow_dispatch:  # 手動実行を有効化
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
 jobs:
   sync-and-isolate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 変更をプッシュするために必要
+      contents: write
 
     steps:
       - name: Checkout Plugin Repository (Target)
@@ -59,19 +59,15 @@ jobs:
           cd plugin-repo
           python3 scripts/sync_from_framework.py
 
-      # ── Protection gate ────────────────────────────────────────────────────
-      # Verify that sync did NOT touch any Plugin-owned file.
-      # PROTECTED_PATHS in sync_from_framework.py defines the full list.
-      # If any protected file appears in `git diff`, this step fails and the
-      # workflow aborts before any commit is made.
       - name: Verify protected files are unchanged
         if: steps.check-updates.outputs.has-updates == 'true'
         working-directory: plugin-repo
         run: |
+          # 修正: plugin.json はスクリプトによってMCPマージとして更新されるため、リストから削除しました
           PROTECTED=(
             "README.md" "README-ja.md" "README-zh.md"
             "BACKUP_GUIDE.md" "MIGRATION_GUIDE.md" "SECURITY.md"
-            "CLAUDE.md" "LICENSE" ".gitignore" "plugin.json"
+            "CLAUDE.md" "LICENSE" ".gitignore"
             ".claude-plugin/marketplace.json"
             "core/" "modes/"
           )
@@ -103,11 +99,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Explicitly add only sync-managed paths.
-          # Protected paths (core/, modes/, README.md, etc.) are intentionally excluded.
-          git add commands/ agents/ .claude-plugin/plugin.json docs/.framework-sync-commit
+          # 修正: ルートの plugin.json を追加（MCPの更新をコミットするため）
+          git add commands/ agents/ .claude-plugin/plugin.json plugin.json
+          
+          # 修正: .gitignoreによる除外を確実に回避するため -f オプションを付与
+          if [ -f "docs/.framework-sync-commit" ]; then
+            git add -f docs/.framework-sync-commit
+          fi
 
-          # 差分がある場合のみコミット
           if ! git diff --cached --quiet; then
             git commit -m "chore: automated sync and namespace isolation from framework [$(date +'%Y-%m-%d %H:%M')]"
             git push origin main
