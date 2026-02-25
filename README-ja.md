@@ -14,7 +14,7 @@
 <a href="https://github.com/SuperClaude-Org/SuperQwen_Framework" target="_blank">
   <img src="https://img.shields.io/badge/Try-SuperQwen_Framework-orange" alt="Try SuperQwen Framework"/>
 </a>
-  <img src="https://img.shields.io/badge/version-4.3.2-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-4.4.0-blue" alt="Version">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
@@ -56,9 +56,9 @@
 
 ## 📊 **フレームワーク統計**
 
-| **コマンド** | **エージェント** | **モード** | **MCPサーバー** |
+| **コマンド** | **エージェント** | **モード** | **MCPツール** |
 |:------------:|:----------:|:---------:|:---------------:|
-| **25** | **15** | **7** | **8** |
+| **29** | **23** | **7** | **10** |
 | スラッシュコマンド | 専門化AI | 動作モード | 統合機能 |
 
 新しい `/sc:help` コマンドを使用して、利用可能なすべてのコマンドの完全なリストを確認できます。
@@ -147,7 +147,7 @@ echo "✅ バックアップ作成完了: $BACKUP_DIR"
 
 ```bash
 # 1. プラグインをアンインストール
-/plugin uninstall sc@superclaude-official
+/plugin uninstall sc@superclaude
 
 # 2. バックアップを復元（実際のバックアップパスを使用）
 BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25
@@ -379,7 +379,7 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td width="50%">
 
 ### 🤖 **スマートエージェントシステム**
-**15の専門エージェント**がドメイン専門知識を持っています：
+**23の専門エージェント**がドメイン専門知識を持っています：
 - 自律的なWeb調査のためのDeep Researchエージェント
 - セキュリティエンジニアが実際の脆弱性をキャッチ
 - フロントエンドアーキテクトがUIパターンを理解
@@ -392,7 +392,7 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 ### 📝 **改善された名前空間**
 **`/sc:` プレフィックス**をすべてのコマンドに：
 - カスタムコマンドとの競合なし
-- ライフサイクル全体をカバーする25のコマンド
+- ライフサイクル全体をカバーする29のコマンド
 - ブレインストーミングからデプロイメントまで
 - クリーンで整理されたコマンド構造
 
@@ -576,10 +576,10 @@ Deep Researchシステムは複数のツールをインテリジェントに調�
 <td valign="top">
 
 - 🎯 [**コマンドリファレンス**](Docs/User-Guide/commands.md)
-  *全25スラッシュコマンド*
+  *全29スラッシュコマンド*
 
 - 🤖 [**エージェントガイド**](Docs/User-Guide/agents.md)
-  *15の専門エージェント*
+  *23の専門エージェント*
 
 - 🎨 [**動作モード**](Docs/User-Guide/modes.md)
   *7つの適応モード*
@@ -588,7 +588,7 @@ Deep Researchシステムは複数のツールをインテリジェントに調�
   *動作の制御*
 
 - 🔧 [**MCPサーバー**](Docs/User-Guide/mcp-servers.md)
-  *7つのサーバー統合*
+  *10ツール統合*
 
 - 💼 [**セッション管理**](Docs/User-Guide/session-management.md)
   *状態の保存と復元*

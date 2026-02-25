@@ -2,6 +2,24 @@
 """
 SuperClaude Plugin - Command Name Attribute Cleanup Script
 
+⚠️  DEPRECATED: This script is deprecated as of v5.0.0 ⚠️
+
+The new sync system (sync_from_framework.py) handles command name cleanup
+automatically during Framework synchronization. This ensures consistency
+and reduces maintenance overhead.
+
+To use the new system:
+    python scripts/sync_from_framework.py
+
+Migration Timeline:
+- v4.4.0: Deprecation notice added
+- v5.0.0: This script will be removed
+
+For more information, see:
+https://github.com/SuperClaude-Org/SuperClaude_Plugin/docs/SYNC_SYSTEM.md
+
+---
+
 This script automatically removes redundant 'name:' attributes from command
 frontmatter in markdown files. The plugin naming system derives command names
 from the plugin name + filename, making explicit name attributes unnecessary.
@@ -133,6 +151,12 @@ def main() -> int:
     Returns:
         Exit code (0 for success, 1 for error)
     """
+    print("⚠️  DEPRECATION WARNING ⚠️")
+    print("=" * 60)
+    print("This script is deprecated and will be removed in v5.0.0")
+    print("Please use: python scripts/sync_from_framework.py")
+    print("=" * 60)
+    print()
     print("🚀 SuperClaude Plugin - Command Name Cleanup")
     print()
 
