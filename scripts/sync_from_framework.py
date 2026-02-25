@@ -487,7 +487,6 @@ class FrameworkSyncer:
         "LICENSE",
         ".gitignore",
         # Plugin configuration & marketplace metadata
-        "plugin.json",
         ".claude-plugin/",
         # Plugin infrastructure (workflows, scripts, tests are Plugin-owned)
         ".github/",
