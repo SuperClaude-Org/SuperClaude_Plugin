@@ -14,7 +14,7 @@
 <a href="https://github.com/SuperClaude-Org/SuperQwen_Framework" target="_blank">
   <img src="https://img.shields.io/badge/Try-SuperQwen_Framework-orange" alt="Try SuperQwen Framework"/>
 </a>
-  <img src="https://img.shields.io/badge/version-4.3.2-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-4.4.0-blue" alt="Version">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
@@ -56,9 +56,9 @@
 
 ## 📊 **框架统计**
 
-| **命令** | **代理** | **模式** | **MCP服务器** |
+| **命令** | **代理** | **模式** | **MCP工具** |
 |:------------:|:----------:|:---------:|:---------------:|
-| **25** | **15** | **7** | **8** |
+| **29** | **23** | **7** | **10** |
 | 斜杠命令 | 专业AI | 行为模式 | 集成功能 |
 
 使用新的 `/sc:help` 命令查看所有可用命令的完整列表。
@@ -80,6 +80,100 @@ Claude Code 是由 [Anthropic](https://www.anthropic.com/) 构建和维护的产
 
 ---
 
+## 🛡️ **关键：先备份您的配置！**
+
+> **⚠️ 请勿跳过此步骤 ⚠️**
+>
+> SuperClaude 插件会修改您的 Claude Code MCP 配置。
+> **安装前务必备份**以确保需要时可以安全回滚。
+
+<div align="center">
+
+### **⏱️ 快速备份（30秒）**
+
+```bash
+# 下载并运行自动备份脚本
+curl -o /tmp/backup-claude.sh https://raw.githubusercontent.com/SuperClaude-Org/SuperClaude_Plugin/main/scripts/backup-claude-config.sh
+chmod +x /tmp/backup-claude.sh
+/tmp/backup-claude.sh
+```
+
+**✅ 备份完成！** 现在可以安全地安装插件了。
+
+</div>
+
+<details>
+<summary><b>📋 备份内容</b></summary>
+
+自动备份脚本会保存：
+
+- ✅ `~/.claude/settings.local.json` - MCP 服务器配置
+- ✅ `~/.claude/CLAUDE.md` - 自定义指令
+- ✅ `~/.claude/.credentials.json` - API 凭证（如果存在）
+- ✅ `.mcp.json` - 项目特定的 MCP 配置（如果存在）
+- ✅ `.claude/` - 项目特定的设置（如果存在）
+
+**备份位置：** `~/claude-backups/backup-YYYY-MM-DD-HH-MM-SS/`
+
+</details>
+
+<details>
+<summary><b>🔧 手动备份方法</b></summary>
+
+如果您更喜欢手动备份：
+
+```bash
+# 创建备份目录
+BACKUP_DIR=~/claude-backups/backup-$(date +%Y-%m-%d-%H-%M-%S)
+mkdir -p "$BACKUP_DIR"
+
+# 备份全局设置
+cp ~/.claude/settings.local.json "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/CLAUDE.md "$BACKUP_DIR/" 2>/dev/null
+cp ~/.claude/.credentials.json "$BACKUP_DIR/" 2>/dev/null
+
+# 备份项目设置（如果在项目目录中）
+cp .mcp.json "$BACKUP_DIR/" 2>/dev/null
+cp -r .claude "$BACKUP_DIR/" 2>/dev/null
+
+echo "✅ 备份已创建：$BACKUP_DIR"
+```
+
+</details>
+
+<details>
+<summary><b>🚨 紧急回滚</b></summary>
+
+如果安装后出现问题：
+
+```bash
+# 1. 卸载插件
+/plugin uninstall sc@superclaude
+
+# 2. 恢复备份（使用您实际的备份路径）
+BACKUP_DIR=~/claude-backups/backup-2025-01-07-14-30-25
+
+cp "$BACKUP_DIR/settings.local.json" ~/.claude/
+cp "$BACKUP_DIR/CLAUDE.md" ~/.claude/ 2>/dev/null
+cp "$BACKUP_DIR/.credentials.json" ~/.claude/ 2>/dev/null
+
+# 3. 重启 Claude Code
+pkill -9 claude-code
+# 然后重新启动 Claude Code
+```
+
+**回滚时间：约1分钟**
+
+</details>
+
+<div align="center">
+
+**📖 完整指南：** [备份与安全指南](BACKUP_GUIDE.md)
+
+</div>
+
+---
+
 ## ⚠️ **重要：Beta 版本说明**
 
 > **此插件版本目前处于 Beta 阶段。**
@@ -87,6 +181,7 @@ Claude Code 是由 [Anthropic](https://www.anthropic.com/) 构建和维护的产
 ### **关键兼容性信息：**
 
 与以前的 SuperClaude 安装**不兼容**：
+
 - pip 版本 (`pip install SuperClaude`)
 - pipx 版本 (`pipx install SuperClaude`)
 - npm 版本 (`npm install -g @bifrost_inc/superclaude`)
@@ -94,8 +189,9 @@ Claude Code 是由 [Anthropic](https://www.anthropic.com/) 构建和维护的产
 
 ### **安装前的必要步骤：**
 
-1. **备份** 您现有的 SuperClaude 配置
+1. **✅ 备份** 您的配置（见上述部分）
 2. **卸载** 以前的版本：
+
    ```bash
    # pip 用户
    pip uninstall SuperClaude
@@ -109,9 +205,11 @@ Claude Code 是由 [Anthropic](https://www.anthropic.com/) 构建和维护的产
    # uv 用户
    uv tool uninstall SuperClaude
    ```
+
 3. **然后** 继续安装插件
 
 ⚠️ **Beta 版限制：**
+
 - 可能包含错误或不完整的功能
 - 配置格式可能会更改
 - 尚不推荐用于生产关键工作
@@ -134,11 +232,57 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 ```
 
 **插件优势：**
+
 - ✅ **简单安装**：一条命令完成，无需 Python/Node.js
 - ✅ **自动更新**：由 Claude Code 管理
 - ✅ **无冲突**：与系统包隔离
 - ✅ **团队共享**：通过市场轻松分发
 - ✅ **原生集成**：无缝的 Claude Code 体验
+- ✅ **自动 MCP 设置**：AIRIS MCP Gateway 自动配置
+
+### **MCP 服务器设置**
+
+插件自动配置 **AIRIS MCP Gateway**，包含 10 个集成工具。
+
+> ⚠️ **重要：备份现有 MCP 配置**
+>
+> 如果您已配置 MCP 服务器，**请先备份您的设置**：
+>
+> ```bash
+> # 备份 Claude Code MCP 设置
+> cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
+>
+> # 或备份项目特定的 MCP 配置
+> cp .mcp.json .mcp.json.backup  # 如果您有项目 MCP 配置
+> ```
+>
+> 插件会将 AIRIS MCP Gateway 添加到您的配置中。启用前请检查与现有 MCP 服务器的冲突。
+
+**前提条件**（一次性设置）：
+
+```bash
+# 安装 uvx（MCP 服务器所需）
+pip install uv
+# 或
+brew install uv
+```
+
+**验证设置**：
+
+```shell
+/sc:setup-mcp   # 交互式设置向导
+/sc:verify-mcp  # 检查 MCP 状态
+```
+
+**可选 API 密钥**（用于高级功能）：
+
+```bash
+# Tavily（网络搜索） - 在 https://tavily.com 获取密钥
+export TAVILY_API_KEY="your-key"
+
+# Magic（UI 生成） - 在 https://21st.dev 获取密钥
+export TWENTYFIRST_API_KEY="your-key"
+```
 
 ### **快速开始**
 
@@ -166,6 +310,7 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 > ⚠️ **警告：** pip/npm 版本与此插件版本不兼容。
 >
 > 如果选择使用 pip/npm 安装：
+>
 > 1. 请勿同时安装插件版本和 pip/npm 版本
 > 2. 如果已安装，请先卸载此插件
 > 3. 它们使用不同的配置格式，无法共存
@@ -193,6 +338,7 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td align="center" width="33%">
 
 ### ☕ **Ko-fi**
+
 [![Ko-fi](https://img.shields.io/badge/Support_on-Ko--fi-ff5e5b?logo=ko-fi)](https://ko-fi.com/superclaude)
 
 *一次性捐赠*
@@ -201,6 +347,7 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td align="center" width="33%">
 
 ### 🎯 **Patreon**
+
 [![Patreon](https://img.shields.io/badge/Become_a-Patron-f96854?logo=patreon)](https://patreon.com/superclaude)
 
 *每月支持*
@@ -209,6 +356,7 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td align="center" width="33%">
 
 ### 💜 **GitHub**
+
 [![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsor-30363D?logo=github-sponsors)](https://github.com/sponsors/SuperClaude-Org)
 
 *灵活的等级*
@@ -245,7 +393,9 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 🤖 **智能代理系统**
-**15 个专业代理**具有领域专业知识：
+
+**23 个专业代理**具有领域专业知识：
+
 - Deep Research 代理用于自主网络研究
 - 安全工程师捕获真实漏洞
 - 前端架构师理解 UI 模式
@@ -256,9 +406,11 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 📝 **改进的命名空间**
+
 所有命令使用 **`/sc:` 前缀**：
+
 - 与自定义命令无冲突
-- 涵盖完整生命周期的 25 个命令
+- 涵盖完整生命周期的 29 个命令
 - 从头脑风暴到部署
 - 清晰、有组织的命令结构
 
@@ -268,21 +420,29 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 🔧 **MCP 服务器集成**
-**8 个强大的服务器**协同工作：
-- **Context7** → 最新文档
-- **Sequential** → 复杂分析
-- **Magic** → UI 组件生成
-- **Playwright** → 浏览器测试
-- **Morphllm** → 批量转换
-- **Serena** → 会话持久化
-- **Tavily** → Deep Research 的网络搜索
-- **Chrome DevTools** → 性能分析
+
+**自动设置** 通过 AIRIS MCP Gateway：
+
+- **10 个集成工具** 在一个统一网关中
+- **无需手动配置** - 开箱即用
+- **上下文优化** - 减少 40% 令牌
+- **只需 uvx** - `pip install uv` 或 `brew install uv`
+
+**包含的工具**：
+
+- sequential-thinking, context7, magic, playwright
+- serena, morphllm, tavily, chrome-devtools
+- git, puppeteer
+
+运行 `/sc:setup-mcp` 验证安装
 
 </td>
 <td width="50%">
 
 ### 🎯 **行为模式**
+
 **7 种适应性模式**用于不同上下文：
+
 - **Brainstorming** → 提出正确的问题
 - **Business Panel** → 多专家战略分析
 - **Deep Research** → 自主网络研究
@@ -297,7 +457,9 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### ⚡ **优化的性能**
+
 **更小的框架，更大的项目：**
+
 - 减少的框架占用空间
 - 为代码提供更多上下文
 - 可能进行更长的对话
@@ -307,7 +469,9 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 📚 **文档改造**
+
 **面向开发者的完全重写：**
+
 - 真实示例和用例
 - 记录常见陷阱
 - 包含实用工作流程
@@ -334,7 +498,9 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 <td width="50%">
 
 ### 🎯 **适应性规划**
+
 **三种智能策略：**
+
 - **Planning-Only**：对清晰查询的直接执行
 - **Intent-Planning**：对模糊请求的澄清
 - **Unified**：协作计划改进（默认）
@@ -343,7 +509,9 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 <td width="50%">
 
 ### 🔄 **多跳推理**
+
 **最多 5 次迭代搜索：**
+
 - 实体扩展（论文 → 作者 → 作品）
 - 概念深化（主题 → 详细信息 → 示例）
 - 时间推进（当前 → 历史）
@@ -355,7 +523,9 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 <td width="50%">
 
 ### 📊 **质量评分**
+
 **基于置信度的验证：**
+
 - 来源可信度评估（0.0-1.0）
 - 覆盖完整性跟踪
 - 综合一致性评估
@@ -365,7 +535,9 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 <td width="50%">
 
 ### 🧠 **基于案例的学习**
+
 **跨会话智能：**
+
 - 模式识别和重用
 - 随时间优化策略
 - 保存成功的查询公式
@@ -403,6 +575,7 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 ### **集成工具编排**
 
 Deep Research 系统智能协调多个工具：
+
 - **Tavily MCP**：主要网络搜索和发现
 - **Playwright MCP**：复杂内容提取
 - **Sequential MCP**：多步推理和综合
@@ -439,10 +612,10 @@ Deep Research 系统智能协调多个工具：
 <td valign="top">
 
 - 🎯 [**命令参考**](Docs/User-Guide/commands.md)
-  *全部 25 个斜杠命令*
+  *全部 29 个斜杠命令*
 
 - 🤖 [**代理指南**](Docs/User-Guide/agents.md)
-  *15 个专业代理*
+  *23 个专业代理*
 
 - 🎨 [**行为模式**](Docs/User-Guide/modes.md)
   *7 种适应性模式*
@@ -451,7 +624,7 @@ Deep Research 系统智能协调多个工具：
   *控制行为*
 
 - 🔧 [**MCP 服务器**](Docs/User-Guide/mcp-servers.md)
-  *7 个服务器集成*
+  *10 个工具集成*
 
 - 💼 [**会话管理**](Docs/User-Guide/session-management.md)
   *保存和恢复状态*
@@ -538,7 +711,6 @@ Deep Research 系统智能协调多个工具：
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Timeline" />
  </picture>
 </a>
-
 
 </div>
 

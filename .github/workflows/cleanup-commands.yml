@@ -152,6 +152,9 @@ jobs:
     name: "Validate plugin structure"
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     steps:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
@@ -192,7 +195,7 @@ jobs:
 
       - name: "🔍 Check command count"
         run: |
-          expected_count=25
+          expected_count=29
           actual_count=$(find commands -name "*.md" | wc -l)
 
           echo "Expected: $expected_count commands"
@@ -211,6 +214,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [cleanup-name-attributes, validate-plugin]
     if: always()
+
+    permissions:
+      contents: read
 
     steps:
       - name: "📊 Generate summary"

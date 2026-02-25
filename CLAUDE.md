@@ -25,17 +25,16 @@ This plugin provides the complete SuperClaude framework as a native Claude Code 
 
 ## Installation
 
-This plugin is designed to replace the pip/npm installation method with native Claude Code plugin distribution.
+For complete installation instructions, see [README.md](README.md#-quick-installation).
 
-### Prerequisites
-- Claude Code installed and running
-
-### Install from Marketplace
+### Quick Install
 
 ```shell
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
-/plugin install superclaude@SuperClaude-Org
+/plugin install sc@superclaude
 ```
+
+After installation, restart Claude Code to activate the plugin.
 
 ## Quick Start
 
