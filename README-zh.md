@@ -106,6 +106,7 @@ chmod +x /tmp/backup-claude.sh
 <summary><b>📋 备份内容</b></summary>
 
 自动备份脚本会保存：
+
 - ✅ `~/.claude/settings.local.json` - MCP 服务器配置
 - ✅ `~/.claude/CLAUDE.md` - 自定义指令
 - ✅ `~/.claude/.credentials.json` - API 凭证（如果存在）
@@ -180,6 +181,7 @@ pkill -9 claude-code
 ### **关键兼容性信息：**
 
 与以前的 SuperClaude 安装**不兼容**：
+
 - pip 版本 (`pip install SuperClaude`)
 - pipx 版本 (`pipx install SuperClaude`)
 - npm 版本 (`npm install -g @bifrost_inc/superclaude`)
@@ -189,6 +191,7 @@ pkill -9 claude-code
 
 1. **✅ 备份** 您的配置（见上述部分）
 2. **卸载** 以前的版本：
+
    ```bash
    # pip 用户
    pip uninstall SuperClaude
@@ -202,9 +205,11 @@ pkill -9 claude-code
    # uv 用户
    uv tool uninstall SuperClaude
    ```
+
 3. **然后** 继续安装插件
 
 ⚠️ **Beta 版限制：**
+
 - 可能包含错误或不完整的功能
 - 配置格式可能会更改
 - 尚不推荐用于生产关键工作
@@ -221,12 +226,13 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # 安装插件
-/plugin install sc@superclaude
+/plugin install sc@SuperClaude-Org
 
 # 重启 Claude Code 以激活
 ```
 
 **插件优势：**
+
 - ✅ **简单安装**：一条命令完成，无需 Python/Node.js
 - ✅ **自动更新**：由 Claude Code 管理
 - ✅ **无冲突**：与系统包隔离
@@ -241,6 +247,7 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 > ⚠️ **重要：备份现有 MCP 配置**
 >
 > 如果您已配置 MCP 服务器，**请先备份您的设置**：
+>
 > ```bash
 > # 备份 Claude Code MCP 设置
 > cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
@@ -252,6 +259,7 @@ SuperClaude 作为原生 Claude Code 插件提供，便于安装和自动更新�
 > 插件会将 AIRIS MCP Gateway 添加到您的配置中。启用前请检查与现有 MCP 服务器的冲突。
 
 **前提条件**（一次性设置）：
+
 ```bash
 # 安装 uvx（MCP 服务器所需）
 pip install uv
@@ -260,12 +268,14 @@ brew install uv
 ```
 
 **验证设置**：
+
 ```shell
 /sc:setup-mcp   # 交互式设置向导
 /sc:verify-mcp  # 检查 MCP 状态
 ```
 
 **可选 API 密钥**（用于高级功能）：
+
 ```bash
 # Tavily（网络搜索） - 在 https://tavily.com 获取密钥
 export TAVILY_API_KEY="your-key"
@@ -300,6 +310,7 @@ export TWENTYFIRST_API_KEY="your-key"
 > ⚠️ **警告：** pip/npm 版本与此插件版本不兼容。
 >
 > 如果选择使用 pip/npm 安装：
+>
 > 1. 请勿同时安装插件版本和 pip/npm 版本
 > 2. 如果已安装，请先卸载此插件
 > 3. 它们使用不同的配置格式，无法共存
@@ -327,6 +338,7 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td align="center" width="33%">
 
 ### ☕ **Ko-fi**
+
 [![Ko-fi](https://img.shields.io/badge/Support_on-Ko--fi-ff5e5b?logo=ko-fi)](https://ko-fi.com/superclaude)
 
 *一次性捐赠*
@@ -335,6 +347,7 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td align="center" width="33%">
 
 ### 🎯 **Patreon**
+
 [![Patreon](https://img.shields.io/badge/Become_a-Patron-f96854?logo=patreon)](https://patreon.com/superclaude)
 
 *每月支持*
@@ -343,6 +356,7 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td align="center" width="33%">
 
 ### 💜 **GitHub**
+
 [![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsor-30363D?logo=github-sponsors)](https://github.com/sponsors/SuperClaude-Org)
 
 *灵活的等级*
@@ -379,7 +393,9 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 🤖 **智能代理系统**
+
 **23 个专业代理**具有领域专业知识：
+
 - Deep Research 代理用于自主网络研究
 - 安全工程师捕获真实漏洞
 - 前端架构师理解 UI 模式
@@ -390,7 +406,9 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 📝 **改进的命名空间**
+
 所有命令使用 **`/sc:` 前缀**：
+
 - 与自定义命令无冲突
 - 涵盖完整生命周期的 29 个命令
 - 从头脑风暴到部署
@@ -402,13 +420,16 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 🔧 **MCP 服务器集成**
+
 **自动设置** 通过 AIRIS MCP Gateway：
+
 - **10 个集成工具** 在一个统一网关中
 - **无需手动配置** - 开箱即用
 - **上下文优化** - 减少 40% 令牌
 - **只需 uvx** - `pip install uv` 或 `brew install uv`
 
 **包含的工具**：
+
 - sequential-thinking, context7, magic, playwright
 - serena, morphllm, tavily, chrome-devtools
 - git, puppeteer
@@ -419,7 +440,9 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 🎯 **行为模式**
+
 **7 种适应性模式**用于不同上下文：
+
 - **Brainstorming** → 提出正确的问题
 - **Business Panel** → 多专家战略分析
 - **Deep Research** → 自主网络研究
@@ -434,7 +457,9 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### ⚡ **优化的性能**
+
 **更小的框架，更大的项目：**
+
 - 减少的框架占用空间
 - 为代码提供更多上下文
 - 可能进行更长的对话
@@ -444,7 +469,9 @@ SuperClaude V4 也可通过包管理器获得。有关 pip/npm 安装说明，�
 <td width="50%">
 
 ### 📚 **文档改造**
+
 **面向开发者的完全重写：**
+
 - 真实示例和用例
 - 记录常见陷阱
 - 包含实用工作流程
@@ -471,7 +498,9 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 <td width="50%">
 
 ### 🎯 **适应性规划**
+
 **三种智能策略：**
+
 - **Planning-Only**：对清晰查询的直接执行
 - **Intent-Planning**：对模糊请求的澄清
 - **Unified**：协作计划改进（默认）
@@ -480,7 +509,9 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 <td width="50%">
 
 ### 🔄 **多跳推理**
+
 **最多 5 次迭代搜索：**
+
 - 实体扩展（论文 → 作者 → 作品）
 - 概念深化（主题 → 详细信息 → 示例）
 - 时间推进（当前 → 历史）
@@ -492,7 +523,9 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 <td width="50%">
 
 ### 📊 **质量评分**
+
 **基于置信度的验证：**
+
 - 来源可信度评估（0.0-1.0）
 - 覆盖完整性跟踪
 - 综合一致性评估
@@ -502,7 +535,9 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 <td width="50%">
 
 ### 🧠 **基于案例的学习**
+
 **跨会话智能：**
+
 - 模式识别和重用
 - 随时间优化策略
 - 保存成功的查询公式
@@ -540,6 +575,7 @@ SuperClaude v4.2 引入了全面的 Deep Research 能力，实现自主、适应
 ### **集成工具编排**
 
 Deep Research 系统智能协调多个工具：
+
 - **Tavily MCP**：主要网络搜索和发现
 - **Playwright MCP**：复杂内容提取
 - **Sequential MCP**：多步推理和综合
@@ -675,7 +711,6 @@ Deep Research 系统智能协调多个工具：
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Timeline" />
  </picture>
 </a>
-
 
 </div>
 

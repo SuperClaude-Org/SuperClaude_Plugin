@@ -14,7 +14,7 @@
 <a href="https://github.com/SuperClaude-Org/SuperQwen_Framework" target="_blank">
   <img src="https://img.shields.io/badge/Try-SuperQwen_Framework-orange" alt="Try SuperQwen Framework"/>
 </a>
-  <img src="https://img.shields.io/badge/version-4.4.0-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-4.4.1-blue" alt="Version">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
@@ -226,7 +226,7 @@ SuperClaude is available as a native Claude Code plugin for easy installation an
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # Install the plugin
-/plugin install sc@superclaude
+/plugin install sc@SuperClaude-Org
 
 # Restart Claude Code to activate
 ```
@@ -478,6 +478,8 @@ Add the AIRIS Agent plugin for additional workflow optimization:
 /plugin marketplace add agiletec-inc/airis-agent
 /plugin install airis-agent
 ```
+
+> 💡 **One gateway, all editors**: The official [AIRIS-MCP-Gateway installer](https://github.com/agiletec-inc/airis-mcp-gateway#installation) can deploy these servers to Claude Code, Claude Desktop, Cursor, Zed, and Codex CLI simultaneously
 
 </td>
 <td width="50%">

@@ -106,6 +106,7 @@ chmod +x /tmp/backup-claude.sh
 <summary><b>📋 バックアップされる内容</b></summary>
 
 自動バックアップスクリプトは以下を保存します：
+
 - ✅ `~/.claude/settings.local.json` - MCPサーバー設定
 - ✅ `~/.claude/CLAUDE.md` - カスタム指示
 - ✅ `~/.claude/.credentials.json` - API認証情報（存在する場合）
@@ -180,6 +181,7 @@ pkill -9 claude-code
 ### **重要な互換性情報：**
 
 以前のSuperClaudeインストールとは**互換性がありません**：
+
 - pip版 (`pip install SuperClaude`)
 - pipx版 (`pipx install SuperClaude`)
 - npm版 (`npm install -g @bifrost_inc/superclaude`)
@@ -189,6 +191,7 @@ pkill -9 claude-code
 
 1. **✅ バックアップ** 設定をバックアップ（上記のセクション参照）
 2. **アンインストール** 以前のバージョンをアンインストールしてください：
+
    ```bash
    # pipユーザーの場合
    pip uninstall SuperClaude
@@ -202,9 +205,11 @@ pkill -9 claude-code
    # uvユーザーの場合
    uv tool uninstall SuperClaude
    ```
+
 3. **その後** プラグインのインストールを進めてください
 
 ⚠️ **ベータ版の制限事項：**
+
 - バグや不完全な機能が含まれている可能性があります
 - 設定形式が変更される可能性があります
 - 本番環境での重要な作業にはまだ推奨されません
@@ -221,12 +226,13 @@ SuperClaudeは、簡単なインストールと自動更新のためのネイテ
 /plugin marketplace add SuperClaude-Org/SuperClaude_Plugin
 
 # プラグインをインストール
-/plugin install sc@superclaude
+/plugin install sc@SuperClaude-Org
 
 # Claude Codeを再起動して有効化
 ```
 
 **プラグインの利点：**
+
 - ✅ **簡単なインストール**: 1つのコマンドで完了、Python/Node.js不要
 - ✅ **自動更新**: Claude Codeによって管理
 - ✅ **競合なし**: システムパッケージから分離
@@ -241,6 +247,7 @@ SuperClaudeは、簡単なインストールと自動更新のためのネイテ
 > ⚠️ **重要：既存のMCP設定のバックアップ**
 >
 > 既にMCPサーバーを設定している場合、**まず設定をバックアップしてください**：
+>
 > ```bash
 > # Claude CodeのMCP設定をバックアップ
 > cp ~/.claude/settings.local.json ~/.claude/settings.local.json.backup
@@ -252,6 +259,7 @@ SuperClaudeは、簡単なインストールと自動更新のためのネイテ
 > プラグインはAIRIS MCP Gatewayを設定に追加します。有効化する前に、既存のMCPサーバーとの競合がないか確認してください。
 
 **前提条件**（初回のみ）：
+
 ```bash
 # uvxをインストール（MCPサーバーに必要）
 pip install uv
@@ -260,12 +268,14 @@ brew install uv
 ```
 
 **セットアップの確認**：
+
 ```shell
 /sc:setup-mcp   # 対話型セットアップウィザード
 /sc:verify-mcp  # MCPステータスの確認
 ```
 
 **オプションAPIキー**（プレミアム機能用）：
+
 ```bash
 # Tavily（Web検索） - https://tavily.com でキーを取得
 export TAVILY_API_KEY="your-key"
@@ -300,6 +310,7 @@ export TWENTYFIRST_API_KEY="your-key"
 > ⚠️ **警告：** pip/npm版はこのプラグイン版と互換性がありません。
 >
 > pip/npmインストールを選択する場合：
+>
 > 1. プラグイン版とpip/npm版を同時にインストールしないでください
 > 2. 既にインストールされている場合は、まずこのプラグインをアンインストールしてください
 > 3. 異なる設定形式を使用しているため、共存できません
@@ -327,6 +338,7 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td align="center" width="33%">
 
 ### ☕ **Ko-fi**
+
 [![Ko-fi](https://img.shields.io/badge/Support_on-Ko--fi-ff5e5b?logo=ko-fi)](https://ko-fi.com/superclaude)
 
 *一回限りの貢献*
@@ -335,6 +347,7 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td align="center" width="33%">
 
 ### 🎯 **Patreon**
+
 [![Patreon](https://img.shields.io/badge/Become_a-Patron-f96854?logo=patreon)](https://patreon.com/superclaude)
 
 *月額サポート*
@@ -343,6 +356,7 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td align="center" width="33%">
 
 ### 💜 **GitHub**
+
 [![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsor-30363D?logo=github-sponsors)](https://github.com/sponsors/SuperClaude-Org)
 
 *柔軟なティア*
@@ -379,7 +393,9 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td width="50%">
 
 ### 🤖 **スマートエージェントシステム**
+
 **23の専門エージェント**がドメイン専門知識を持っています：
+
 - 自律的なWeb調査のためのDeep Researchエージェント
 - セキュリティエンジニアが実際の脆弱性をキャッチ
 - フロントエンドアーキテクトがUIパターンを理解
@@ -390,7 +406,9 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td width="50%">
 
 ### 📝 **改善された名前空間**
+
 **`/sc:` プレフィックス**をすべてのコマンドに：
+
 - カスタムコマンドとの競合なし
 - ライフサイクル全体をカバーする29のコマンド
 - ブレインストーミングからデプロイメントまで
@@ -402,13 +420,16 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td width="50%">
 
 ### 🔧 **MCPサーバー統合**
+
 **自動セットアップ** AIRIS MCP Gateway経由：
+
 - **10の統合ツール** を1つの統合ゲートウェイで提供
 - **手動設定不要** - すぐに使える
 - **コンテキスト最適化** - 40%のトークン削減
 - **uvxのみ必要** - `pip install uv` または `brew install uv`
 
 **含まれるツール**：
+
 - sequential-thinking, context7, magic, playwright
 - serena, morphllm, tavily, chrome-devtools
 - git, puppeteer
@@ -419,7 +440,9 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td width="50%">
 
 ### 🎯 **動作モード**
+
 **7つの適応モード**が異なるコンテキストに対応：
+
 - **Brainstorming** → 適切な質問をする
 - **Business Panel** → マルチエキスパート戦略分析
 - **Deep Research** → 自律的なWeb調査
@@ -434,7 +457,9 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td width="50%">
 
 ### ⚡ **最適化されたパフォーマンス**
+
 **小さなフレームワーク、大きなプロジェクト：**
+
 - フレームワークフットプリントの削減
 - コードのためのより多くのコンテキスト
 - より長い会話が可能
@@ -444,7 +469,9 @@ SuperClaude V4はパッケージマネージャー経由でも利用できます
 <td width="50%">
 
 ### 📚 **ドキュメントの刷新**
+
 **開発者向けの完全な書き直し：**
+
 - 実際の例と使用例
 - 一般的な落とし穴を文書化
 - 実践的なワークフローを含む
@@ -471,7 +498,9 @@ SuperClaude v4.2は、自律的、適応的、インテリジェントなWeb調�
 <td width="50%">
 
 ### 🎯 **適応的計画**
+
 **3つのインテリジェント戦略：**
+
 - **Planning-Only**: 明確なクエリに対する直接実行
 - **Intent-Planning**: 曖昧な要求に対する明確化
 - **Unified**: 協調的な計画の改善（デフォルト）
@@ -480,7 +509,9 @@ SuperClaude v4.2は、自律的、適応的、インテリジェントなWeb調�
 <td width="50%">
 
 ### 🔄 **マルチホップ推論**
+
 **最大5回の反復検索：**
+
 - エンティティ拡張（論文 → 著者 → 作品）
 - 概念の深化（トピック → 詳細 → 例）
 - 時間的進行（現在 → 歴史）
@@ -492,7 +523,9 @@ SuperClaude v4.2は、自律的、適応的、インテリジェントなWeb調�
 <td width="50%">
 
 ### 📊 **品質スコアリング**
+
 **信頼度ベースの検証：**
+
 - ソースの信頼性評価（0.0-1.0）
 - カバレッジの完全性追跡
 - 合成の一貫性評価
@@ -502,7 +535,9 @@ SuperClaude v4.2は、自律的、適応的、インテリジェントなWeb調�
 <td width="50%">
 
 ### 🧠 **ケースベース学習**
+
 **セッション間のインテリジェンス：**
+
 - パターン認識と再利用
 - 時間をかけた戦略の最適化
 - 成功したクエリ定式化の保存
@@ -540,6 +575,7 @@ SuperClaude v4.2は、自律的、適応的、インテリジェントなWeb調�
 ### **統合ツールオーケストレーション**
 
 Deep Researchシステムは複数のツールをインテリジェントに調整します：
+
 - **Tavily MCP**: 主要なWeb検索と発見
 - **Playwright MCP**: 複雑なコンテンツ抽出
 - **Sequential MCP**: マルチステップ推論と合成
@@ -675,7 +711,6 @@ Deep Researchシステムは複数のツールをインテリジェントに調�
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Timeline" />
  </picture>
 </a>
-
 
 </div>
 
