@@ -1,5 +1,5 @@
 ---
-
+name: load
 description: "Session lifecycle management with Serena MCP integration for project context loading"
 category: session
 complexity: standard

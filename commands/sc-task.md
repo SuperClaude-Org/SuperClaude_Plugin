@@ -1,5 +1,5 @@
 ---
-
+name: task
 description: "Execute complex tasks with intelligent workflow management and delegation"
 category: special
 complexity: advanced

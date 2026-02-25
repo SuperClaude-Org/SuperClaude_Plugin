@@ -1,10 +1,10 @@
-
+name: sc:agent
 description: SC Agent — session controller that orchestrates investigation, implementation, and review
 category: orchestration
 personas: []
 ---
 
-# /sc:agent - SC Agent Activation
+# SC Agent Activation
 
 🚀 **SC Agent online** — this plugin launches `/sc:sc:agent` automatically at session start.
 

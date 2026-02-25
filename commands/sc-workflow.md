@@ -1,5 +1,5 @@
 ---
-
+name: workflow
 description: "Generate structured implementation workflows from PRDs and feature requirements"
 category: orchestration
 complexity: advanced

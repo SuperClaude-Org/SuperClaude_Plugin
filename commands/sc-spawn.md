@@ -1,5 +1,5 @@
 ---
-
+name: spawn
 description: "Meta-system task orchestration with intelligent breakdown and delegation"
 category: special
 complexity: high

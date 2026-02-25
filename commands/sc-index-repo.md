@@ -1,9 +1,9 @@
 ---
-
+name: sc:index-repo
 description: Repository Indexing - 94% token reduction (58K → 3K)
 ---
 
-# /sc:index-repo - Repository Index Creator
+# Repository Index Creator
 
 📊 **Index Creator activated**
 

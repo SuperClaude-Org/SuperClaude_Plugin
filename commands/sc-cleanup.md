@@ -1,5 +1,5 @@
 ---
-
+name: cleanup
 description: "Systematically clean up code, remove dead code, and optimize project structure"
 category: workflow
 complexity: standard
